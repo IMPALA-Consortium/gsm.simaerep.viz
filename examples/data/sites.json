@@ -1,0 +1,137 @@
+[
+  {
+    "GroupID": "S0001",
+    "InvestigatorLastName": "Anderson",
+    "Country": "USA",
+    "Status": "Active",
+    "SubjectCount": 45,
+    "StudyID": "STUDY-001",
+    "SiteNumber": 1
+  },
+  {
+    "GroupID": "S0002",
+    "InvestigatorLastName": "Brown",
+    "Country": "USA",
+    "Status": "Active",
+    "SubjectCount": 38,
+    "StudyID": "STUDY-001",
+    "SiteNumber": 2
+  },
+  {
+    "GroupID": "S0003",
+    "InvestigatorLastName": "Chen",
+    "Country": "China",
+    "Status": "Active",
+    "SubjectCount": 52,
+    "StudyID": "STUDY-001",
+    "SiteNumber": 3
+  },
+  {
+    "GroupID": "S0004",
+    "InvestigatorLastName": "Davis",
+    "Country": "UK",
+    "Status": "Active",
+    "SubjectCount": 41,
+    "StudyID": "STUDY-001",
+    "SiteNumber": 4
+  },
+  {
+    "GroupID": "S0005",
+    "InvestigatorLastName": "Evans",
+    "Country": "Canada",
+    "Status": "Active",
+    "SubjectCount": 33,
+    "StudyID": "STUDY-001",
+    "SiteNumber": 5
+  },
+  {
+    "GroupID": "S0006",
+    "InvestigatorLastName": "Fischer",
+    "Country": "Germany",
+    "Status": "Active",
+    "SubjectCount": 29,
+    "StudyID": "STUDY-001",
+    "SiteNumber": 6
+  },
+  {
+    "GroupID": "S0007",
+    "InvestigatorLastName": "Garcia",
+    "Country": "Spain",
+    "Status": "Active",
+    "SubjectCount": 47,
+    "StudyID": "STUDY-001",
+    "SiteNumber": 7
+  },
+  {
+    "GroupID": "S0008",
+    "InvestigatorLastName": "Hoffman",
+    "Country": "USA",
+    "Status": "Active",
+    "SubjectCount": 55,
+    "StudyID": "STUDY-001",
+    "SiteNumber": 8
+  },
+  {
+    "GroupID": "S0009",
+    "InvestigatorLastName": "Ivanov",
+    "Country": "Russia",
+    "Status": "Active",
+    "SubjectCount": 36,
+    "StudyID": "STUDY-001",
+    "SiteNumber": 9
+  },
+  {
+    "GroupID": "S0010",
+    "InvestigatorLastName": "Jackson",
+    "Country": "Australia",
+    "Status": "Active",
+    "SubjectCount": 42,
+    "StudyID": "STUDY-001",
+    "SiteNumber": 10
+  },
+  {
+    "GroupID": "S0011",
+    "InvestigatorLastName": "Kumar",
+    "Country": "India",
+    "Status": "Active",
+    "SubjectCount": 61,
+    "StudyID": "STUDY-001",
+    "SiteNumber": 11
+  },
+  {
+    "GroupID": "S0012",
+    "InvestigatorLastName": "Lee",
+    "Country": "South Korea",
+    "Status": "Active",
+    "SubjectCount": 49,
+    "StudyID": "STUDY-001",
+    "SiteNumber": 12
+  },
+  {
+    "GroupID": "S0013",
+    "InvestigatorLastName": "Martinez",
+    "Country": "Mexico",
+    "Status": "Active",
+    "SubjectCount": 44,
+    "StudyID": "STUDY-001",
+    "SiteNumber": 13
+  },
+  {
+    "GroupID": "S0014",
+    "InvestigatorLastName": "Nakamura",
+    "Country": "Japan",
+    "Status": "Active",
+    "SubjectCount": 53,
+    "StudyID": "STUDY-001",
+    "SiteNumber": 14
+  },
+  {
+    "GroupID": "S0015",
+    "InvestigatorLastName": "O'Brien",
+    "Country": "Ireland",
+    "Status": "Active",
+    "SubjectCount": 31,
+    "StudyID": "STUDY-001",
+    "SiteNumber": 15
+  }
+]

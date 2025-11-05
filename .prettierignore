@@ -1,0 +1,7 @@
+node_modules/
+dist/
+coverage/
+index.js
+index.js.map
+*.min.js
+

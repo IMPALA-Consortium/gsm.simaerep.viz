@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SiteList Simple Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        #chart-container {
+            border: 2px solid #ccc;
+            padding: 10px;
+            min-height: 400px;
+            background: white;
+        }
+        .info {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e3f2fd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>SiteList Chart - Simple Test</h1>
+    <div id="chart-container"></div>
+    <div class="info">
+        <h3>Selected Site: <span id="selected-site">None</span></h3>
+    </div>
+
+    <script src="../index.js"></script>
+    <script>
+        // Inline test data
+        const testData = [
+            { GroupID: 'S0001', InvestigatorLastName: 'Anderson', Country: 'USA', SubjectCount: 45 },
+            { GroupID: 'S0002', InvestigatorLastName: 'Brown', Country: 'USA', SubjectCount: 38 },
+            { GroupID: 'S0003', InvestigatorLastName: 'Chen', Country: 'China', SubjectCount: 52 },
+            { GroupID: 'S0004', InvestigatorLastName: 'Davis', Country: 'UK', SubjectCount: 41 },
+            { GroupID: 'S0005', InvestigatorLastName: 'Evans', Country: 'Canada', SubjectCount: 33 },
+            { GroupID: 'S0006', InvestigatorLastName: 'Fischer', Country: 'Germany', SubjectCount: 29 },
+            { GroupID: 'S0007', InvestigatorLastName: 'Garcia', Country: 'Spain', SubjectCount: 47 },
+            { GroupID: 'S0008', InvestigatorLastName: 'Hoffman', Country: 'USA', SubjectCount: 55 },
+            { GroupID: 'S0009', InvestigatorLastName: 'Ivanov', Country: 'Russia', SubjectCount: 36 },
+            { GroupID: 'S0010', InvestigatorLastName: 'Jackson', Country: 'Australia', SubjectCount: 42 }
+        ];
+
+        try {
+            // Create chart
+            const container = document.getElementById('chart-container');
+            const chart = new gsmSimaerepViz.SiteList(container, testData, {
+                maxHeight: '400px',
+                showGroupSelector: true,
+                groupLabelKey: 'GroupID'
+            });
+
+            // Listen for selection events
+            container.addEventListener('site-selected', (event) => {
+                const groupID = event.detail.groupID;
+                document.getElementById('selected-site').textContent = groupID;
+                console.log('Site selected:', groupID);
+            });
+
+            console.log('Chart initialized successfully');
+            console.log('Chart object:', chart);
+        } catch (error) {
+            console.error('Error initializing chart:', error);
+            document.getElementById('chart-container').innerHTML = 
+                '<p style="color: red;">Error: ' + error.message + '</p>';
+        }
+    </script>
+</body>
+</html>
+

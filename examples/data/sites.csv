@@ -1,0 +1,17 @@
+GroupID,InvestigatorLastName,Country,Status,SubjectCount,StudyID,SiteNumber
+S0001,Anderson,USA,Active,45,STUDY-001,001
+S0002,Brown,USA,Active,38,STUDY-001,002
+S0003,Chen,China,Active,52,STUDY-001,003
+S0004,Davis,UK,Active,41,STUDY-001,004
+S0005,Evans,Canada,Active,33,STUDY-001,005
+S0006,Fischer,Germany,Active,29,STUDY-001,006
+S0007,Garcia,Spain,Active,47,STUDY-001,007
+S0008,Hoffman,USA,Active,55,STUDY-001,008
+S0009,Ivanov,Russia,Active,36,STUDY-001,009
+S0010,Jackson,Australia,Active,42,STUDY-001,010
+S0011,Kumar,India,Active,61,STUDY-001,011
+S0012,Lee,South Korea,Active,49,STUDY-001,012
+S0013,Martinez,Mexico,Active,44,STUDY-001,013
+S0014,Nakamura,Japan,Active,53,STUDY-001,014
+S0015,O'Brien,Ireland,Active,31,STUDY-001,015
+
