@@ -1,0 +1,29 @@
+- do not write any non-standard documentation as *.md files
+- be short and concise prioritize conciseness over grammar
+
+
+# Outline
+- the goal is to create a new version of https://github.com/Gilead-BioStats/gsm.viz
+- gsm.viz is used as a htmlwidget in https://github.com/Gilead-BioStats/gsm.kri
+  - creates a html report with widgets created by gsm.viz using data generated in R
+  - common selector for clinical trial sites which highlights the same site across all visible plots
+- if possible add gsm.viz to it as a dependency
+- reuse code from src/util if necessary
+- add a new charttype which is just a list of sites that supports gsm.viz site selection functionality
+
+- subsequently add more chart types, we will do this at a later point in time
+
+- this is only a JS library
+- we start with only a cahrt list of sites
+- we need a testing framework the same gsm.viz is using
+- we start with the github gsm.viz dependency
+
+
+- we will use a git based workflow:
+  - create issues for implementation steps
+  - create branch for each issue
+  - iterate locally until all tests are passing
+  - update issues if necessary
+  - create PR with main
+  - merge with main branch when ci/cd is passing
+
