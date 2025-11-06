@@ -21,7 +21,7 @@
     "simaerep"
   ],
   "author": "",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "dependencies": {
     "gsm.viz": "github:Gilead-BioStats/gsm.viz#v2.2.0"
   },

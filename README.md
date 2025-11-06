@@ -276,7 +276,9 @@ Modern browsers supporting ES6+:
 
 ## License
 
-Apache-2.0
+MIT License - see [LICENSE.md](LICENSE.md) for full text.
+
+Copyright (c) 2025 IMPALA Consortium
 
 ## Related Projects
 

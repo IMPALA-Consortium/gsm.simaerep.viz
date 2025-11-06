@@ -1,6 +1,9 @@
 /**
  * SiteList - A list-based visualization for clinical trial sites
  * Supports gsm.viz site selection functionality
+ * 
+ * Copyright (c) 2025 IMPALA Consortium
+ * Licensed under the MIT License - see LICENSE.md
  */
 
 class SiteList {
