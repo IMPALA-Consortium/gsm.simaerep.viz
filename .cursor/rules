@@ -27,3 +27,4 @@
   - create PR with main
   - merge with main branch when ci/cd is passing
 
+- copy gsm.viz sample data structure add a source data file with site_names, make up some random IDs
