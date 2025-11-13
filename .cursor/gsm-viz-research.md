@@ -209,3 +209,4 @@ When creating a similar project (gsm.simaerep.viz):
 9. Use Babel for modern JavaScript features
 10. Include comprehensive README with installation and contribution guidelines
 
+

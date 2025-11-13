@@ -28,3 +28,21 @@
   - merge with main branch when ci/cd is passing
 
 - copy gsm.viz sample data structure add a source data file with site_names, make up some random IDs
+
+- never commit and push to git the user will manage commits and pushes
+- never copy code from this project to gsm.simaerep, the user will take care of that
+
+# documentation:
+
+- project documentation is organized in docs/ folder
+- README.md stays lean with links to detailed docs
+- CONTRIBUTING.md contains development workflow and contribution guidelines
+- use /add-chart-docs command to generate integration templates for new charts
+
+1. Chart integration into gsm.simaerep viz:
+
+so each chart I want to implement in gsm.simaerep needs a Widget_Chart.js and a Widget_Chart.yaml file.
+I would like to add some project documentation for each chart available through gsm.simaerep.viz with the proposed structure of each of these files.
+Examples 
+- Widget_Chart.js:
+- Widget_Chart.yaml:
