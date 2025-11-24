@@ -81,8 +81,10 @@ npm run build
 # Create target directory if it doesn't exist
 mkdir -p ../gsm.simaerep/inst/htmlwidgets/lib/gsm.simaerep.viz
 
-# Copy bundle files to gsm.simaerep
-cp index.js index.js.map ../gsm.simaerep/inst/htmlwidgets/lib/gsm.simaerep.viz/
+# Copy bundle files and license to gsm.simaerep
+cp index.js index.js.map LICENSE.md ../gsm.simaerep/inst/htmlwidgets/lib/gsm.simaerep.viz/
+# Copy third-party license file if it exists (generated when Chart.js is bundled)
+[ -f index.js.LICENSE.txt ] && cp index.js.LICENSE.txt ../gsm.simaerep/inst/htmlwidgets/lib/gsm.simaerep.viz/ || true
 ```
 
 ### Verify Deployment
@@ -139,7 +141,7 @@ gsm.simaerep.viz/
 
 ## Dependencies
 
-- **gsm.viz** - Base visualization library (includes Chart.js bundled within)
+- **Chart.js** - JavaScript charting library (bundled internally, not exposed in public API)
 
 ## Browser Compatibility
 
@@ -157,7 +159,6 @@ Copyright (c) 2025 IMPALA Consortium
 
 ## Related Projects
 
-- [gsm.viz](https://github.com/Gilead-BioStats/gsm.viz) - Base visualization library
 - [gsm.kri](https://github.com/Gilead-BioStats/gsm.kri) - R package for KRI reporting
 - [gsm.simaerep](https://github.com/Gilead-BioStats/gsm.simaerep) - R package for simaerep analysis
 - [gsm.core](https://github.com/Gilead-BioStats/gsm.core) - Core utilities

@@ -16,8 +16,7 @@
 - this is only a JS library
 - we start with only a cahrt list of sites
 - we need a testing framework the same gsm.viz is using
-- we start with the github gsm.viz dependency
-
+- chartJS should be integrated into the index.js export file
 
 - we will use a git based workflow:
   - create issues for implementation steps
@@ -31,6 +30,42 @@
 
 - never commit and push to git the user will manage commits and pushes
 - never copy code from this project to gsm.simaerep, the user will take care of that
+
+## Chart Type Simaerep
+
+- sample data has been added to data folder as csv, it is the output as provided by prepare_visualization_data() R function
+- R code for using this data for a ggplot2 visualisation have been added in .cursor/Visualize_Simaerep.R
+- the new chart type should work with the sample data plus strScoreCol, strStudyId
+- it should consit of two panels
+- left panel shows the study plot with the site lines
+  - on mouse over show site labels
+  - highlight site on right panel
+- right panel shows individual flagged sites
+  - show all flagged sites
+  - 4 site plots should have the same size as the left plot
+  - activate vertical scrolling when there are more than 4 sites
+  - site order needs to be as in df_label_sites
+  - make aspect ratio a function parameter with default of 1 (square)
+  - reference lines need to be plotted over the data lines, check R example for plotting order
+    - study plot left panel:
+      - 1. unflagged sites
+      - 2. flagged sites
+      - 3. study line
+    - site plots reight panel
+      - 1. df_visit, patient lines
+      - 2. site line
+      - 3. study line
+  - background colour should should be the same in all panels
+  - we need the same site highlighter as in SiteList that is compatible with the gsm.viz
+  - it needs to be compatible with the gsm.viz group selector
+  - it should use chartjs
+  - sample date for this chart is provided in examples/data/csv
+
+  - the first version of the chart should only contain the left panel
+  - it needs to contain site selector which highlights a selected site
+  - it needs to be compatible with the gsm.viz group selector
+  - it must take up the same space as the scatterplot widget in the html report
+
 
 # documentation:
 

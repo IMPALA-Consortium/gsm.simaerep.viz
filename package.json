@@ -23,7 +23,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "gsm.viz": "github:Gilead-BioStats/gsm.viz#v2.2.0"
+    "chart.js": "^4.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.23.0",
