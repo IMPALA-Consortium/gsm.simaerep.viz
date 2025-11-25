@@ -126,6 +126,8 @@ HTMLWidgets.widget({
 - Accepts R data frames converted to JSON format
 - Supports optional configuration via `lChartConfig`
 - Compatible with gsm.kri report interactivity system
+- **Tooltip styling**: Tooltips use the standard gsm.viz aesthetic with white semi-transparent background, black text, Roboto font, and proper borders for consistency across all gsm.kri widgets
+- **Tooltip interaction**: Shows only the nearest single point on hover (not all points at same x-coordinate) for better user experience
 
 ### 2. Dependencies Configuration (Widget_Simaerep.yaml)
 

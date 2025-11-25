@@ -8,6 +8,8 @@
  */
 
 import Chart from 'chart.js/auto';
+import getTooltipAesthetics from './util/getTooltipAesthetics.js';
+import hexToRgba from './util/hexToRgba.js';
 
 class Simaerep {
   constructor(container, data, config = {}) {
@@ -70,6 +72,9 @@ class Simaerep {
   processData() {
     const datasets = [];
     const selectedGroupID = this.data.config.selectedGroupIDs;
+    
+    // Check if a site is actually selected (not 'None')
+    const hasSelection = selectedGroupID && selectedGroupID !== 'None';
 
     // Extract data from rawData structure
     const studyData = this.rawData.df_mean_study || [];
@@ -102,7 +107,11 @@ class Simaerep {
     const unflaggedGroups = groupByGroupID(unflaggedSites);
     Object.entries(unflaggedGroups).forEach(([groupID, points]) => {
       const isSelected = groupID === selectedGroupID;
-      const color = siteMetadata[groupID]?.Color || '#CCCCCC';
+      const baseColor = siteMetadata[groupID]?.Color || '#CCCCCC';
+      
+      // Apply opacity reduction for unselected items when there's a selection
+      const opacity = hasSelection && !isSelected ? 0.2 : 1.0;
+      const color = hexToRgba(baseColor, opacity);
       
       datasets.push({
         label: `Site ${groupID}`,
@@ -123,7 +132,11 @@ class Simaerep {
     const flaggedGroups = groupByGroupID(flaggedSites);
     Object.entries(flaggedGroups).forEach(([groupID, points]) => {
       const isSelected = groupID === selectedGroupID;
-      const color = siteMetadata[groupID]?.Color || '#3182BD';
+      const baseColor = siteMetadata[groupID]?.Color || '#3182BD';
+      
+      // Apply opacity reduction for unselected items when there's a selection
+      const opacity = hasSelection && !isSelected ? 0.2 : 1.0;
+      const color = hexToRgba(baseColor, opacity);
       
       datasets.push({
         label: `Site ${groupID}`,
@@ -141,6 +154,7 @@ class Simaerep {
     });
 
     // 3. Add study line (top layer)
+    // Study line always stays at full opacity
     if (studyData.length > 0) {
       const studyPoints = studyData.map(row => ({
         x: parseFloat(row.Denominator),
@@ -238,20 +252,32 @@ class Simaerep {
             enabled: true,
             mode: 'nearest',
             intersect: false,
+            ...getTooltipAesthetics(),
             callbacks: {
-              label: (context) => {
-                const dataset = context.dataset;
-                if (dataset.siteType === 'study') {
-                  return `Study: ${context.parsed.y.toFixed(2)}`;
+              title: (context) => {
+                if (context.length > 0) {
+                  const dataset = context[0].dataset;
+                  if (dataset.siteType === 'study') {
+                    return 'Study Mean';
+                  }
+                  return `Site ${dataset.groupID}`;
                 }
-                return `Site ${dataset.groupID}: ${context.parsed.y.toFixed(2)}`;
-              }
+                return '';
+              },
+              label: (context) => {
+                const value = context.parsed.y.toFixed(2);
+                const xValue = context.parsed.x.toFixed(0);
+                return [
+                  `Cumulative Mean Deviation: ${value}`,
+                  `Denominator: ${xValue}`
+                ];
+              },
+              labelPointStyle: () => ({ pointStyle: 'circle' })
             }
           }
         },
         interaction: {
           mode: 'nearest',
-          axis: 'x',
           intersect: false
         }
       }
