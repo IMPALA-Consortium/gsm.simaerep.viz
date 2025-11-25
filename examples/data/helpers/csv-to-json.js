@@ -26,8 +26,8 @@ function csvToJson(csvFilePath) {
     headers.forEach((header, index) => {
       let value = values[index];
       
-      // Convert numbers
-      if (!isNaN(value) && value !== '') {
+      // Convert numbers, but preserve GroupID as string
+      if (header !== 'GroupID' && !isNaN(value) && value !== '') {
         value = Number(value);
       }
       

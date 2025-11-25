@@ -10,6 +10,8 @@
 import Chart from 'chart.js/auto';
 import getTooltipAesthetics from './util/getTooltipAesthetics.js';
 import hexToRgba from './util/hexToRgba.js';
+import structureGroupMetadata from './util/structureGroupMetadata.js';
+import formatGroupTooltipLabel from './util/formatGroupTooltipLabel.js';
 
 class Simaerep {
   constructor(container, data, config = {}) {
@@ -22,8 +24,12 @@ class Simaerep {
       aspectRatio: config.aspectRatio || 2,
       showGroupSelector: config.showGroupSelector !== false,
       groupLabelKey: config.groupLabelKey || 'GroupID',
+      GroupLevel: config.GroupLevel || 'Site',
       ...config,
     };
+
+    // Structure group metadata if provided
+    this.groupMetadata = structureGroupMetadata(config.groupMetadata, this.config);
 
     // Initialize canvas for Chart.js
     this.canvas = document.createElement('canvas');
@@ -260,17 +266,33 @@ class Simaerep {
                   if (dataset.siteType === 'study') {
                     return 'Study Mean';
                   }
-                  return `Site ${dataset.groupID}`;
+                  const groupID = dataset.groupID;
+                  const metadata = this.groupMetadata?.get(groupID);
+                  if (metadata && metadata.InvestigatorLastName) {
+                    return `Site ${groupID} - ${metadata.InvestigatorLastName}`;
+                  }
+                  return `Site ${groupID}`;
                 }
                 return '';
               },
               label: (context) => {
                 const value = context.parsed.y.toFixed(2);
                 const xValue = context.parsed.x.toFixed(0);
-                return [
+                const groupID = context.dataset.groupID;
+                const metadata = this.groupMetadata?.get(groupID);
+                
+                const labels = [
                   `Cumulative Mean Deviation: ${value}`,
                   `Denominator: ${xValue}`
                 ];
+                
+                // Add metadata fields if available
+                if (metadata && context.dataset.siteType !== 'study') {
+                  const metadataLabels = formatGroupTooltipLabel(metadata, this.config);
+                  labels.push(...metadataLabels);
+                }
+                
+                return labels;
               },
               labelPointStyle: () => ({ pointStyle: 'circle' })
             }

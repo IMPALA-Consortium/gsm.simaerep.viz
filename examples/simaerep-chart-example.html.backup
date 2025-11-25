@@ -86,20 +86,18 @@
     // Load data from JSON files
     async function loadData() {
       try {
-        const [studyData, flaggedData, unflaggedData, labelData, groupsData] = await Promise.all([
+        const [studyData, flaggedData, unflaggedData, labelData] = await Promise.all([
           fetch('data/csv/df_mean_study.json').then(r => r.json()),
           fetch('data/csv/df_mean_group_flagged.json').then(r => r.json()),
           fetch('data/csv/df_mean_group_not_flagged.json').then(r => r.json()),
-          fetch('data/csv/df_label_sites.json').then(r => r.json()),
-          fetch('data/csv/df_groups.json').then(r => r.json())
+          fetch('data/csv/df_label_sites.json').then(r => r.json())
         ]);
 
         return {
           df_mean_study: studyData,
           df_mean_group_flagged: flaggedData,
           df_mean_group_not_flagged: unflaggedData,
-          df_label_sites: labelData,
-          df_groups: groupsData
+          df_label_sites: labelData
         };
       } catch (error) {
         console.error('Error loading data:', error);
@@ -121,30 +119,11 @@
           aspectRatio: 1.5,
           showGroupSelector: true,
           width: '100%',
-          height: '500px',
-          groupMetadata: data.df_groups,
-          GroupLevel: 'Site'
+          height: '500px'
         };
 
         // Create chart using the global gsmSimaerepViz library
-        console.log("=== DEBUG START ===");
-        console.log("data object keys:", Object.keys(data));
-        console.log("df_groups exists?", !!data.df_groups);
-        console.log("df_groups length:", data.df_groups?.length);
-        console.log("df_groups first item:", data.df_groups?.[0]);
-        console.log("config.GroupLevel:", config.GroupLevel);
-        console.log("config.groupMetadata length:", config.groupMetadata?.length);
         const chart = new gsmSimaerepViz.Simaerep(container, data, config);
-        window.lastChart = chart;  // For debugging
-        console.log("Chart created successfully");
-        console.log("chart.groupMetadata type:", typeof chart.groupMetadata);
-        console.log("chart.groupMetadata instanceof Map:", chart.groupMetadata instanceof Map);
-        console.log("chart.groupMetadata size:", chart.groupMetadata?.size);
-        if (chart.groupMetadata && chart.groupMetadata.size > 0) {
-          console.log("First 3 metadata entries:", Array.from(chart.groupMetadata.entries()).slice(0, 3));
-        } else {
-          console.log("WARNING: groupMetadata is empty or null!");
-        }
 
         console.log('Simaerep initialized:', chart);
         console.log('Available sites:', data.df_label_sites.map(s => s.GroupID));

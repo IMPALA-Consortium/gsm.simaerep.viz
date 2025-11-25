@@ -128,6 +128,7 @@ HTMLWidgets.widget({
 - Compatible with gsm.kri report interactivity system
 - **Tooltip styling**: Tooltips use the standard gsm.viz aesthetic with white semi-transparent background, black text, Roboto font, and proper borders for consistency across all gsm.kri widgets
 - **Tooltip interaction**: Shows only the nearest single point on hover (not all points at same x-coordinate) for better user experience
+- **Group metadata**: Supports dfGroups parameter for displaying site investigator names, countries, status, and other metadata in tooltips (matching gsm.viz pattern)
 
 ### 2. Dependencies Configuration (Widget_Simaerep.yaml)
 
@@ -170,6 +171,11 @@ dependencies:
 #'   (same structure as df_mean_group_flagged)
 #' @param df_label_sites Data frame with site metadata
 #'   (columns: GroupID, Flag, Color, nSubjects)
+#' @param dfGroups Optional data frame with group metadata in Param/Value format
+#'   (columns: GroupID, Param, Value, GroupLevel). When provided, tooltips will display
+#'   investigator names, countries, status, and other metadata fields. Format example:
+#'   GroupID="S001", Param="InvestigatorLastName", Value="Smith", GroupLevel="Site".
+#'   Default is NULL (no additional metadata displayed in tooltips).
 #' @param strStudyId Study identifier for element ID generation
 #' @param strScoreCol Score column name for element ID generation
 #' @param lChartConfig List of chart configuration options:
@@ -194,12 +200,13 @@ dependencies:
 #'   strScoreCol = "Score"
 #' )
 #'
-#' # Create widget
+#' # Create widget with group metadata for richer tooltips
 #' Widget_Simaerep(
 #'   df_mean_study = viz_data$df_mean_study,
 #'   df_mean_group_flagged = viz_data$df_mean_group_flagged,
 #'   df_mean_group_not_flagged = viz_data$df_mean_group_not_flagged,
 #'   df_label_sites = viz_data$df_label_sites,
+#'   dfGroups = dfGroups,  # Group metadata in Param/Value format
 #'   strStudyId = "STUDY001",
 #'   strScoreCol = "Score",
 #'   lChartConfig = list(aspectRatio = 1.5),
@@ -213,6 +220,7 @@ Widget_Simaerep <- function(
   df_mean_group_flagged,
   df_mean_group_not_flagged,
   df_label_sites,
+  dfGroups = NULL,
   strStudyId = "study",
   strScoreCol = "score",
   lChartConfig = list(),

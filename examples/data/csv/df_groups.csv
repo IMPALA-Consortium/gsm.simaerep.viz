@@ -1,0 +1,2314 @@
+GroupID,Param,Value,GroupLevel
+AA-AA-000-0000,studyid,AA-AA-000-0000,Study
+AA-AA-000-0000,nickname,Protocol Nickname,Study
+AA-AA-000-0000,protocol_title,Protocol Title,Study
+AA-AA-000-0000,Status,Active,Study
+AA-AA-000-0000,num_plan_site,190,Study
+AA-AA-000-0000,num_plan_subj,1300,Study
+AA-AA-000-0000,act_fpfv,2003-01-01,Study
+AA-AA-000-0000,est_fpfv,2003-01-01,Study
+AA-AA-000-0000,est_lplv,2021-06-01,Study
+AA-AA-000-0000,est_lpfv,2020-06-01,Study
+AA-AA-000-0000,therapeutic_area,Therapeutic Area,Study
+AA-AA-000-0000,protocol_indication,Protocol Indication,Study
+AA-AA-000-0000,phase,P3,Study
+AA-AA-000-0000,product,Product,Study
+AA-AA-000-0000,SiteTarget,190,Study
+AA-AA-000-0000,ParticipantTarget,1300,Study
+AA-AA-000-0000,ParticipantCount,1301,Study
+AA-AA-000-0000,ActiveParticipantCount,1301,Study
+AA-AA-000-0000,SiteCount,176,Study
+AA-AA-000-0000,PercentSitesActivated,92.6,Study
+AA-AA-000-0000,SiteActivation,176 / 190 (92.6%),Study
+AA-AA-000-0000,PercentParticipantsEnrolled,100.1,Study
+AA-AA-000-0000,ParticipantEnrollment,1301 / 1300 (100.1%),Study
+AA-AA-000-0000,PercentParticipantsActive,100,Study
+AA-AA-000-0000,ActiveParticipants,1301 / 1301 (100%),Study
+0X126,studyid,AA-AA-000-0000,Site
+0X126,invid,0X126,Site
+0X126,InvestigatorFirstName,Ariel,Site
+0X126,InvestigatorLastName,Torres,Site
+0X126,Status,Active,Site
+0X126,City,city 1,Site
+0X126,State,state 1,Site
+0X126,Country,China,Site
+X060X,studyid,AA-AA-000-0000,Site
+X060X,invid,X060X,Site
+X060X,InvestigatorFirstName,Cheyenne,Site
+X060X,InvestigatorLastName,Spangler,Site
+X060X,Status,Active,Site
+X060X,City,city 1,Site
+X060X,State,state 1,Site
+X060X,Country,Japan,Site
+0X174,studyid,AA-AA-000-0000,Site
+0X174,invid,0X174,Site
+0X174,InvestigatorFirstName,Macallyson,Site
+0X174,InvestigatorLastName,Broughton,Site
+0X174,Status,Active,Site
+0X174,City,city 1,Site
+0X174,State,state 1,Site
+0X174,Country,US,Site
+0X073,studyid,AA-AA-000-0000,Site
+0X073,invid,0X073,Site
+0X073,InvestigatorFirstName,Asa,Site
+0X073,InvestigatorLastName,Lester,Site
+0X073,Status,Active,Site
+0X073,City,city 1,Site
+0X073,State,state 1,Site
+0X073,Country,US,Site
+0X176,studyid,AA-AA-000-0000,Site
+0X176,invid,0X176,Site
+0X176,InvestigatorFirstName,Manaal,Site
+0X176,InvestigatorLastName,Salazar,Site
+0X176,Status,Active,Site
+0X176,City,city 1,Site
+0X176,State,state 1,Site
+0X176,Country,Japan,Site
+0X140,studyid,AA-AA-000-0000,Site
+0X140,invid,0X140,Site
+0X140,InvestigatorFirstName,Dominico,Site
+0X140,InvestigatorLastName,Rollins,Site
+0X140,Status,Active,Site
+0X140,City,city 1,Site
+0X140,State,state 1,Site
+0X140,Country,US,Site
+0X179,studyid,AA-AA-000-0000,Site
+0X179,invid,0X179,Site
+0X179,InvestigatorFirstName,Brandon,Site
+0X179,InvestigatorLastName,Terry,Site
+0X179,Status,Active,Site
+0X179,City,city 1,Site
+0X179,State,state 1,Site
+0X179,Country,US,Site
+0X040,studyid,AA-AA-000-0000,Site
+0X040,invid,0X040,Site
+0X040,InvestigatorFirstName,Gabriella,Site
+0X040,InvestigatorLastName,Porter,Site
+0X040,Status,Active,Site
+0X040,City,city 1,Site
+0X040,State,state 1,Site
+0X040,Country,US,Site
+0X072,studyid,AA-AA-000-0000,Site
+0X072,invid,0X072,Site
+0X072,InvestigatorFirstName,Peter,Site
+0X072,InvestigatorLastName,Lopez,Site
+0X072,Status,Active,Site
+0X072,City,city 1,Site
+0X072,State,state 1,Site
+0X072,Country,US,Site
+0X127,studyid,AA-AA-000-0000,Site
+0X127,invid,0X127,Site
+0X127,InvestigatorFirstName,Brandon,Site
+0X127,InvestigatorLastName,Pascual,Site
+0X127,Status,Active,Site
+0X127,City,city 1,Site
+0X127,State,state 1,Site
+0X127,Country,China,Site
+0X156,studyid,AA-AA-000-0000,Site
+0X156,invid,0X156,Site
+0X156,InvestigatorFirstName,Michael,Site
+0X156,InvestigatorLastName,Ashcroft-Bitsilly,Site
+0X156,Status,Active,Site
+0X156,City,city 1,Site
+0X156,State,state 1,Site
+0X156,Country,China,Site
+0X181,studyid,AA-AA-000-0000,Site
+0X181,invid,0X181,Site
+0X181,InvestigatorFirstName,Trang,Site
+0X181,InvestigatorLastName,al-Rais,Site
+0X181,Status,Active,Site
+0X181,City,city 1,Site
+0X181,State,state 1,Site
+0X181,Country,China,Site
+0X114,studyid,AA-AA-000-0000,Site
+0X114,invid,0X114,Site
+0X114,InvestigatorFirstName,Yueh-Ya,Site
+0X114,InvestigatorLastName,Mancilla,Site
+0X114,Status,Active,Site
+0X114,City,city 1,Site
+0X114,State,state 1,Site
+0X114,Country,US,Site
+0X118,studyid,AA-AA-000-0000,Site
+0X118,invid,0X118,Site
+0X118,InvestigatorFirstName,Trevor,Site
+0X118,InvestigatorLastName,el-Dia,Site
+0X118,Status,Active,Site
+0X118,City,city 1,Site
+0X118,State,state 1,Site
+0X118,Country,Japan,Site
+X187X,studyid,AA-AA-000-0000,Site
+X187X,invid,X187X,Site
+X187X,InvestigatorFirstName,Brittany,Site
+X187X,InvestigatorLastName,al-Hasen,Site
+X187X,Status,Active,Site
+X187X,City,city 1,Site
+X187X,State,state 1,Site
+X187X,Country,China,Site
+0X016,studyid,AA-AA-000-0000,Site
+0X016,invid,0X016,Site
+0X016,InvestigatorFirstName,Aatika,Site
+0X016,InvestigatorLastName,el-Shaker,Site
+0X016,Status,Active,Site
+0X016,City,city 1,Site
+0X016,State,state 1,Site
+0X016,Country,US,Site
+0X037,studyid,AA-AA-000-0000,Site
+0X037,invid,0X037,Site
+0X037,InvestigatorFirstName,Sabriyya,Site
+0X037,InvestigatorLastName,el-Mostafa,Site
+0X037,Status,Active,Site
+0X037,City,city 1,Site
+0X037,State,state 1,Site
+0X037,Country,US,Site
+0X105,studyid,AA-AA-000-0000,Site
+0X105,invid,0X105,Site
+0X105,InvestigatorFirstName,Alexander,Site
+0X105,InvestigatorLastName,Patalan,Site
+0X105,Status,Active,Site
+0X105,City,city 1,Site
+0X105,State,state 1,Site
+0X105,Country,China,Site
+0X092,studyid,AA-AA-000-0000,Site
+0X092,invid,0X092,Site
+0X092,InvestigatorFirstName,Nazeeha,Site
+0X092,InvestigatorLastName,al-Badour,Site
+0X092,Status,Active,Site
+0X092,City,city 1,Site
+0X092,State,state 1,Site
+0X092,Country,China,Site
+0X076,studyid,AA-AA-000-0000,Site
+0X076,invid,0X076,Site
+0X076,InvestigatorFirstName,Mujaahida,Site
+0X076,InvestigatorLastName,Farr,Site
+0X076,Status,Active,Site
+0X076,City,city 1,Site
+0X076,State,state 1,Site
+0X076,Country,US,Site
+0X134,studyid,AA-AA-000-0000,Site
+0X134,invid,0X134,Site
+0X134,InvestigatorFirstName,Ashlee,Site
+0X134,InvestigatorLastName,Keese,Site
+0X134,Status,Active,Site
+0X134,City,city 1,Site
+0X134,State,state 1,Site
+0X134,Country,China,Site
+0X085,studyid,AA-AA-000-0000,Site
+0X085,invid,0X085,Site
+0X085,InvestigatorFirstName,Shaleena,Site
+0X085,InvestigatorLastName,al-Mussa,Site
+0X085,Status,Active,Site
+0X085,City,city 1,Site
+0X085,State,state 1,Site
+0X085,Country,US,Site
+0X169,studyid,AA-AA-000-0000,Site
+0X169,invid,0X169,Site
+0X169,InvestigatorFirstName,Andres,Site
+0X169,InvestigatorLastName,Kanack,Site
+0X169,Status,Active,Site
+0X169,City,city 1,Site
+0X169,State,state 1,Site
+0X169,Country,China,Site
+0X120,studyid,AA-AA-000-0000,Site
+0X120,invid,0X120,Site
+0X120,InvestigatorFirstName,Nicholas,Site
+0X120,InvestigatorLastName,Strock,Site
+0X120,Status,Active,Site
+0X120,City,city 1,Site
+0X120,State,state 1,Site
+0X120,Country,US,Site
+0X018,studyid,AA-AA-000-0000,Site
+0X018,invid,0X018,Site
+0X018,InvestigatorFirstName,Aquilah,Site
+0X018,InvestigatorLastName,Bocanegra,Site
+0X018,Status,Active,Site
+0X018,City,city 1,Site
+0X018,State,state 1,Site
+0X018,Country,China,Site
+0X078,studyid,AA-AA-000-0000,Site
+0X078,invid,0X078,Site
+0X078,InvestigatorFirstName,Mariah,Site
+0X078,InvestigatorLastName,Ha,Site
+0X078,Status,Active,Site
+0X078,City,city 1,Site
+0X078,State,state 1,Site
+0X078,Country,Japan,Site
+0X029,studyid,AA-AA-000-0000,Site
+0X029,invid,0X029,Site
+0X029,InvestigatorFirstName,Christopher,Site
+0X029,InvestigatorLastName,Truong,Site
+0X029,Status,Active,Site
+0X029,City,city 1,Site
+0X029,State,state 1,Site
+0X029,Country,US,Site
+0X099,studyid,AA-AA-000-0000,Site
+0X099,invid,0X099,Site
+0X099,InvestigatorFirstName,Joseph,Site
+0X099,InvestigatorLastName,Schmidt,Site
+0X099,Status,Active,Site
+0X099,City,city 1,Site
+0X099,State,state 1,Site
+0X099,Country,China,Site
+0X043,studyid,AA-AA-000-0000,Site
+0X043,invid,0X043,Site
+0X043,InvestigatorFirstName,Saaya,Site
+0X043,InvestigatorLastName,Ford,Site
+0X043,Status,Active,Site
+0X043,City,city 1,Site
+0X043,State,state 1,Site
+0X043,Country,Japan,Site
+0X149,studyid,AA-AA-000-0000,Site
+0X149,invid,0X149,Site
+0X149,InvestigatorFirstName,Nkaujiaong,Site
+0X149,InvestigatorLastName,Lesley,Site
+0X149,Status,Active,Site
+0X149,City,city 1,Site
+0X149,State,state 1,Site
+0X149,Country,Japan,Site
+0X048,studyid,AA-AA-000-0000,Site
+0X048,invid,0X048,Site
+0X048,InvestigatorFirstName,Anna,Site
+0X048,InvestigatorLastName,Friedrich,Site
+0X048,Status,Active,Site
+0X048,City,city 1,Site
+0X048,State,state 1,Site
+0X048,Country,China,Site
+0X077,studyid,AA-AA-000-0000,Site
+0X077,invid,0X077,Site
+0X077,InvestigatorFirstName,Crystal,Site
+0X077,InvestigatorLastName,Gonzalez,Site
+0X077,Status,Active,Site
+0X077,City,city 1,Site
+0X077,State,state 1,Site
+0X077,Country,China,Site
+0X010,studyid,AA-AA-000-0000,Site
+0X010,invid,0X010,Site
+0X010,InvestigatorFirstName,Carissa,Site
+0X010,InvestigatorLastName,al-Radi,Site
+0X010,Status,Active,Site
+0X010,City,city 1,Site
+0X010,State,state 1,Site
+0X010,Country,Japan,Site
+0X025,studyid,AA-AA-000-0000,Site
+0X025,invid,0X025,Site
+0X025,InvestigatorFirstName,Eric,Site
+0X025,InvestigatorLastName,Smith,Site
+0X025,Status,Active,Site
+0X025,City,city 1,Site
+0X025,State,state 1,Site
+0X025,Country,China,Site
+0X028,studyid,AA-AA-000-0000,Site
+0X028,invid,0X028,Site
+0X028,InvestigatorFirstName,Aqsa,Site
+0X028,InvestigatorLastName,Gonzales,Site
+0X028,Status,Active,Site
+0X028,City,city 1,Site
+0X028,State,state 1,Site
+0X028,Country,China,Site
+0X042,studyid,AA-AA-000-0000,Site
+0X042,invid,0X042,Site
+0X042,InvestigatorFirstName,Musaddiq,Site
+0X042,InvestigatorLastName,el-Massoud,Site
+0X042,Status,Active,Site
+0X042,City,city 1,Site
+0X042,State,state 1,Site
+0X042,Country,Japan,Site
+0X057,studyid,AA-AA-000-0000,Site
+0X057,invid,0X057,Site
+0X057,InvestigatorFirstName,Hailey,Site
+0X057,InvestigatorLastName,Aragon,Site
+0X057,Status,Active,Site
+0X057,City,city 1,Site
+0X057,State,state 1,Site
+0X057,Country,US,Site
+0X142,studyid,AA-AA-000-0000,Site
+0X142,invid,0X142,Site
+0X142,InvestigatorFirstName,Alix,Site
+0X142,InvestigatorLastName,Garnett,Site
+0X142,Status,Active,Site
+0X142,City,city 1,Site
+0X142,State,state 1,Site
+0X142,Country,Japan,Site
+0X110,studyid,AA-AA-000-0000,Site
+0X110,invid,0X110,Site
+0X110,InvestigatorFirstName,Zakariyya,Site
+0X110,InvestigatorLastName,Cleckley,Site
+0X110,Status,Active,Site
+0X110,City,city 1,Site
+0X110,State,state 1,Site
+0X110,Country,US,Site
+0X086,studyid,AA-AA-000-0000,Site
+0X086,invid,0X086,Site
+0X086,InvestigatorFirstName,Lindsey,Site
+0X086,InvestigatorLastName,Gonzales,Site
+0X086,Status,Active,Site
+0X086,City,city 1,Site
+0X086,State,state 1,Site
+0X086,Country,China,Site
+0X184,studyid,AA-AA-000-0000,Site
+0X184,invid,0X184,Site
+0X184,InvestigatorFirstName,Tateh,Site
+0X184,InvestigatorLastName,Kapoor,Site
+0X184,Status,Active,Site
+0X184,City,city 1,Site
+0X184,State,state 1,Site
+0X184,Country,US,Site
+0X052,studyid,AA-AA-000-0000,Site
+0X052,invid,0X052,Site
+0X052,InvestigatorFirstName,Angelo,Site
+0X052,InvestigatorLastName,Agenar,Site
+0X052,Status,Active,Site
+0X052,City,city 1,Site
+0X052,State,state 1,Site
+0X052,Country,US,Site
+0X033,studyid,AA-AA-000-0000,Site
+0X033,invid,0X033,Site
+0X033,InvestigatorFirstName,Bianca,Site
+0X033,InvestigatorLastName,Taylor,Site
+0X033,Status,Active,Site
+0X033,City,city 1,Site
+0X033,State,state 1,Site
+0X033,Country,US,Site
+0X161,studyid,AA-AA-000-0000,Site
+0X161,invid,0X161,Site
+0X161,InvestigatorFirstName,Cydnie,Site
+0X161,InvestigatorLastName,Vangoey,Site
+0X161,Status,Active,Site
+0X161,City,city 1,Site
+0X161,State,state 1,Site
+0X161,Country,US,Site
+0X180,studyid,AA-AA-000-0000,Site
+0X180,invid,0X180,Site
+0X180,InvestigatorFirstName,Raelina,Site
+0X180,InvestigatorLastName,Tran,Site
+0X180,Status,Active,Site
+0X180,City,city 1,Site
+0X180,State,state 1,Site
+0X180,Country,China,Site
+0X095,studyid,AA-AA-000-0000,Site
+0X095,invid,0X095,Site
+0X095,InvestigatorFirstName,Benjamin,Site
+0X095,InvestigatorLastName,Gonzales,Site
+0X095,Status,Active,Site
+0X095,City,city 1,Site
+0X095,State,state 1,Site
+0X095,Country,US,Site
+0X153,studyid,AA-AA-000-0000,Site
+0X153,invid,0X153,Site
+0X153,InvestigatorFirstName,Hamdoona,Site
+0X153,InvestigatorLastName,Voss,Site
+0X153,Status,Active,Site
+0X153,City,city 1,Site
+0X153,State,state 1,Site
+0X153,Country,US,Site
+0X164,studyid,AA-AA-000-0000,Site
+0X164,invid,0X164,Site
+0X164,InvestigatorFirstName,Essence,Site
+0X164,InvestigatorLastName,Jiron,Site
+0X164,Status,Active,Site
+0X164,City,city 1,Site
+0X164,State,state 1,Site
+0X164,Country,China,Site
+0X173,studyid,AA-AA-000-0000,Site
+0X173,invid,0X173,Site
+0X173,InvestigatorFirstName,Christine,Site
+0X173,InvestigatorLastName,el-Yusuf,Site
+0X173,Status,Active,Site
+0X173,City,city 1,Site
+0X173,State,state 1,Site
+0X173,Country,US,Site
+0X188,studyid,AA-AA-000-0000,Site
+0X188,invid,0X188,Site
+0X188,InvestigatorFirstName,Ashuka,Site
+0X188,InvestigatorLastName,Jenkins,Site
+0X188,Status,Active,Site
+0X188,City,city 1,Site
+0X188,State,state 1,Site
+0X188,Country,US,Site
+0X036,studyid,AA-AA-000-0000,Site
+0X036,invid,0X036,Site
+0X036,InvestigatorFirstName,Carlos,Site
+0X036,InvestigatorLastName,Gonzales,Site
+0X036,Status,Active,Site
+0X036,City,city 1,Site
+0X036,State,state 1,Site
+0X036,Country,US,Site
+0X186,studyid,AA-AA-000-0000,Site
+0X186,invid,0X186,Site
+0X186,InvestigatorFirstName,Caroline,Site
+0X186,InvestigatorLastName,Gallegos-Neiberger,Site
+0X186,Status,Active,Site
+0X186,City,city 1,Site
+0X186,State,state 1,Site
+0X186,Country,China,Site
+0X075,studyid,AA-AA-000-0000,Site
+0X075,invid,0X075,Site
+0X075,InvestigatorFirstName,Derrick,Site
+0X075,InvestigatorLastName,Dabit,Site
+0X075,Status,Active,Site
+0X075,City,city 1,Site
+0X075,State,state 1,Site
+0X075,Country,US,Site
+0X039,studyid,AA-AA-000-0000,Site
+0X039,invid,0X039,Site
+0X039,InvestigatorFirstName,Marceen,Site
+0X039,InvestigatorLastName,Kimler,Site
+0X039,Status,Active,Site
+0X039,City,city 1,Site
+0X039,State,state 1,Site
+0X039,Country,China,Site
+0X054,studyid,AA-AA-000-0000,Site
+0X054,invid,0X054,Site
+0X054,InvestigatorFirstName,Darien,Site
+0X054,InvestigatorLastName,Vargas Padilla,Site
+0X054,Status,Active,Site
+0X054,City,city 1,Site
+0X054,State,state 1,Site
+0X054,Country,China,Site
+0X168,studyid,AA-AA-000-0000,Site
+0X168,invid,0X168,Site
+0X168,InvestigatorFirstName,Haileigh,Site
+0X168,InvestigatorLastName,Pinch,Site
+0X168,Status,Active,Site
+0X168,City,city 1,Site
+0X168,State,state 1,Site
+0X168,Country,China,Site
+0X013,studyid,AA-AA-000-0000,Site
+0X013,invid,0X013,Site
+0X013,InvestigatorFirstName,Felicity,Site
+0X013,InvestigatorLastName,el-Allam,Site
+0X013,Status,Active,Site
+0X013,City,city 1,Site
+0X013,State,state 1,Site
+0X013,Country,Japan,Site
+0X089,studyid,AA-AA-000-0000,Site
+0X089,invid,0X089,Site
+0X089,InvestigatorFirstName,Caerra,Site
+0X089,InvestigatorLastName,al-Nouri,Site
+0X089,Status,Active,Site
+0X089,City,city 1,Site
+0X089,State,state 1,Site
+0X089,Country,China,Site
+0X090,studyid,AA-AA-000-0000,Site
+0X090,invid,0X090,Site
+0X090,InvestigatorFirstName,Kristie,Site
+0X090,InvestigatorLastName,el-Attar,Site
+0X090,Status,Active,Site
+0X090,City,city 1,Site
+0X090,State,state 1,Site
+0X090,Country,Japan,Site
+0X125,studyid,AA-AA-000-0000,Site
+0X125,invid,0X125,Site
+0X125,InvestigatorFirstName,Qu Onu,Site
+0X125,InvestigatorLastName,Pond,Site
+0X125,Status,Active,Site
+0X125,City,city 1,Site
+0X125,State,state 1,Site
+0X125,Country,US,Site
+0X157,studyid,AA-AA-000-0000,Site
+0X157,invid,0X157,Site
+0X157,InvestigatorFirstName,Talia,Site
+0X157,InvestigatorLastName,Arellano,Site
+0X157,Status,Active,Site
+0X157,City,city 1,Site
+0X157,State,state 1,Site
+0X157,Country,China,Site
+0X063,studyid,AA-AA-000-0000,Site
+0X063,invid,0X063,Site
+0X063,InvestigatorFirstName,Justin,Site
+0X063,InvestigatorLastName,Pinto,Site
+0X063,Status,Active,Site
+0X063,City,city 1,Site
+0X063,State,state 1,Site
+0X063,Country,US,Site
+0X183,studyid,AA-AA-000-0000,Site
+0X183,invid,0X183,Site
+0X183,InvestigatorFirstName,Louisa,Site
+0X183,InvestigatorLastName,Gray,Site
+0X183,Status,Active,Site
+0X183,City,city 1,Site
+0X183,State,state 1,Site
+0X183,Country,Japan,Site
+0X121,studyid,AA-AA-000-0000,Site
+0X121,invid,0X121,Site
+0X121,InvestigatorFirstName,Kevin,Site
+0X121,InvestigatorLastName,Rodriguez-Cruz,Site
+0X121,Status,Active,Site
+0X121,City,city 1,Site
+0X121,State,state 1,Site
+0X121,Country,Japan,Site
+0X148,studyid,AA-AA-000-0000,Site
+0X148,invid,0X148,Site
+0X148,InvestigatorFirstName,Christina,Site
+0X148,InvestigatorLastName,Suess,Site
+0X148,Status,Active,Site
+0X148,City,city 1,Site
+0X148,State,state 1,Site
+0X148,Country,US,Site
+0X096,studyid,AA-AA-000-0000,Site
+0X096,invid,0X096,Site
+0X096,InvestigatorFirstName,"Mu,Aawiya",Site
+0X096,InvestigatorLastName,el-Agha,Site
+0X096,Status,Active,Site
+0X096,City,city 1,Site
+0X096,State,state 1,Site
+0X096,Country,Japan,Site
+0X011,studyid,AA-AA-000-0000,Site
+0X011,invid,0X011,Site
+0X011,InvestigatorFirstName,Mansoor,Site
+0X011,InvestigatorLastName,Gallegos,Site
+0X011,Status,Active,Site
+0X011,City,city 1,Site
+0X011,State,state 1,Site
+0X011,Country,Japan,Site
+0X049,studyid,AA-AA-000-0000,Site
+0X049,invid,0X049,Site
+0X049,InvestigatorFirstName,Byung,Site
+0X049,InvestigatorLastName,Mccracken,Site
+0X049,Status,Active,Site
+0X049,City,city 1,Site
+0X049,State,state 1,Site
+0X049,Country,US,Site
+0X031,studyid,AA-AA-000-0000,Site
+0X031,invid,0X031,Site
+0X031,InvestigatorFirstName,Raquel,Site
+0X031,InvestigatorLastName,Garrison,Site
+0X031,Status,Active,Site
+0X031,City,city 1,Site
+0X031,State,state 1,Site
+0X031,Country,US,Site
+0X162,studyid,AA-AA-000-0000,Site
+0X162,invid,0X162,Site
+0X162,InvestigatorFirstName,April,Site
+0X162,InvestigatorLastName,Campa,Site
+0X162,Status,Active,Site
+0X162,City,city 1,Site
+0X162,State,state 1,Site
+0X162,Country,China,Site
+0X131,studyid,AA-AA-000-0000,Site
+0X131,invid,0X131,Site
+0X131,InvestigatorFirstName,Briana,Site
+0X131,InvestigatorLastName,Tran,Site
+0X131,Status,Active,Site
+0X131,City,city 1,Site
+0X131,State,state 1,Site
+0X131,Country,Japan,Site
+0X102,studyid,AA-AA-000-0000,Site
+0X102,invid,0X102,Site
+0X102,InvestigatorFirstName,Safwa,Site
+0X102,InvestigatorLastName,Solis,Site
+0X102,Status,Active,Site
+0X102,City,city 1,Site
+0X102,State,state 1,Site
+0X102,Country,US,Site
+0X059,studyid,AA-AA-000-0000,Site
+0X059,invid,0X059,Site
+0X059,InvestigatorFirstName,Tracee,Site
+0X059,InvestigatorLastName,Foster,Site
+0X059,Status,Active,Site
+0X059,City,city 1,Site
+0X059,State,state 1,Site
+0X059,Country,US,Site
+0X189,studyid,AA-AA-000-0000,Site
+0X189,invid,0X189,Site
+0X189,InvestigatorFirstName,Shaqeeqa,Site
+0X189,InvestigatorLastName,Orio,Site
+0X189,Status,Active,Site
+0X189,City,city 1,Site
+0X189,State,state 1,Site
+0X189,Country,China,Site
+0X171,studyid,AA-AA-000-0000,Site
+0X171,invid,0X171,Site
+0X171,InvestigatorFirstName,Adam,Site
+0X171,InvestigatorLastName,Hoffpauir,Site
+0X171,Status,Active,Site
+0X171,City,city 1,Site
+0X171,State,state 1,Site
+0X171,Country,China,Site
+0X087,studyid,AA-AA-000-0000,Site
+0X087,invid,0X087,Site
+0X087,InvestigatorFirstName,Edeyanira,Site
+0X087,InvestigatorLastName,Vigo,Site
+0X087,Status,Active,Site
+0X087,City,city 1,Site
+0X087,State,state 1,Site
+0X087,Country,US,Site
+0X109,studyid,AA-AA-000-0000,Site
+0X109,invid,0X109,Site
+0X109,InvestigatorFirstName,Abdul Wadood,Site
+0X109,InvestigatorLastName,Nguyen,Site
+0X109,Status,Active,Site
+0X109,City,city 1,Site
+0X109,State,state 1,Site
+0X109,Country,US,Site
+0X163,studyid,AA-AA-000-0000,Site
+0X163,invid,0X163,Site
+0X163,InvestigatorFirstName,Theador,Site
+0X163,InvestigatorLastName,el-Vaziri,Site
+0X163,Status,Active,Site
+0X163,City,city 1,Site
+0X163,State,state 1,Site
+0X163,Country,Japan,Site
+0X124,studyid,AA-AA-000-0000,Site
+0X124,invid,0X124,Site
+0X124,InvestigatorFirstName,Dominick,Site
+0X124,InvestigatorLastName,Salas Dominguez,Site
+0X124,Status,Active,Site
+0X124,City,city 1,Site
+0X124,State,state 1,Site
+0X124,Country,US,Site
+0X051,studyid,AA-AA-000-0000,Site
+0X051,invid,0X051,Site
+0X051,InvestigatorFirstName,Carsyn,Site
+0X051,InvestigatorLastName,al-Miah,Site
+0X051,Status,Active,Site
+0X051,City,city 1,Site
+0X051,State,state 1,Site
+0X051,Country,US,Site
+X067X,studyid,AA-AA-000-0000,Site
+X067X,invid,X067X,Site
+X067X,InvestigatorFirstName,John,Site
+X067X,InvestigatorLastName,Zamora,Site
+X067X,Status,Active,Site
+X067X,City,city 1,Site
+X067X,State,state 1,Site
+X067X,Country,US,Site
+0X106,studyid,AA-AA-000-0000,Site
+0X106,invid,0X106,Site
+0X106,InvestigatorFirstName,Joan,Site
+0X106,InvestigatorLastName,Hill,Site
+0X106,Status,Active,Site
+0X106,City,city 1,Site
+0X106,State,state 1,Site
+0X106,Country,US,Site
+0X020,studyid,AA-AA-000-0000,Site
+0X020,invid,0X020,Site
+0X020,InvestigatorFirstName,Ivy,Site
+0X020,InvestigatorLastName,Hamlin,Site
+0X020,Status,Active,Site
+0X020,City,city 1,Site
+0X020,State,state 1,Site
+0X020,Country,US,Site
+0X144,studyid,AA-AA-000-0000,Site
+0X144,invid,0X144,Site
+0X144,InvestigatorFirstName,Darrell,Site
+0X144,InvestigatorLastName,el-Kaber,Site
+0X144,Status,Active,Site
+0X144,City,city 1,Site
+0X144,State,state 1,Site
+0X144,Country,US,Site
+0X021,studyid,AA-AA-000-0000,Site
+0X021,invid,0X021,Site
+0X021,InvestigatorFirstName,Omar,Site
+0X021,InvestigatorLastName,Lee,Site
+0X021,Status,Active,Site
+0X021,City,city 1,Site
+0X021,State,state 1,Site
+0X021,Country,US,Site
+0X068,studyid,AA-AA-000-0000,Site
+0X068,invid,0X068,Site
+0X068,InvestigatorFirstName,Ana,Site
+0X068,InvestigatorLastName,al-Sesay,Site
+0X068,Status,Active,Site
+0X068,City,city 1,Site
+0X068,State,state 1,Site
+0X068,Country,US,Site
+0X061,studyid,AA-AA-000-0000,Site
+0X061,invid,0X061,Site
+0X061,InvestigatorFirstName,Audreana,Site
+0X061,InvestigatorLastName,Harrison,Site
+0X061,Status,Active,Site
+0X061,City,city 1,Site
+0X061,State,state 1,Site
+0X061,Country,Japan,Site
+0X001,studyid,AA-AA-000-0000,Site
+0X001,invid,0X001,Site
+0X001,InvestigatorFirstName,Muslih,Site
+0X001,InvestigatorLastName,Robb,Site
+0X001,Status,Active,Site
+0X001,City,city 1,Site
+0X001,State,state 1,Site
+0X001,Country,US,Site
+0X117,studyid,AA-AA-000-0000,Site
+0X117,invid,0X117,Site
+0X117,InvestigatorFirstName,Rubin,Site
+0X117,InvestigatorLastName,Guevara,Site
+0X117,Status,Active,Site
+0X117,City,city 1,Site
+0X117,State,state 1,Site
+0X117,Country,US,Site
+0X030,studyid,AA-AA-000-0000,Site
+0X030,invid,0X030,Site
+0X030,InvestigatorFirstName,Jocelyn,Site
+0X030,InvestigatorLastName,Hutchinson,Site
+0X030,Status,Active,Site
+0X030,City,city 1,Site
+0X030,State,state 1,Site
+0X030,Country,China,Site
+0X123,studyid,AA-AA-000-0000,Site
+0X123,invid,0X123,Site
+0X123,InvestigatorFirstName,Aayaat,Site
+0X123,InvestigatorLastName,Martinez,Site
+0X123,Status,Active,Site
+0X123,City,city 1,Site
+0X123,State,state 1,Site
+0X123,Country,US,Site
+0X007,studyid,AA-AA-000-0000,Site
+0X007,invid,0X007,Site
+0X007,InvestigatorFirstName,Jose,Site
+0X007,InvestigatorLastName,Harrison,Site
+0X007,Status,Active,Site
+0X007,City,city 1,Site
+0X007,State,state 1,Site
+0X007,Country,Japan,Site
+0X064,studyid,AA-AA-000-0000,Site
+0X064,invid,0X064,Site
+0X064,InvestigatorFirstName,Janiro,Site
+0X064,InvestigatorLastName,al-Mussa,Site
+0X064,Status,Active,Site
+0X064,City,city 1,Site
+0X064,State,state 1,Site
+0X064,Country,US,Site
+0X119,studyid,AA-AA-000-0000,Site
+0X119,invid,0X119,Site
+0X119,InvestigatorFirstName,Xin Hong,Site
+0X119,InvestigatorLastName,Cousins,Site
+0X119,Status,Active,Site
+0X119,City,city 1,Site
+0X119,State,state 1,Site
+0X119,Country,US,Site
+0X166,studyid,AA-AA-000-0000,Site
+0X166,invid,0X166,Site
+0X166,InvestigatorFirstName,Intisaar,Site
+0X166,InvestigatorLastName,Garcia,Site
+0X166,Status,Active,Site
+0X166,City,city 1,Site
+0X166,State,state 1,Site
+0X166,Country,Japan,Site
+0X093,studyid,AA-AA-000-0000,Site
+0X093,invid,0X093,Site
+0X093,InvestigatorFirstName,Annestaisia,Site
+0X093,InvestigatorLastName,Depoyster,Site
+0X093,Status,Active,Site
+0X093,City,city 1,Site
+0X093,State,state 1,Site
+0X093,Country,US,Site
+0X138,studyid,AA-AA-000-0000,Site
+0X138,invid,0X138,Site
+0X138,InvestigatorFirstName,Cynthia,Site
+0X138,InvestigatorLastName,Black,Site
+0X138,Status,Active,Site
+0X138,City,city 1,Site
+0X138,State,state 1,Site
+0X138,Country,US,Site
+0X005,studyid,AA-AA-000-0000,Site
+0X005,invid,0X005,Site
+0X005,InvestigatorFirstName,Sulaimaan,Site
+0X005,InvestigatorLastName,Arshad,Site
+0X005,Status,Active,Site
+0X005,City,city 1,Site
+0X005,State,state 1,Site
+0X005,Country,US,Site
+X185X,studyid,AA-AA-000-0000,Site
+X185X,invid,X185X,Site
+X185X,InvestigatorFirstName,Kasey,Site
+X185X,InvestigatorLastName,Landry,Site
+X185X,Status,Active,Site
+X185X,City,city 1,Site
+X185X,State,state 1,Site
+X185X,Country,US,Site
+0X132,studyid,AA-AA-000-0000,Site
+0X132,invid,0X132,Site
+0X132,InvestigatorFirstName,Aranda,Site
+0X132,InvestigatorLastName,Choi,Site
+0X132,Status,Active,Site
+0X132,City,city 1,Site
+0X132,State,state 1,Site
+0X132,Country,US,Site
+0X107,studyid,AA-AA-000-0000,Site
+0X107,invid,0X107,Site
+0X107,InvestigatorFirstName,Makayla,Site
+0X107,InvestigatorLastName,Grant-Perry,Site
+0X107,Status,Active,Site
+0X107,City,city 1,Site
+0X107,State,state 1,Site
+0X107,Country,China,Site
+0X041,studyid,AA-AA-000-0000,Site
+0X041,invid,0X041,Site
+0X041,InvestigatorFirstName,Aaron,Site
+0X041,InvestigatorLastName,Yazzie,Site
+0X041,Status,Active,Site
+0X041,City,city 1,Site
+0X041,State,state 1,Site
+0X041,Country,Japan,Site
+0X152,studyid,AA-AA-000-0000,Site
+0X152,invid,0X152,Site
+0X152,InvestigatorFirstName,Savanna,Site
+0X152,InvestigatorLastName,Batchelder,Site
+0X152,Status,Active,Site
+0X152,City,city 1,Site
+0X152,State,state 1,Site
+0X152,Country,US,Site
+0X113,studyid,AA-AA-000-0000,Site
+0X113,invid,0X113,Site
+0X113,InvestigatorFirstName,Naasiruddeen,Site
+0X113,InvestigatorLastName,Wilde,Site
+0X113,Status,Active,Site
+0X113,City,city 1,Site
+0X113,State,state 1,Site
+0X113,Country,China,Site
+0X103,studyid,AA-AA-000-0000,Site
+0X103,invid,0X103,Site
+0X103,InvestigatorFirstName,Andrew,Site
+0X103,InvestigatorLastName,al-Mona,Site
+0X103,Status,Active,Site
+0X103,City,city 1,Site
+0X103,State,state 1,Site
+0X103,Country,US,Site
+0X116,studyid,AA-AA-000-0000,Site
+0X116,invid,0X116,Site
+0X116,InvestigatorFirstName,Latisha,Site
+0X116,InvestigatorLastName,el-Ameen,Site
+0X116,Status,Active,Site
+0X116,City,city 1,Site
+0X116,State,state 1,Site
+0X116,Country,Japan,Site
+0X139,studyid,AA-AA-000-0000,Site
+0X139,invid,0X139,Site
+0X139,InvestigatorFirstName,Fuaada,Site
+0X139,InvestigatorLastName,el-Khalifa,Site
+0X139,Status,Active,Site
+0X139,City,city 1,Site
+0X139,State,state 1,Site
+0X139,Country,US,Site
+0X100,studyid,AA-AA-000-0000,Site
+0X100,invid,0X100,Site
+0X100,InvestigatorFirstName,Wyatt,Site
+0X100,InvestigatorLastName,Browne,Site
+0X100,Status,Active,Site
+0X100,City,city 1,Site
+0X100,State,state 1,Site
+0X100,Country,Japan,Site
+0X066,studyid,AA-AA-000-0000,Site
+0X066,invid,0X066,Site
+0X066,InvestigatorFirstName,Marcus,Site
+0X066,InvestigatorLastName,Lipps,Site
+0X066,Status,Active,Site
+0X066,City,city 1,Site
+0X066,State,state 1,Site
+0X066,Country,US,Site
+0X079,studyid,AA-AA-000-0000,Site
+0X079,invid,0X079,Site
+0X079,InvestigatorFirstName,Shane,Site
+0X079,InvestigatorLastName,Gomez,Site
+0X079,Status,Active,Site
+0X079,City,city 1,Site
+0X079,State,state 1,Site
+0X079,Country,Japan,Site
+0X141,studyid,AA-AA-000-0000,Site
+0X141,invid,0X141,Site
+0X141,InvestigatorFirstName,Shakoora,Site
+0X141,InvestigatorLastName,Esquibel,Site
+0X141,Status,Active,Site
+0X141,City,city 1,Site
+0X141,State,state 1,Site
+0X141,Country,Japan,Site
+0X082,studyid,AA-AA-000-0000,Site
+0X082,invid,0X082,Site
+0X082,InvestigatorFirstName,Kailey,Site
+0X082,InvestigatorLastName,Ramirez,Site
+0X082,Status,Active,Site
+0X082,City,city 1,Site
+0X082,State,state 1,Site
+0X082,Country,Japan,Site
+0X012,studyid,AA-AA-000-0000,Site
+0X012,invid,0X012,Site
+0X012,InvestigatorFirstName,Elle-Han,Site
+0X012,InvestigatorLastName,Mansfield,Site
+0X012,Status,Active,Site
+0X012,City,city 1,Site
+0X012,State,state 1,Site
+0X012,Country,Japan,Site
+0X115,studyid,AA-AA-000-0000,Site
+0X115,invid,0X115,Site
+0X115,InvestigatorFirstName,Jose,Site
+0X115,InvestigatorLastName,John,Site
+0X115,Status,Active,Site
+0X115,City,city 1,Site
+0X115,State,state 1,Site
+0X115,Country,US,Site
+0X165,studyid,AA-AA-000-0000,Site
+0X165,invid,0X165,Site
+0X165,InvestigatorFirstName,Austin,Site
+0X165,InvestigatorLastName,Pinar,Site
+0X165,Status,Active,Site
+0X165,City,city 1,Site
+0X165,State,state 1,Site
+0X165,Country,China,Site
+0X045,studyid,AA-AA-000-0000,Site
+0X045,invid,0X045,Site
+0X045,InvestigatorFirstName,Drew,Site
+0X045,InvestigatorLastName,Horton,Site
+0X045,Status,Active,Site
+0X045,City,city 1,Site
+0X045,State,state 1,Site
+0X045,Country,Japan,Site
+X044X,studyid,AA-AA-000-0000,Site
+X044X,invid,X044X,Site
+X044X,InvestigatorFirstName,Taamir,Site
+X044X,InvestigatorLastName,Anderson,Site
+X044X,Status,Active,Site
+X044X,City,city 1,Site
+X044X,State,state 1,Site
+X044X,Country,US,Site
+0X147,studyid,AA-AA-000-0000,Site
+0X147,invid,0X147,Site
+0X147,InvestigatorFirstName,Tad,Site
+0X147,InvestigatorLastName,Lamping,Site
+0X147,Status,Active,Site
+0X147,City,city 1,Site
+0X147,State,state 1,Site
+0X147,Country,US,Site
+0X098,studyid,AA-AA-000-0000,Site
+0X098,invid,0X098,Site
+0X098,InvestigatorFirstName,Alejandra,Site
+0X098,InvestigatorLastName,Ronquillo,Site
+0X098,Status,Active,Site
+0X098,City,city 1,Site
+0X098,State,state 1,Site
+0X098,Country,US,Site
+0X008,studyid,AA-AA-000-0000,Site
+0X008,invid,0X008,Site
+0X008,InvestigatorFirstName,Grace,Site
+0X008,InvestigatorLastName,el-Hoque,Site
+0X008,Status,Active,Site
+0X008,City,city 1,Site
+0X008,State,state 1,Site
+0X008,Country,US,Site
+0X159,studyid,AA-AA-000-0000,Site
+0X159,invid,0X159,Site
+0X159,InvestigatorFirstName,Sufyaan,Site
+0X159,InvestigatorLastName,Flores,Site
+0X159,Status,Active,Site
+0X159,City,city 1,Site
+0X159,State,state 1,Site
+0X159,Country,US,Site
+0X108,studyid,AA-AA-000-0000,Site
+0X108,invid,0X108,Site
+0X108,InvestigatorFirstName,Isiah,Site
+0X108,InvestigatorLastName,Keys,Site
+0X108,Status,Active,Site
+0X108,City,city 1,Site
+0X108,State,state 1,Site
+0X108,Country,China,Site
+0X136,studyid,AA-AA-000-0000,Site
+0X136,invid,0X136,Site
+0X136,InvestigatorFirstName,Kelsey,Site
+0X136,InvestigatorLastName,Handley,Site
+0X136,Status,Active,Site
+0X136,City,city 1,Site
+0X136,State,state 1,Site
+0X136,Country,US,Site
+0X058,studyid,AA-AA-000-0000,Site
+0X058,invid,0X058,Site
+0X058,InvestigatorFirstName,Francine,Site
+0X058,InvestigatorLastName,Phouansavanh,Site
+0X058,Status,Active,Site
+0X058,City,city 1,Site
+0X058,State,state 1,Site
+0X058,Country,US,Site
+0X062,studyid,AA-AA-000-0000,Site
+0X062,invid,0X062,Site
+0X062,InvestigatorFirstName,Robert,Site
+0X062,InvestigatorLastName,Davis Jr,Site
+0X062,Status,Active,Site
+0X062,City,city 1,Site
+0X062,State,state 1,Site
+0X062,Country,China,Site
+0X190,studyid,AA-AA-000-0000,Site
+0X190,invid,0X190,Site
+0X190,InvestigatorFirstName,Angelique,Site
+0X190,InvestigatorLastName,Longwolf,Site
+0X190,Status,Active,Site
+0X190,City,city 1,Site
+0X190,State,state 1,Site
+0X190,Country,Japan,Site
+0X046,studyid,AA-AA-000-0000,Site
+0X046,invid,0X046,Site
+0X046,InvestigatorFirstName,Ami,Site
+0X046,InvestigatorLastName,al-Daoud,Site
+0X046,Status,Active,Site
+0X046,City,city 1,Site
+0X046,State,state 1,Site
+0X046,Country,US,Site
+0X167,studyid,AA-AA-000-0000,Site
+0X167,invid,0X167,Site
+0X167,InvestigatorFirstName,Amanda,Site
+0X167,InvestigatorLastName,al-Koroma,Site
+0X167,Status,Active,Site
+0X167,City,city 1,Site
+0X167,State,state 1,Site
+0X167,Country,US,Site
+0X143,studyid,AA-AA-000-0000,Site
+0X143,invid,0X143,Site
+0X143,InvestigatorFirstName,Yushan,Site
+0X143,InvestigatorLastName,el-Salih,Site
+0X143,Status,Active,Site
+0X143,City,city 1,Site
+0X143,State,state 1,Site
+0X143,Country,US,Site
+0X088,studyid,AA-AA-000-0000,Site
+0X088,invid,0X088,Site
+0X088,InvestigatorFirstName,Evan,Site
+0X088,InvestigatorLastName,Correa,Site
+0X088,Status,Active,Site
+0X088,City,city 1,Site
+0X088,State,state 1,Site
+0X088,Country,US,Site
+0X022,studyid,AA-AA-000-0000,Site
+0X022,invid,0X022,Site
+0X022,InvestigatorFirstName,Ghaaliya,Site
+0X022,InvestigatorLastName,al-Nawaz,Site
+0X022,Status,Active,Site
+0X022,City,city 1,Site
+0X022,State,state 1,Site
+0X022,Country,US,Site
+0X015,studyid,AA-AA-000-0000,Site
+0X015,invid,0X015,Site
+0X015,InvestigatorFirstName,April,Site
+0X015,InvestigatorLastName,Martinez,Site
+0X015,Status,Active,Site
+0X015,City,city 1,Site
+0X015,State,state 1,Site
+0X015,Country,China,Site
+0X080,studyid,AA-AA-000-0000,Site
+0X080,invid,0X080,Site
+0X080,InvestigatorFirstName,Saalim,Site
+0X080,InvestigatorLastName,el-Mousa,Site
+0X080,Status,Active,Site
+0X080,City,city 1,Site
+0X080,State,state 1,Site
+0X080,Country,US,Site
+0X050,studyid,AA-AA-000-0000,Site
+0X050,invid,0X050,Site
+0X050,InvestigatorFirstName,Rayyaan,Site
+0X050,InvestigatorLastName,Tull,Site
+0X050,Status,Active,Site
+0X050,City,city 1,Site
+0X050,State,state 1,Site
+0X050,Country,US,Site
+0X014,studyid,AA-AA-000-0000,Site
+0X014,invid,0X014,Site
+0X014,InvestigatorFirstName,Josiah,Site
+0X014,InvestigatorLastName,Som,Site
+0X014,Status,Active,Site
+0X014,City,city 1,Site
+0X014,State,state 1,Site
+0X014,Country,US,Site
+0X055,studyid,AA-AA-000-0000,Site
+0X055,invid,0X055,Site
+0X055,InvestigatorFirstName,Tawfeeqa,Site
+0X055,InvestigatorLastName,Jung,Site
+0X055,Status,Active,Site
+0X055,City,city 1,Site
+0X055,State,state 1,Site
+0X055,Country,US,Site
+0X091,studyid,AA-AA-000-0000,Site
+0X091,invid,0X091,Site
+0X091,InvestigatorFirstName,Diego,Site
+0X091,InvestigatorLastName,Ostrom,Site
+0X091,Status,Active,Site
+0X091,City,city 1,Site
+0X091,State,state 1,Site
+0X091,Country,China,Site
+0X182,studyid,AA-AA-000-0000,Site
+0X182,invid,0X182,Site
+0X182,InvestigatorFirstName,Elizabeth,Site
+0X182,InvestigatorLastName,al-Yusuf,Site
+0X182,Status,Active,Site
+0X182,City,city 1,Site
+0X182,State,state 1,Site
+0X182,Country,US,Site
+0X172,studyid,AA-AA-000-0000,Site
+0X172,invid,0X172,Site
+0X172,InvestigatorFirstName,Austin,Site
+0X172,InvestigatorLastName,Johnson,Site
+0X172,Status,Active,Site
+0X172,City,city 1,Site
+0X172,State,state 1,Site
+0X172,Country,US,Site
+0X170,studyid,AA-AA-000-0000,Site
+0X170,invid,0X170,Site
+0X170,InvestigatorFirstName,Tyler,Site
+0X170,InvestigatorLastName,Herlin,Site
+0X170,Status,Active,Site
+0X170,City,city 1,Site
+0X170,State,state 1,Site
+0X170,Country,US,Site
+0X151,studyid,AA-AA-000-0000,Site
+0X151,invid,0X151,Site
+0X151,InvestigatorFirstName,Jack,Site
+0X151,InvestigatorLastName,Poveromo,Site
+0X151,Status,Active,Site
+0X151,City,city 1,Site
+0X151,State,state 1,Site
+0X151,Country,China,Site
+0X023,studyid,AA-AA-000-0000,Site
+0X023,invid,0X023,Site
+0X023,InvestigatorFirstName,Maren,Site
+0X023,InvestigatorLastName,Avena,Site
+0X023,Status,Active,Site
+0X023,City,city 1,Site
+0X023,State,state 1,Site
+0X023,Country,US,Site
+0X129,studyid,AA-AA-000-0000,Site
+0X129,invid,0X129,Site
+0X129,InvestigatorFirstName,Moses,Site
+0X129,InvestigatorLastName,Martinez,Site
+0X129,Status,Active,Site
+0X129,City,city 1,Site
+0X129,State,state 1,Site
+0X129,Country,Japan,Site
+0X006,studyid,AA-AA-000-0000,Site
+0X006,invid,0X006,Site
+0X006,InvestigatorFirstName,Trevon,Site
+0X006,InvestigatorLastName,al-Sultana,Site
+0X006,Status,Active,Site
+0X006,City,city 1,Site
+0X006,State,state 1,Site
+0X006,Country,Japan,Site
+0X133,studyid,AA-AA-000-0000,Site
+0X133,invid,0X133,Site
+0X133,InvestigatorFirstName,Hilario,Site
+0X133,InvestigatorLastName,Pope,Site
+0X133,Status,Active,Site
+0X133,City,city 1,Site
+0X133,State,state 1,Site
+0X133,Country,China,Site
+0X177,studyid,AA-AA-000-0000,Site
+0X177,invid,0X177,Site
+0X177,InvestigatorFirstName,Kendall,Site
+0X177,InvestigatorLastName,Crowe,Site
+0X177,Status,Active,Site
+0X177,City,city 1,Site
+0X177,State,state 1,Site
+0X177,Country,US,Site
+0X178,studyid,AA-AA-000-0000,Site
+0X178,invid,0X178,Site
+0X178,InvestigatorFirstName,Tyler,Site
+0X178,InvestigatorLastName,Kessenich,Site
+0X178,Status,Active,Site
+0X178,City,city 1,Site
+0X178,State,state 1,Site
+0X178,Country,US,Site
+0X155,studyid,AA-AA-000-0000,Site
+0X155,invid,0X155,Site
+0X155,InvestigatorFirstName,Mary,Site
+0X155,InvestigatorLastName,al-Sani,Site
+0X155,Status,Active,Site
+0X155,City,city 1,Site
+0X155,State,state 1,Site
+0X155,Country,China,Site
+0X038,studyid,AA-AA-000-0000,Site
+0X038,invid,0X038,Site
+0X038,InvestigatorFirstName,Autumn,Site
+0X038,InvestigatorLastName,Culhane,Site
+0X038,Status,Active,Site
+0X038,City,city 1,Site
+0X038,State,state 1,Site
+0X038,Country,US,Site
+0X130,studyid,AA-AA-000-0000,Site
+0X130,invid,0X130,Site
+0X130,InvestigatorFirstName,Selena,Site
+0X130,InvestigatorLastName,Burroughs-Chock,Site
+0X130,Status,Active,Site
+0X130,City,city 1,Site
+0X130,State,state 1,Site
+0X130,Country,China,Site
+0X056,studyid,AA-AA-000-0000,Site
+0X056,invid,0X056,Site
+0X056,InvestigatorFirstName,Carson,Site
+0X056,InvestigatorLastName,Cooley,Site
+0X056,Status,Active,Site
+0X056,City,city 1,Site
+0X056,State,state 1,Site
+0X056,Country,US,Site
+0X083,studyid,AA-AA-000-0000,Site
+0X083,invid,0X083,Site
+0X083,InvestigatorFirstName,Lathan,Site
+0X083,InvestigatorLastName,el-Aman,Site
+0X083,Status,Active,Site
+0X083,City,city 1,Site
+0X083,State,state 1,Site
+0X083,Country,China,Site
+0X101,studyid,AA-AA-000-0000,Site
+0X101,invid,0X101,Site
+0X101,InvestigatorFirstName,Tori,Site
+0X101,InvestigatorLastName,Flood,Site
+0X101,Status,Active,Site
+0X101,City,city 1,Site
+0X101,State,state 1,Site
+0X101,Country,China,Site
+0X069,studyid,AA-AA-000-0000,Site
+0X069,invid,0X069,Site
+0X069,InvestigatorFirstName,April,Site
+0X069,InvestigatorLastName,Ello,Site
+0X069,Status,Active,Site
+0X069,City,city 1,Site
+0X069,State,state 1,Site
+0X069,Country,Japan,Site
+0X027,studyid,AA-AA-000-0000,Site
+0X027,invid,0X027,Site
+0X027,InvestigatorFirstName,Olivia,Site
+0X027,InvestigatorLastName,Owens,Site
+0X027,Status,Active,Site
+0X027,City,city 1,Site
+0X027,State,state 1,Site
+0X027,Country,China,Site
+0X104,studyid,AA-AA-000-0000,Site
+0X104,invid,0X104,Site
+0X104,InvestigatorFirstName,Ryan,Site
+0X104,InvestigatorLastName,James,Site
+0X104,Status,Active,Site
+0X104,City,city 1,Site
+0X104,State,state 1,Site
+0X104,Country,US,Site
+0X122,studyid,AA-AA-000-0000,Site
+0X122,invid,0X122,Site
+0X122,InvestigatorFirstName,Austin,Site
+0X122,InvestigatorLastName,el-Salameh,Site
+0X122,Status,Active,Site
+0X122,City,city 1,Site
+0X122,State,state 1,Site
+0X122,Country,US,Site
+0X002,studyid,AA-AA-000-0000,Site
+0X002,invid,0X002,Site
+0X002,InvestigatorFirstName,Abrina,Site
+0X002,InvestigatorLastName,Biolchini,Site
+0X002,Status,Active,Site
+0X002,City,city 1,Site
+0X002,State,state 1,Site
+0X002,Country,US,Site
+0X154,studyid,AA-AA-000-0000,Site
+0X154,invid,0X154,Site
+0X154,InvestigatorFirstName,Ian,Site
+0X154,InvestigatorLastName,Cloud,Site
+0X154,Status,Active,Site
+0X154,City,city 1,Site
+0X154,State,state 1,Site
+0X154,Country,US,Site
+0X097,studyid,AA-AA-000-0000,Site
+0X097,invid,0X097,Site
+0X097,InvestigatorFirstName,Troslyn,Site
+0X097,InvestigatorLastName,Thompson,Site
+0X097,Status,Active,Site
+0X097,City,city 1,Site
+0X097,State,state 1,Site
+0X097,Country,China,Site
+0X160,studyid,AA-AA-000-0000,Site
+0X160,invid,0X160,Site
+0X160,InvestigatorFirstName,Joseph,Site
+0X160,InvestigatorLastName,Liggett,Site
+0X160,Status,Active,Site
+0X160,City,city 1,Site
+0X160,State,state 1,Site
+0X160,Country,China,Site
+0X135,studyid,AA-AA-000-0000,Site
+0X135,invid,0X135,Site
+0X135,InvestigatorFirstName,Hafsa,Site
+0X135,InvestigatorLastName,Hager,Site
+0X135,Status,Active,Site
+0X135,City,city 1,Site
+0X135,State,state 1,Site
+0X135,Country,Japan,Site
+0X024,studyid,AA-AA-000-0000,Site
+0X024,invid,0X024,Site
+0X024,InvestigatorFirstName,Najwa,Site
+0X024,InvestigatorLastName,Rinard,Site
+0X024,Status,Active,Site
+0X024,City,city 1,Site
+0X024,State,state 1,Site
+0X024,Country,Japan,Site
+0X004,studyid,AA-AA-000-0000,Site
+0X004,invid,0X004,Site
+0X004,InvestigatorFirstName,Brandon,Site
+0X004,InvestigatorLastName,Touch,Site
+0X004,Status,Active,Site
+0X004,City,city 1,Site
+0X004,State,state 1,Site
+0X004,Country,China,Site
+0X003,studyid,AA-AA-000-0000,Site
+0X003,invid,0X003,Site
+0X003,InvestigatorFirstName,Leonard,Site
+0X003,InvestigatorLastName,Drake,Site
+0X003,Status,Active,Site
+0X003,City,city 1,Site
+0X003,State,state 1,Site
+0X003,Country,US,Site
+0X035,studyid,AA-AA-000-0000,Site
+0X035,invid,0X035,Site
+0X035,InvestigatorFirstName,Viola,Site
+0X035,InvestigatorLastName,el-Saladin,Site
+0X035,Status,Active,Site
+0X035,City,city 1,Site
+0X035,State,state 1,Site
+0X035,Country,US,Site
+0X034,studyid,AA-AA-000-0000,Site
+0X034,invid,0X034,Site
+0X034,InvestigatorFirstName,Zakiyya,Site
+0X034,InvestigatorLastName,Yeadon,Site
+0X034,Status,Active,Site
+0X034,City,city 1,Site
+0X034,State,state 1,Site
+0X034,Country,US,Site
+0X137,studyid,AA-AA-000-0000,Site
+0X137,invid,0X137,Site
+0X137,InvestigatorFirstName,Justin,Site
+0X137,InvestigatorLastName,Wilson,Site
+0X137,Status,Active,Site
+0X137,City,city 1,Site
+0X137,State,state 1,Site
+0X137,Country,Japan,Site
+0X084,studyid,AA-AA-000-0000,Site
+0X084,invid,0X084,Site
+0X084,InvestigatorFirstName,Nina Angelica,Site
+0X084,InvestigatorLastName,Luong,Site
+0X084,Status,Active,Site
+0X084,City,city 1,Site
+0X084,State,state 1,Site
+0X084,Country,Japan,Site
+0X175,studyid,AA-AA-000-0000,Site
+0X175,invid,0X175,Site
+0X175,InvestigatorFirstName,Bibek,Site
+0X175,InvestigatorLastName,Gonzalez,Site
+0X175,Status,Active,Site
+0X175,City,city 1,Site
+0X175,State,state 1,Site
+0X175,Country,US,Site
+0X026,studyid,AA-AA-000-0000,Site
+0X026,invid,0X026,Site
+0X026,InvestigatorFirstName,Omar,Site
+0X026,InvestigatorLastName,el-Samra,Site
+0X026,Status,Active,Site
+0X026,City,city 1,Site
+0X026,State,state 1,Site
+0X026,Country,US,Site
+0X065,studyid,AA-AA-000-0000,Site
+0X065,invid,0X065,Site
+0X065,InvestigatorFirstName,Jordan,Site
+0X065,InvestigatorLastName,Hill,Site
+0X065,Status,Active,Site
+0X065,City,city 1,Site
+0X065,State,state 1,Site
+0X065,Country,US,Site
+0X081,studyid,AA-AA-000-0000,Site
+0X081,invid,0X081,Site
+0X081,InvestigatorFirstName,Dhareef,Site
+0X081,InvestigatorLastName,Hendee,Site
+0X081,Status,Active,Site
+0X081,City,city 1,Site
+0X081,State,state 1,Site
+0X081,Country,China,Site
+0X094,studyid,AA-AA-000-0000,Site
+0X094,invid,0X094,Site
+0X094,InvestigatorFirstName,Derika,Site
+0X094,InvestigatorLastName,al-Mussa,Site
+0X094,Status,Active,Site
+0X094,City,city 1,Site
+0X094,State,state 1,Site
+0X094,Country,US,Site
+0X074,studyid,AA-AA-000-0000,Site
+0X074,invid,0X074,Site
+0X074,InvestigatorFirstName,Myles,Site
+0X074,InvestigatorLastName,Moran,Site
+0X074,Status,Active,Site
+0X074,City,city 1,Site
+0X074,State,state 1,Site
+0X074,Country,Japan,Site
+0X047,studyid,AA-AA-000-0000,Site
+0X047,invid,0X047,Site
+0X047,InvestigatorFirstName,Alexandra,Site
+0X047,InvestigatorLastName,Ruvalcaba,Site
+0X047,Status,Active,Site
+0X047,City,city 1,Site
+0X047,State,state 1,Site
+0X047,Country,Japan,Site
+0X116,ParticipantCount,7,Site
+0X116,ActiveParticipantCount,7,Site
+0X116,SiteCount,1,Site
+0X116,PercentParticipantsActive,100,Site
+0X116,ActiveParticipants,7 / 7 (100%),Site
+0X154,ParticipantCount,23,Site
+0X154,ActiveParticipantCount,23,Site
+0X154,SiteCount,1,Site
+0X154,PercentParticipantsActive,100,Site
+0X154,ActiveParticipants,23 / 23 (100%),Site
+0X076,ParticipantCount,17,Site
+0X076,ActiveParticipantCount,17,Site
+0X076,SiteCount,1,Site
+0X076,PercentParticipantsActive,100,Site
+0X076,ActiveParticipants,17 / 17 (100%),Site
+0X100,ParticipantCount,7,Site
+0X100,ActiveParticipantCount,7,Site
+0X100,SiteCount,1,Site
+0X100,PercentParticipantsActive,100,Site
+0X100,ActiveParticipants,7 / 7 (100%),Site
+0X140,ParticipantCount,9,Site
+0X140,ActiveParticipantCount,9,Site
+0X140,SiteCount,1,Site
+0X140,PercentParticipantsActive,100,Site
+0X140,ActiveParticipants,9 / 9 (100%),Site
+0X003,ParticipantCount,13,Site
+0X003,ActiveParticipantCount,13,Site
+0X003,SiteCount,1,Site
+0X003,PercentParticipantsActive,100,Site
+0X003,ActiveParticipants,13 / 13 (100%),Site
+0X171,ParticipantCount,12,Site
+0X171,ActiveParticipantCount,12,Site
+0X171,SiteCount,1,Site
+0X171,PercentParticipantsActive,100,Site
+0X171,ActiveParticipants,12 / 12 (100%),Site
+0X136,ParticipantCount,1,Site
+0X136,ActiveParticipantCount,1,Site
+0X136,SiteCount,1,Site
+0X136,PercentParticipantsActive,100,Site
+0X136,ActiveParticipants,1 / 1 (100%),Site
+0X113,ParticipantCount,4,Site
+0X113,ActiveParticipantCount,4,Site
+0X113,SiteCount,1,Site
+0X113,PercentParticipantsActive,100,Site
+0X113,ActiveParticipants,4 / 4 (100%),Site
+0X084,ParticipantCount,2,Site
+0X084,ActiveParticipantCount,2,Site
+0X084,SiteCount,1,Site
+0X084,PercentParticipantsActive,100,Site
+0X084,ActiveParticipants,2 / 2 (100%),Site
+0X035,ParticipantCount,22,Site
+0X035,ActiveParticipantCount,22,Site
+0X035,SiteCount,1,Site
+0X035,PercentParticipantsActive,100,Site
+0X035,ActiveParticipants,22 / 22 (100%),Site
+0X095,ParticipantCount,4,Site
+0X095,ActiveParticipantCount,4,Site
+0X095,SiteCount,1,Site
+0X095,PercentParticipantsActive,100,Site
+0X095,ActiveParticipants,4 / 4 (100%),Site
+0X090,ParticipantCount,1,Site
+0X090,ActiveParticipantCount,1,Site
+0X090,SiteCount,1,Site
+0X090,PercentParticipantsActive,100,Site
+0X090,ActiveParticipants,1 / 1 (100%),Site
+0X166,ParticipantCount,3,Site
+0X166,ActiveParticipantCount,3,Site
+0X166,SiteCount,1,Site
+0X166,PercentParticipantsActive,100,Site
+0X166,ActiveParticipants,3 / 3 (100%),Site
+0X117,ParticipantCount,2,Site
+0X117,ActiveParticipantCount,2,Site
+0X117,SiteCount,1,Site
+0X117,PercentParticipantsActive,100,Site
+0X117,ActiveParticipants,2 / 2 (100%),Site
+0X036,ParticipantCount,5,Site
+0X036,ActiveParticipantCount,5,Site
+0X036,SiteCount,1,Site
+0X036,PercentParticipantsActive,100,Site
+0X036,ActiveParticipants,5 / 5 (100%),Site
+0X022,ParticipantCount,3,Site
+0X022,ActiveParticipantCount,3,Site
+0X022,SiteCount,1,Site
+0X022,PercentParticipantsActive,100,Site
+0X022,ActiveParticipants,3 / 3 (100%),Site
+0X092,ParticipantCount,1,Site
+0X092,ActiveParticipantCount,1,Site
+0X092,SiteCount,1,Site
+0X092,PercentParticipantsActive,100,Site
+0X092,ActiveParticipants,1 / 1 (100%),Site
+0X061,ParticipantCount,1,Site
+0X061,ActiveParticipantCount,1,Site
+0X061,SiteCount,1,Site
+0X061,PercentParticipantsActive,100,Site
+0X061,ActiveParticipants,1 / 1 (100%),Site
+0X165,ParticipantCount,1,Site
+0X165,ActiveParticipantCount,1,Site
+0X165,SiteCount,1,Site
+0X165,PercentParticipantsActive,100,Site
+0X165,ActiveParticipants,1 / 1 (100%),Site
+0X028,ParticipantCount,1,Site
+0X028,ActiveParticipantCount,1,Site
+0X028,SiteCount,1,Site
+0X028,PercentParticipantsActive,100,Site
+0X028,ActiveParticipants,1 / 1 (100%),Site
+0X144,ParticipantCount,2,Site
+0X144,ActiveParticipantCount,2,Site
+0X144,SiteCount,1,Site
+0X144,PercentParticipantsActive,100,Site
+0X144,ActiveParticipants,2 / 2 (100%),Site
+0X056,ParticipantCount,3,Site
+0X056,ActiveParticipantCount,3,Site
+0X056,SiteCount,1,Site
+0X056,PercentParticipantsActive,100,Site
+0X056,ActiveParticipants,3 / 3 (100%),Site
+0X167,ParticipantCount,43,Site
+0X167,ActiveParticipantCount,43,Site
+0X167,SiteCount,1,Site
+0X167,PercentParticipantsActive,100,Site
+0X167,ActiveParticipants,43 / 43 (100%),Site
+0X102,ParticipantCount,20,Site
+0X102,ActiveParticipantCount,20,Site
+0X102,SiteCount,1,Site
+0X102,PercentParticipantsActive,100,Site
+0X102,ActiveParticipants,20 / 20 (100%),Site
+0X020,ParticipantCount,5,Site
+0X020,ActiveParticipantCount,5,Site
+0X020,SiteCount,1,Site
+0X020,PercentParticipantsActive,100,Site
+0X020,ActiveParticipants,5 / 5 (100%),Site
+0X149,ParticipantCount,5,Site
+0X149,ActiveParticipantCount,5,Site
+0X149,SiteCount,1,Site
+0X149,PercentParticipantsActive,100,Site
+0X149,ActiveParticipants,5 / 5 (100%),Site
+0X155,ParticipantCount,4,Site
+0X155,ActiveParticipantCount,4,Site
+0X155,SiteCount,1,Site
+0X155,PercentParticipantsActive,100,Site
+0X155,ActiveParticipants,4 / 4 (100%),Site
+0X086,ParticipantCount,7,Site
+0X086,ActiveParticipantCount,7,Site
+0X086,SiteCount,1,Site
+0X086,PercentParticipantsActive,100,Site
+0X086,ActiveParticipants,7 / 7 (100%),Site
+0X088,ParticipantCount,11,Site
+0X088,ActiveParticipantCount,11,Site
+0X088,SiteCount,1,Site
+0X088,PercentParticipantsActive,100,Site
+0X088,ActiveParticipants,11 / 11 (100%),Site
+0X046,ParticipantCount,4,Site
+0X046,ActiveParticipantCount,4,Site
+0X046,SiteCount,1,Site
+0X046,PercentParticipantsActive,100,Site
+0X046,ActiveParticipants,4 / 4 (100%),Site
+0X096,ParticipantCount,7,Site
+0X096,ActiveParticipantCount,7,Site
+0X096,SiteCount,1,Site
+0X096,PercentParticipantsActive,100,Site
+0X096,ActiveParticipants,7 / 7 (100%),Site
+0X051,ParticipantCount,6,Site
+0X051,ActiveParticipantCount,6,Site
+0X051,SiteCount,1,Site
+0X051,PercentParticipantsActive,100,Site
+0X051,ActiveParticipants,6 / 6 (100%),Site
+0X156,ParticipantCount,9,Site
+0X156,ActiveParticipantCount,9,Site
+0X156,SiteCount,1,Site
+0X156,PercentParticipantsActive,100,Site
+0X156,ActiveParticipants,9 / 9 (100%),Site
+0X079,ParticipantCount,3,Site
+0X079,ActiveParticipantCount,3,Site
+0X079,SiteCount,1,Site
+0X079,PercentParticipantsActive,100,Site
+0X079,ActiveParticipants,3 / 3 (100%),Site
+0X174,ParticipantCount,3,Site
+0X174,ActiveParticipantCount,3,Site
+0X174,SiteCount,1,Site
+0X174,PercentParticipantsActive,100,Site
+0X174,ActiveParticipants,3 / 3 (100%),Site
+0X190,ParticipantCount,1,Site
+0X190,ActiveParticipantCount,1,Site
+0X190,SiteCount,1,Site
+0X190,PercentParticipantsActive,100,Site
+0X190,ActiveParticipants,1 / 1 (100%),Site
+0X066,ParticipantCount,1,Site
+0X066,ActiveParticipantCount,1,Site
+0X066,SiteCount,1,Site
+0X066,PercentParticipantsActive,100,Site
+0X066,ActiveParticipants,1 / 1 (100%),Site
+0X048,ParticipantCount,2,Site
+0X048,ActiveParticipantCount,2,Site
+0X048,SiteCount,1,Site
+0X048,PercentParticipantsActive,100,Site
+0X048,ActiveParticipants,2 / 2 (100%),Site
+0X120,ParticipantCount,6,Site
+0X120,ActiveParticipantCount,6,Site
+0X120,SiteCount,1,Site
+0X120,PercentParticipantsActive,100,Site
+0X120,ActiveParticipants,6 / 6 (100%),Site
+0X134,ParticipantCount,2,Site
+0X134,ActiveParticipantCount,2,Site
+0X134,SiteCount,1,Site
+0X134,PercentParticipantsActive,100,Site
+0X134,ActiveParticipants,2 / 2 (100%),Site
+0X110,ParticipantCount,2,Site
+0X110,ActiveParticipantCount,2,Site
+0X110,SiteCount,1,Site
+0X110,PercentParticipantsActive,100,Site
+0X110,ActiveParticipants,2 / 2 (100%),Site
+0X109,ParticipantCount,1,Site
+0X109,ActiveParticipantCount,1,Site
+0X109,SiteCount,1,Site
+0X109,PercentParticipantsActive,100,Site
+0X109,ActiveParticipants,1 / 1 (100%),Site
+0X064,ParticipantCount,5,Site
+0X064,ActiveParticipantCount,5,Site
+0X064,SiteCount,1,Site
+0X064,PercentParticipantsActive,100,Site
+0X064,ActiveParticipants,5 / 5 (100%),Site
+0X115,ParticipantCount,1,Site
+0X115,ActiveParticipantCount,1,Site
+0X115,SiteCount,1,Site
+0X115,PercentParticipantsActive,100,Site
+0X115,ActiveParticipants,1 / 1 (100%),Site
+0X093,ParticipantCount,28,Site
+0X093,ActiveParticipantCount,28,Site
+0X093,SiteCount,1,Site
+0X093,PercentParticipantsActive,100,Site
+0X093,ActiveParticipants,28 / 28 (100%),Site
+0X023,ParticipantCount,34,Site
+0X023,ActiveParticipantCount,34,Site
+0X023,SiteCount,1,Site
+0X023,PercentParticipantsActive,100,Site
+0X023,ActiveParticipants,34 / 34 (100%),Site
+0X016,ParticipantCount,7,Site
+0X016,ActiveParticipantCount,7,Site
+0X016,SiteCount,1,Site
+0X016,PercentParticipantsActive,100,Site
+0X016,ActiveParticipants,7 / 7 (100%),Site
+0X074,ParticipantCount,2,Site
+0X074,ActiveParticipantCount,2,Site
+0X074,SiteCount,1,Site
+0X074,PercentParticipantsActive,100,Site
+0X074,ActiveParticipants,2 / 2 (100%),Site
+0X083,ParticipantCount,10,Site
+0X083,ActiveParticipantCount,10,Site
+0X083,SiteCount,1,Site
+0X083,PercentParticipantsActive,100,Site
+0X083,ActiveParticipants,10 / 10 (100%),Site
+0X126,ParticipantCount,20,Site
+0X126,ActiveParticipantCount,20,Site
+0X126,SiteCount,1,Site
+0X126,PercentParticipantsActive,100,Site
+0X126,ActiveParticipants,20 / 20 (100%),Site
+0X072,ParticipantCount,3,Site
+0X072,ActiveParticipantCount,3,Site
+0X072,SiteCount,1,Site
+0X072,PercentParticipantsActive,100,Site
+0X072,ActiveParticipants,3 / 3 (100%),Site
+0X040,ParticipantCount,3,Site
+0X040,ActiveParticipantCount,3,Site
+0X040,SiteCount,1,Site
+0X040,PercentParticipantsActive,100,Site
+0X040,ActiveParticipants,3 / 3 (100%),Site
+0X152,ParticipantCount,7,Site
+0X152,ActiveParticipantCount,7,Site
+0X152,SiteCount,1,Site
+0X152,PercentParticipantsActive,100,Site
+0X152,ActiveParticipants,7 / 7 (100%),Site
+0X103,ParticipantCount,5,Site
+0X103,ActiveParticipantCount,5,Site
+0X103,SiteCount,1,Site
+0X103,PercentParticipantsActive,100,Site
+0X103,ActiveParticipants,5 / 5 (100%),Site
+0X139,ParticipantCount,2,Site
+0X139,ActiveParticipantCount,2,Site
+0X139,SiteCount,1,Site
+0X139,PercentParticipantsActive,100,Site
+0X139,ActiveParticipants,2 / 2 (100%),Site
+0X010,ParticipantCount,3,Site
+0X010,ActiveParticipantCount,3,Site
+0X010,SiteCount,1,Site
+0X010,PercentParticipantsActive,100,Site
+0X010,ActiveParticipants,3 / 3 (100%),Site
+0X137,ParticipantCount,6,Site
+0X137,ActiveParticipantCount,6,Site
+0X137,SiteCount,1,Site
+0X137,PercentParticipantsActive,100,Site
+0X137,ActiveParticipants,6 / 6 (100%),Site
+0X180,ParticipantCount,12,Site
+0X180,ActiveParticipantCount,12,Site
+0X180,SiteCount,1,Site
+0X180,PercentParticipantsActive,100,Site
+0X180,ActiveParticipants,12 / 12 (100%),Site
+0X160,ParticipantCount,4,Site
+0X160,ActiveParticipantCount,4,Site
+0X160,SiteCount,1,Site
+0X160,PercentParticipantsActive,100,Site
+0X160,ActiveParticipants,4 / 4 (100%),Site
+0X075,ParticipantCount,8,Site
+0X075,ActiveParticipantCount,8,Site
+0X075,SiteCount,1,Site
+0X075,PercentParticipantsActive,100,Site
+0X075,ActiveParticipants,8 / 8 (100%),Site
+0X172,ParticipantCount,1,Site
+0X172,ActiveParticipantCount,1,Site
+0X172,SiteCount,1,Site
+0X172,PercentParticipantsActive,100,Site
+0X172,ActiveParticipants,1 / 1 (100%),Site
+0X055,ParticipantCount,2,Site
+0X055,ActiveParticipantCount,2,Site
+0X055,SiteCount,1,Site
+0X055,PercentParticipantsActive,100,Site
+0X055,ActiveParticipants,2 / 2 (100%),Site
+0X029,ParticipantCount,4,Site
+0X029,ActiveParticipantCount,4,Site
+0X029,SiteCount,1,Site
+0X029,PercentParticipantsActive,100,Site
+0X029,ActiveParticipants,4 / 4 (100%),Site
+0X062,ParticipantCount,3,Site
+0X062,ActiveParticipantCount,3,Site
+0X062,SiteCount,1,Site
+0X062,PercentParticipantsActive,100,Site
+0X062,ActiveParticipants,3 / 3 (100%),Site
+0X176,ParticipantCount,4,Site
+0X176,ActiveParticipantCount,4,Site
+0X176,SiteCount,1,Site
+0X176,PercentParticipantsActive,100,Site
+0X176,ActiveParticipants,4 / 4 (100%),Site
+0X031,ParticipantCount,3,Site
+0X031,ActiveParticipantCount,3,Site
+0X031,SiteCount,1,Site
+0X031,PercentParticipantsActive,100,Site
+0X031,ActiveParticipants,3 / 3 (100%),Site
+0X011,ParticipantCount,5,Site
+0X011,ActiveParticipantCount,5,Site
+0X011,SiteCount,1,Site
+0X011,PercentParticipantsActive,100,Site
+0X011,ActiveParticipants,5 / 5 (100%),Site
+0X183,ParticipantCount,1,Site
+0X183,ActiveParticipantCount,1,Site
+0X183,SiteCount,1,Site
+0X183,PercentParticipantsActive,100,Site
+0X183,ActiveParticipants,1 / 1 (100%),Site
+0X142,ParticipantCount,5,Site
+0X142,ActiveParticipantCount,5,Site
+0X142,SiteCount,1,Site
+0X142,PercentParticipantsActive,100,Site
+0X142,ActiveParticipants,5 / 5 (100%),Site
+0X132,ParticipantCount,5,Site
+0X132,ActiveParticipantCount,5,Site
+0X132,SiteCount,1,Site
+0X132,PercentParticipantsActive,100,Site
+0X132,ActiveParticipants,5 / 5 (100%),Site
+0X080,ParticipantCount,17,Site
+0X080,ActiveParticipantCount,17,Site
+0X080,SiteCount,1,Site
+0X080,PercentParticipantsActive,100,Site
+0X080,ActiveParticipants,17 / 17 (100%),Site
+0X039,ParticipantCount,5,Site
+0X039,ActiveParticipantCount,5,Site
+0X039,SiteCount,1,Site
+0X039,PercentParticipantsActive,100,Site
+0X039,ActiveParticipants,5 / 5 (100%),Site
+0X104,ParticipantCount,12,Site
+0X104,ActiveParticipantCount,12,Site
+0X104,SiteCount,1,Site
+0X104,PercentParticipantsActive,100,Site
+0X104,ActiveParticipants,12 / 12 (100%),Site
+0X106,ParticipantCount,5,Site
+0X106,ActiveParticipantCount,5,Site
+0X106,SiteCount,1,Site
+0X106,PercentParticipantsActive,100,Site
+0X106,ActiveParticipants,5 / 5 (100%),Site
+0X043,ParticipantCount,5,Site
+0X043,ActiveParticipantCount,5,Site
+0X043,SiteCount,1,Site
+0X043,PercentParticipantsActive,100,Site
+0X043,ActiveParticipants,5 / 5 (100%),Site
+0X163,ParticipantCount,28,Site
+0X163,ActiveParticipantCount,28,Site
+0X163,SiteCount,1,Site
+0X163,PercentParticipantsActive,100,Site
+0X163,ActiveParticipants,28 / 28 (100%),Site
+0X097,ParticipantCount,5,Site
+0X097,ActiveParticipantCount,5,Site
+0X097,SiteCount,1,Site
+0X097,PercentParticipantsActive,100,Site
+0X097,ActiveParticipants,5 / 5 (100%),Site
+0X027,ParticipantCount,10,Site
+0X027,ActiveParticipantCount,10,Site
+0X027,SiteCount,1,Site
+0X027,PercentParticipantsActive,100,Site
+0X027,ActiveParticipants,10 / 10 (100%),Site
+0X123,ParticipantCount,5,Site
+0X123,ActiveParticipantCount,5,Site
+0X123,SiteCount,1,Site
+0X123,PercentParticipantsActive,100,Site
+0X123,ActiveParticipants,5 / 5 (100%),Site
+0X038,ParticipantCount,12,Site
+0X038,ActiveParticipantCount,12,Site
+0X038,SiteCount,1,Site
+0X038,PercentParticipantsActive,100,Site
+0X038,ActiveParticipants,12 / 12 (100%),Site
+0X073,ParticipantCount,3,Site
+0X073,ActiveParticipantCount,3,Site
+0X073,SiteCount,1,Site
+0X073,PercentParticipantsActive,100,Site
+0X073,ActiveParticipants,3 / 3 (100%),Site
+0X058,ParticipantCount,2,Site
+0X058,ActiveParticipantCount,2,Site
+0X058,SiteCount,1,Site
+0X058,PercentParticipantsActive,100,Site
+0X058,ActiveParticipants,2 / 2 (100%),Site
+0X012,ParticipantCount,5,Site
+0X012,ActiveParticipantCount,5,Site
+0X012,SiteCount,1,Site
+0X012,PercentParticipantsActive,100,Site
+0X012,ActiveParticipants,5 / 5 (100%),Site
+0X077,ParticipantCount,8,Site
+0X077,ActiveParticipantCount,8,Site
+0X077,SiteCount,1,Site
+0X077,PercentParticipantsActive,100,Site
+0X077,ActiveParticipants,8 / 8 (100%),Site
+0X169,ParticipantCount,3,Site
+0X169,ActiveParticipantCount,3,Site
+0X169,SiteCount,1,Site
+0X169,PercentParticipantsActive,100,Site
+0X169,ActiveParticipants,3 / 3 (100%),Site
+0X085,ParticipantCount,1,Site
+0X085,ActiveParticipantCount,1,Site
+0X085,SiteCount,1,Site
+0X085,PercentParticipantsActive,100,Site
+0X085,ActiveParticipants,1 / 1 (100%),Site
+0X108,ParticipantCount,4,Site
+0X108,ActiveParticipantCount,4,Site
+0X108,SiteCount,1,Site
+0X108,PercentParticipantsActive,100,Site
+0X108,ActiveParticipants,4 / 4 (100%),Site
+0X026,ParticipantCount,15,Site
+0X026,ActiveParticipantCount,15,Site
+0X026,SiteCount,1,Site
+0X026,PercentParticipantsActive,100,Site
+0X026,ActiveParticipants,15 / 15 (100%),Site
+0X042,ParticipantCount,5,Site
+0X042,ActiveParticipantCount,5,Site
+0X042,SiteCount,1,Site
+0X042,PercentParticipantsActive,100,Site
+0X042,ActiveParticipants,5 / 5 (100%),Site
+X044X,ParticipantCount,9,Site
+X044X,ActiveParticipantCount,9,Site
+X044X,SiteCount,1,Site
+X044X,PercentParticipantsActive,100,Site
+X044X,ActiveParticipants,9 / 9 (100%),Site
+0X189,ParticipantCount,3,Site
+0X189,ActiveParticipantCount,3,Site
+0X189,SiteCount,1,Site
+0X189,PercentParticipantsActive,100,Site
+0X189,ActiveParticipants,3 / 3 (100%),Site
+0X013,ParticipantCount,6,Site
+0X013,ActiveParticipantCount,6,Site
+0X013,SiteCount,1,Site
+0X013,PercentParticipantsActive,100,Site
+0X013,ActiveParticipants,6 / 6 (100%),Site
+0X182,ParticipantCount,8,Site
+0X182,ActiveParticipantCount,8,Site
+0X182,SiteCount,1,Site
+0X182,PercentParticipantsActive,100,Site
+0X182,ActiveParticipants,8 / 8 (100%),Site
+0X162,ParticipantCount,7,Site
+0X162,ActiveParticipantCount,7,Site
+0X162,SiteCount,1,Site
+0X162,PercentParticipantsActive,100,Site
+0X162,ActiveParticipants,7 / 7 (100%),Site
+0X157,ParticipantCount,9,Site
+0X157,ActiveParticipantCount,9,Site
+0X157,SiteCount,1,Site
+0X157,PercentParticipantsActive,100,Site
+0X157,ActiveParticipants,9 / 9 (100%),Site
+0X045,ParticipantCount,4,Site
+0X045,ActiveParticipantCount,4,Site
+0X045,SiteCount,1,Site
+0X045,PercentParticipantsActive,100,Site
+0X045,ActiveParticipants,4 / 4 (100%),Site
+0X181,ParticipantCount,1,Site
+0X181,ActiveParticipantCount,1,Site
+0X181,SiteCount,1,Site
+0X181,PercentParticipantsActive,100,Site
+0X181,ActiveParticipants,1 / 1 (100%),Site
+0X005,ParticipantCount,7,Site
+0X005,ActiveParticipantCount,7,Site
+0X005,SiteCount,1,Site
+0X005,PercentParticipantsActive,100,Site
+0X005,ActiveParticipants,7 / 7 (100%),Site
+0X098,ParticipantCount,2,Site
+0X098,ActiveParticipantCount,2,Site
+0X098,SiteCount,1,Site
+0X098,PercentParticipantsActive,100,Site
+0X098,ActiveParticipants,2 / 2 (100%),Site
+0X069,ParticipantCount,4,Site
+0X069,ActiveParticipantCount,4,Site
+0X069,SiteCount,1,Site
+0X069,PercentParticipantsActive,100,Site
+0X069,ActiveParticipants,4 / 4 (100%),Site
+0X135,ParticipantCount,2,Site
+0X135,ActiveParticipantCount,2,Site
+0X135,SiteCount,1,Site
+0X135,PercentParticipantsActive,100,Site
+0X135,ActiveParticipants,2 / 2 (100%),Site
+0X101,ParticipantCount,1,Site
+0X101,ActiveParticipantCount,1,Site
+0X101,SiteCount,1,Site
+0X101,PercentParticipantsActive,100,Site
+0X101,ActiveParticipants,1 / 1 (100%),Site
+0X030,ParticipantCount,2,Site
+0X030,ActiveParticipantCount,2,Site
+0X030,SiteCount,1,Site
+0X030,PercentParticipantsActive,100,Site
+0X030,ActiveParticipants,2 / 2 (100%),Site
+0X099,ParticipantCount,1,Site
+0X099,ActiveParticipantCount,1,Site
+0X099,SiteCount,1,Site
+0X099,PercentParticipantsActive,100,Site
+0X099,ActiveParticipants,1 / 1 (100%),Site
+X067X,ParticipantCount,1,Site
+X067X,ActiveParticipantCount,1,Site
+X067X,SiteCount,1,Site
+X067X,PercentParticipantsActive,100,Site
+X067X,ActiveParticipants,1 / 1 (100%),Site
+0X124,ParticipantCount,27,Site
+0X124,ActiveParticipantCount,27,Site
+0X124,SiteCount,1,Site
+0X124,PercentParticipantsActive,100,Site
+0X124,ActiveParticipants,27 / 27 (100%),Site
+0X059,ParticipantCount,15,Site
+0X059,ActiveParticipantCount,15,Site
+0X059,SiteCount,1,Site
+0X059,PercentParticipantsActive,100,Site
+0X059,ActiveParticipants,15 / 15 (100%),Site
+0X127,ParticipantCount,4,Site
+0X127,ActiveParticipantCount,4,Site
+0X127,SiteCount,1,Site
+0X127,PercentParticipantsActive,100,Site
+0X127,ActiveParticipants,4 / 4 (100%),Site
+0X164,ParticipantCount,4,Site
+0X164,ActiveParticipantCount,4,Site
+0X164,SiteCount,1,Site
+0X164,PercentParticipantsActive,100,Site
+0X164,ActiveParticipants,4 / 4 (100%),Site
+0X014,ParticipantCount,25,Site
+0X014,ActiveParticipantCount,25,Site
+0X014,SiteCount,1,Site
+0X014,PercentParticipantsActive,100,Site
+0X014,ActiveParticipants,25 / 25 (100%),Site
+0X125,ParticipantCount,10,Site
+0X125,ActiveParticipantCount,10,Site
+0X125,SiteCount,1,Site
+0X125,PercentParticipantsActive,100,Site
+0X125,ActiveParticipants,10 / 10 (100%),Site
+0X065,ParticipantCount,36,Site
+0X065,ActiveParticipantCount,36,Site
+0X065,SiteCount,1,Site
+0X065,PercentParticipantsActive,100,Site
+0X065,ActiveParticipants,36 / 36 (100%),Site
+0X015,ParticipantCount,3,Site
+0X015,ActiveParticipantCount,3,Site
+0X015,SiteCount,1,Site
+0X015,PercentParticipantsActive,100,Site
+0X015,ActiveParticipants,3 / 3 (100%),Site
+0X151,ParticipantCount,15,Site
+0X151,ActiveParticipantCount,15,Site
+0X151,SiteCount,1,Site
+0X151,PercentParticipantsActive,100,Site
+0X151,ActiveParticipants,15 / 15 (100%),Site
+0X138,ParticipantCount,3,Site
+0X138,ActiveParticipantCount,3,Site
+0X138,SiteCount,1,Site
+0X138,PercentParticipantsActive,100,Site
+0X138,ActiveParticipants,3 / 3 (100%),Site
+0X025,ParticipantCount,7,Site
+0X025,ActiveParticipantCount,7,Site
+0X025,SiteCount,1,Site
+0X025,PercentParticipantsActive,100,Site
+0X025,ActiveParticipants,7 / 7 (100%),Site
+0X024,ParticipantCount,7,Site
+0X024,ActiveParticipantCount,7,Site
+0X024,SiteCount,1,Site
+0X024,PercentParticipantsActive,100,Site
+0X024,ActiveParticipants,7 / 7 (100%),Site
+0X184,ParticipantCount,6,Site
+0X184,ActiveParticipantCount,6,Site
+0X184,SiteCount,1,Site
+0X184,PercentParticipantsActive,100,Site
+0X184,ActiveParticipants,6 / 6 (100%),Site
+0X006,ParticipantCount,4,Site
+0X006,ActiveParticipantCount,4,Site
+0X006,SiteCount,1,Site
+0X006,PercentParticipantsActive,100,Site
+0X006,ActiveParticipants,4 / 4 (100%),Site
+0X168,ParticipantCount,3,Site
+0X168,ActiveParticipantCount,3,Site
+0X168,SiteCount,1,Site
+0X168,PercentParticipantsActive,100,Site
+0X168,ActiveParticipants,3 / 3 (100%),Site
+0X141,ParticipantCount,1,Site
+0X141,ActiveParticipantCount,1,Site
+0X141,SiteCount,1,Site
+0X141,PercentParticipantsActive,100,Site
+0X141,ActiveParticipants,1 / 1 (100%),Site
+0X037,ParticipantCount,3,Site
+0X037,ActiveParticipantCount,3,Site
+0X037,SiteCount,1,Site
+0X037,PercentParticipantsActive,100,Site
+0X037,ActiveParticipants,3 / 3 (100%),Site
+0X119,ParticipantCount,5,Site
+0X119,ActiveParticipantCount,5,Site
+0X119,SiteCount,1,Site
+0X119,PercentParticipantsActive,100,Site
+0X119,ActiveParticipants,5 / 5 (100%),Site
+0X094,ParticipantCount,5,Site
+0X094,ActiveParticipantCount,5,Site
+0X094,SiteCount,1,Site
+0X094,PercentParticipantsActive,100,Site
+0X094,ActiveParticipants,5 / 5 (100%),Site
+0X021,ParticipantCount,4,Site
+0X021,ActiveParticipantCount,4,Site
+0X021,SiteCount,1,Site
+0X021,PercentParticipantsActive,100,Site
+0X021,ActiveParticipants,4 / 4 (100%),Site
+0X054,ParticipantCount,2,Site
+0X054,ActiveParticipantCount,2,Site
+0X054,SiteCount,1,Site
+0X054,PercentParticipantsActive,100,Site
+0X054,ActiveParticipants,2 / 2 (100%),Site
+0X068,ParticipantCount,2,Site
+0X068,ActiveParticipantCount,2,Site
+0X068,SiteCount,1,Site
+0X068,PercentParticipantsActive,100,Site
+0X068,ActiveParticipants,2 / 2 (100%),Site
+0X008,ParticipantCount,1,Site
+0X008,ActiveParticipantCount,1,Site
+0X008,SiteCount,1,Site
+0X008,PercentParticipantsActive,100,Site
+0X008,ActiveParticipants,1 / 1 (100%),Site
+0X089,ParticipantCount,4,Site
+0X089,ActiveParticipantCount,4,Site
+0X089,SiteCount,1,Site
+0X089,PercentParticipantsActive,100,Site
+0X089,ActiveParticipants,4 / 4 (100%),Site
+0X041,ParticipantCount,3,Site
+0X041,ActiveParticipantCount,3,Site
+0X041,SiteCount,1,Site
+0X041,PercentParticipantsActive,100,Site
+0X041,ActiveParticipants,3 / 3 (100%),Site
+0X078,ParticipantCount,1,Site
+0X078,ActiveParticipantCount,1,Site
+0X078,SiteCount,1,Site
+0X078,PercentParticipantsActive,100,Site
+0X078,ActiveParticipants,1 / 1 (100%),Site
+0X133,ParticipantCount,1,Site
+0X133,ActiveParticipantCount,1,Site
+0X133,SiteCount,1,Site
+0X133,PercentParticipantsActive,100,Site
+0X133,ActiveParticipants,1 / 1 (100%),Site
+0X173,ParticipantCount,1,Site
+0X173,ActiveParticipantCount,1,Site
+0X173,SiteCount,1,Site
+0X173,PercentParticipantsActive,100,Site
+0X173,ActiveParticipants,1 / 1 (100%),Site
+X185X,ParticipantCount,1,Site
+X185X,ActiveParticipantCount,1,Site
+X185X,SiteCount,1,Site
+X185X,PercentParticipantsActive,100,Site
+X185X,ActiveParticipants,1 / 1 (100%),Site
+0X049,ParticipantCount,2,Site
+0X049,ActiveParticipantCount,2,Site
+0X049,SiteCount,1,Site
+0X049,PercentParticipantsActive,100,Site
+0X049,ActiveParticipants,2 / 2 (100%),Site
+0X091,ParticipantCount,20,Site
+0X091,ActiveParticipantCount,20,Site
+0X091,SiteCount,1,Site
+0X091,PercentParticipantsActive,100,Site
+0X091,ActiveParticipants,20 / 20 (100%),Site
+0X018,ParticipantCount,9,Site
+0X018,ActiveParticipantCount,9,Site
+0X018,SiteCount,1,Site
+0X018,PercentParticipantsActive,100,Site
+0X018,ActiveParticipants,9 / 9 (100%),Site
+0X129,ParticipantCount,10,Site
+0X129,ActiveParticipantCount,10,Site
+0X129,SiteCount,1,Site
+0X129,PercentParticipantsActive,100,Site
+0X129,ActiveParticipants,10 / 10 (100%),Site
+0X175,ParticipantCount,16,Site
+0X175,ActiveParticipantCount,16,Site
+0X175,SiteCount,1,Site
+0X175,PercentParticipantsActive,100,Site
+0X175,ActiveParticipants,16 / 16 (100%),Site
+0X007,ParticipantCount,2,Site
+0X007,ActiveParticipantCount,2,Site
+0X007,SiteCount,1,Site
+0X007,PercentParticipantsActive,100,Site
+0X007,ActiveParticipants,2 / 2 (100%),Site
+0X087,ParticipantCount,27,Site
+0X087,ActiveParticipantCount,27,Site
+0X087,SiteCount,1,Site
+0X087,PercentParticipantsActive,100,Site
+0X087,ActiveParticipants,27 / 27 (100%),Site
+0X179,ParticipantCount,3,Site
+0X179,ActiveParticipantCount,3,Site
+0X179,SiteCount,1,Site
+0X179,PercentParticipantsActive,100,Site
+0X179,ActiveParticipants,3 / 3 (100%),Site
+X187X,ParticipantCount,8,Site
+X187X,ActiveParticipantCount,8,Site
+X187X,SiteCount,1,Site
+X187X,PercentParticipantsActive,100,Site
+X187X,ActiveParticipants,8 / 8 (100%),Site
+0X001,ParticipantCount,3,Site
+0X001,ActiveParticipantCount,3,Site
+0X001,SiteCount,1,Site
+0X001,PercentParticipantsActive,100,Site
+0X001,ActiveParticipants,3 / 3 (100%),Site
+0X057,ParticipantCount,6,Site
+0X057,ActiveParticipantCount,6,Site
+0X057,SiteCount,1,Site
+0X057,PercentParticipantsActive,100,Site
+0X057,ActiveParticipants,6 / 6 (100%),Site
+0X147,ParticipantCount,3,Site
+0X147,ActiveParticipantCount,3,Site
+0X147,SiteCount,1,Site
+0X147,PercentParticipantsActive,100,Site
+0X147,ActiveParticipants,3 / 3 (100%),Site
+0X148,ParticipantCount,3,Site
+0X148,ActiveParticipantCount,3,Site
+0X148,SiteCount,1,Site
+0X148,PercentParticipantsActive,100,Site
+0X148,ActiveParticipants,3 / 3 (100%),Site
+0X118,ParticipantCount,2,Site
+0X118,ActiveParticipantCount,2,Site
+0X118,SiteCount,1,Site
+0X118,PercentParticipantsActive,100,Site
+0X118,ActiveParticipants,2 / 2 (100%),Site
+X060X,ParticipantCount,2,Site
+X060X,ActiveParticipantCount,2,Site
+X060X,SiteCount,1,Site
+X060X,PercentParticipantsActive,100,Site
+X060X,ActiveParticipants,2 / 2 (100%),Site
+0X033,ParticipantCount,1,Site
+0X033,ActiveParticipantCount,1,Site
+0X033,SiteCount,1,Site
+0X033,PercentParticipantsActive,100,Site
+0X033,ActiveParticipants,1 / 1 (100%),Site
+0X002,ParticipantCount,1,Site
+0X002,ActiveParticipantCount,1,Site
+0X002,SiteCount,1,Site
+0X002,PercentParticipantsActive,100,Site
+0X002,ActiveParticipants,1 / 1 (100%),Site
+0X052,ParticipantCount,58,Site
+0X052,ActiveParticipantCount,58,Site
+0X052,SiteCount,1,Site
+0X052,PercentParticipantsActive,100,Site
+0X052,ActiveParticipants,58 / 58 (100%),Site
+0X153,ParticipantCount,28,Site
+0X153,ActiveParticipantCount,28,Site
+0X153,SiteCount,1,Site
+0X153,PercentParticipantsActive,100,Site
+0X153,ActiveParticipants,28 / 28 (100%),Site
+0X188,ParticipantCount,7,Site
+0X188,ActiveParticipantCount,7,Site
+0X188,SiteCount,1,Site
+0X188,PercentParticipantsActive,100,Site
+0X188,ActiveParticipants,7 / 7 (100%),Site
+0X082,ParticipantCount,8,Site
+0X082,ActiveParticipantCount,8,Site
+0X082,SiteCount,1,Site
+0X082,PercentParticipantsActive,100,Site
+0X082,ActiveParticipants,8 / 8 (100%),Site
+0X159,ParticipantCount,33,Site
+0X159,ActiveParticipantCount,33,Site
+0X159,SiteCount,1,Site
+0X159,PercentParticipantsActive,100,Site
+0X159,ActiveParticipants,33 / 33 (100%),Site
+0X161,ParticipantCount,69,Site
+0X161,ActiveParticipantCount,69,Site
+0X161,SiteCount,1,Site
+0X161,PercentParticipantsActive,100,Site
+0X161,ActiveParticipants,69 / 69 (100%),Site
+0X122,ParticipantCount,17,Site
+0X122,ActiveParticipantCount,17,Site
+0X122,SiteCount,1,Site
+0X122,PercentParticipantsActive,100,Site
+0X122,ActiveParticipants,17 / 17 (100%),Site
+0X170,ParticipantCount,4,Site
+0X170,ActiveParticipantCount,4,Site
+0X170,SiteCount,1,Site
+0X170,PercentParticipantsActive,100,Site
+0X170,ActiveParticipants,4 / 4 (100%),Site
+0X143,ParticipantCount,8,Site
+0X143,ActiveParticipantCount,8,Site
+0X143,SiteCount,1,Site
+0X143,PercentParticipantsActive,100,Site
+0X143,ActiveParticipants,8 / 8 (100%),Site
+0X081,ParticipantCount,4,Site
+0X081,ActiveParticipantCount,4,Site
+0X081,SiteCount,1,Site
+0X081,PercentParticipantsActive,100,Site
+0X081,ActiveParticipants,4 / 4 (100%),Site
+0X105,ParticipantCount,3,Site
+0X105,ActiveParticipantCount,3,Site
+0X105,SiteCount,1,Site
+0X105,PercentParticipantsActive,100,Site
+0X105,ActiveParticipants,3 / 3 (100%),Site
+0X107,ParticipantCount,5,Site
+0X107,ActiveParticipantCount,5,Site
+0X107,SiteCount,1,Site
+0X107,PercentParticipantsActive,100,Site
+0X107,ActiveParticipants,5 / 5 (100%),Site
+0X130,ParticipantCount,9,Site
+0X130,ActiveParticipantCount,9,Site
+0X130,SiteCount,1,Site
+0X130,PercentParticipantsActive,100,Site
+0X130,ActiveParticipants,9 / 9 (100%),Site
+0X050,ParticipantCount,1,Site
+0X050,ActiveParticipantCount,1,Site
+0X050,SiteCount,1,Site
+0X050,PercentParticipantsActive,100,Site
+0X050,ActiveParticipants,1 / 1 (100%),Site
+0X004,ParticipantCount,3,Site
+0X004,ActiveParticipantCount,3,Site
+0X004,SiteCount,1,Site
+0X004,PercentParticipantsActive,100,Site
+0X004,ActiveParticipants,3 / 3 (100%),Site
+0X047,ParticipantCount,1,Site
+0X047,ActiveParticipantCount,1,Site
+0X047,SiteCount,1,Site
+0X047,PercentParticipantsActive,100,Site
+0X047,ActiveParticipants,1 / 1 (100%),Site
+0X063,ParticipantCount,7,Site
+0X063,ActiveParticipantCount,7,Site
+0X063,SiteCount,1,Site
+0X063,PercentParticipantsActive,100,Site
+0X063,ActiveParticipants,7 / 7 (100%),Site
+0X186,ParticipantCount,2,Site
+0X186,ActiveParticipantCount,2,Site
+0X186,SiteCount,1,Site
+0X186,PercentParticipantsActive,100,Site
+0X186,ActiveParticipants,2 / 2 (100%),Site
+0X178,ParticipantCount,11,Site
+0X178,ActiveParticipantCount,11,Site
+0X178,SiteCount,1,Site
+0X178,PercentParticipantsActive,100,Site
+0X178,ActiveParticipants,11 / 11 (100%),Site
+0X121,ParticipantCount,1,Site
+0X121,ActiveParticipantCount,1,Site
+0X121,SiteCount,1,Site
+0X121,PercentParticipantsActive,100,Site
+0X121,ActiveParticipants,1 / 1 (100%),Site
+0X114,ParticipantCount,2,Site
+0X114,ActiveParticipantCount,2,Site
+0X114,SiteCount,1,Site
+0X114,PercentParticipantsActive,100,Site
+0X114,ActiveParticipants,2 / 2 (100%),Site
+0X034,ParticipantCount,1,Site
+0X034,ActiveParticipantCount,1,Site
+0X034,SiteCount,1,Site
+0X034,PercentParticipantsActive,100,Site
+0X034,ActiveParticipants,1 / 1 (100%),Site
+0X177,ParticipantCount,1,Site
+0X177,ActiveParticipantCount,1,Site
+0X177,SiteCount,1,Site
+0X177,PercentParticipantsActive,100,Site
+0X177,ActiveParticipants,1 / 1 (100%),Site
+0X131,ParticipantCount,1,Site
+0X131,ActiveParticipantCount,1,Site
+0X131,SiteCount,1,Site
+0X131,PercentParticipantsActive,100,Site
+0X131,ActiveParticipants,1 / 1 (100%),Site

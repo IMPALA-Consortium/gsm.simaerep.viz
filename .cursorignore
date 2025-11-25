@@ -1,5 +1,5 @@
 # Example HTML files (can get large)
-examples/*.html
+# examples/*.html
 
 # Build output
 index.js

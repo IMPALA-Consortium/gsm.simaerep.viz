@@ -1,27 +1,27 @@
 [
   {
     "Denominator": 1,
-    "cum_mean_dev_event": 0.004611837048424251
+    "cum_mean_dev_event": 0.004611837048424265
   },
   {
     "Denominator": 2,
-    "cum_mean_dev_event": 0.110684089162183
+    "cum_mean_dev_event": 0.11068408916218303
   },
   {
     "Denominator": 3,
-    "cum_mean_dev_event": 0.40875358723168087
+    "cum_mean_dev_event": 0.4087535872316808
   },
   {
     "Denominator": 4,
-    "cum_mean_dev_event": 0.6166666981703932
+    "cum_mean_dev_event": 0.6166666981703931
   },
   {
     "Denominator": 5,
-    "cum_mean_dev_event": 0.7861845830848566
+    "cum_mean_dev_event": 0.7861845830848564
   },
   {
     "Denominator": 6,
-    "cum_mean_dev_event": 0.9546713225544355
+    "cum_mean_dev_event": 0.9546713225544353
   },
   {
     "Denominator": 7,
@@ -29,39 +29,39 @@
   },
   {
     "Denominator": 8,
-    "cum_mean_dev_event": 1.3068313930873514
+    "cum_mean_dev_event": 1.3068313930873512
   },
   {
     "Denominator": 9,
-    "cum_mean_dev_event": 1.4504734653008515
+    "cum_mean_dev_event": 1.450473465300852
   },
   {
     "Denominator": 10,
-    "cum_mean_dev_event": 1.6042589542598422
+    "cum_mean_dev_event": 1.6042589542598424
   },
   {
     "Denominator": 11,
-    "cum_mean_dev_event": 1.7425988752084587
+    "cum_mean_dev_event": 1.7425988752084591
   },
   {
     "Denominator": 12,
-    "cum_mean_dev_event": 1.9068845894941728
+    "cum_mean_dev_event": 1.9068845894941733
   },
   {
     "Denominator": 13,
-    "cum_mean_dev_event": 2.035762871117085
+    "cum_mean_dev_event": 2.0357628711170848
   },
   {
     "Denominator": 14,
-    "cum_mean_dev_event": 2.192312391883858
+    "cum_mean_dev_event": 2.1923123918838576
   },
   {
     "Denominator": 15,
-    "cum_mean_dev_event": 2.3435123918838583
+    "cum_mean_dev_event": 2.343512391883858
   },
   {
     "Denominator": 16,
-    "cum_mean_dev_event": 2.5215945836646805
+    "cum_mean_dev_event": 2.52159458366468
   },
   {
     "Denominator": 17,
@@ -69,11 +69,11 @@
   },
   {
     "Denominator": 18,
-    "cum_mean_dev_event": 2.8775873134255052
+    "cum_mean_dev_event": 2.877587313425505
   },
   {
     "Denominator": 19,
-    "cum_mean_dev_event": 3.0864325222707145
+    "cum_mean_dev_event": 3.086432522270714
   },
   {
     "Denominator": 20,
@@ -81,15 +81,15 @@
   },
   {
     "Denominator": 21,
-    "cum_mean_dev_event": 3.4092209539005958
+    "cum_mean_dev_event": 3.4092209539005953
   },
   {
     "Denominator": 22,
-    "cum_mean_dev_event": 3.623819494046581
+    "cum_mean_dev_event": 3.6238194940465807
   },
   {
     "Denominator": 23,
-    "cum_mean_dev_event": 3.8457874574333086
+    "cum_mean_dev_event": 3.845787457433308
   },
   {
     "Denominator": 24,
@@ -97,50 +97,50 @@
   },
   {
     "Denominator": 25,
-    "cum_mean_dev_event": 4.262748423976059
+    "cum_mean_dev_event": 4.26274842397606
   },
   {
     "Denominator": 26,
-    "cum_mean_dev_event": 4.434465595693231
+    "cum_mean_dev_event": 4.434465595693232
   },
   {
     "Denominator": 27,
-    "cum_mean_dev_event": 4.595179881407517
+    "cum_mean_dev_event": 4.5951798814075175
   },
   {
     "Denominator": 28,
-    "cum_mean_dev_event": 4.716392002619638
+    "cum_mean_dev_event": 4.716392002619639
   },
   {
     "Denominator": 29,
-    "cum_mean_dev_event": 4.924725335952971
+    "cum_mean_dev_event": 4.924725335952972
   },
   {
     "Denominator": 30,
-    "cum_mean_dev_event": 5.049725335952971
+    "cum_mean_dev_event": 5.049725335952972
   },
   {
     "Denominator": 31,
-    "cum_mean_dev_event": 5.383058669286304
+    "cum_mean_dev_event": 5.383058669286305
   },
   {
     "Denominator": 32,
-    "cum_mean_dev_event": 5.716392002619637
+    "cum_mean_dev_event": 5.716392002619638
   },
   {
     "Denominator": 33,
-    "cum_mean_dev_event": 5.883058669286304
+    "cum_mean_dev_event": 5.883058669286305
   },
   {
     "Denominator": 34,
-    "cum_mean_dev_event": 6.883058669286304
+    "cum_mean_dev_event": 6.883058669286305
   },
   {
     "Denominator": 35,
-    "cum_mean_dev_event": 7.549725335952971
+    "cum_mean_dev_event": 7.549725335952972
   },
   {
     "Denominator": 36,
-    "cum_mean_dev_event": 7.549725335952971
+    "cum_mean_dev_event": 7.549725335952972
   }
 ]
