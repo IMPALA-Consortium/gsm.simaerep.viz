@@ -65,6 +65,7 @@ const chart = new SiteList(container, sites, {
 ## Available Charts
 
 - **[SiteList](docs/API.md#sitelist)** - Interactive list of clinical trial sites with selection support
+- **[Simaerep](docs/API.md#simaerep)** - Time series visualization for cumulative deviation trends
 
 ## Deploying to gsm.simaerep
 
@@ -96,7 +97,9 @@ ls -la ../gsm.simaerep/inst/htmlwidgets/lib/gsm.simaerep.viz/
 
 After deployment, test the htmlwidget integration in the gsm.simaerep R package to ensure the changes work as expected.
 
-## Testing
+## Development
+
+### Testing with Jest
 
 Run tests with Jest:
 
@@ -104,6 +107,51 @@ Run tests with Jest:
 npm test              # Run all tests
 npm test -- --watch   # Run in watch mode
 npm test -- --coverage # Generate coverage report
+```
+
+### Testing Charts Locally in Browser
+
+To test charts interactively in your browser with live data:
+
+1. **Build the bundle:**
+   ```bash
+   npm run build
+   ```
+
+2. **Start the local web server:**
+   ```bash
+   npm run local
+   ```
+   This starts an HTTP server on port 8080.
+
+3. **Open examples in your browser:**
+   - **SiteList Chart**: http://localhost:8080/examples/siteList.html
+   - **Simaerep Chart**: http://localhost:8080/examples/simaerep-chart-example.html
+   - **Simple SiteList**: http://localhost:8080/examples/siteList-simple.html
+
+4. **Test interactivity:**
+   - Use the site selector dropdown to highlight different sites
+   - Open browser DevTools (F12) to see console logs
+   - Check the Network tab to verify data loads correctly
+   - Hover over chart elements to see tooltips
+
+**Note:** The examples use JSON data files generated from the CSV files in `examples/data/csv/`. If you modify the CSV files, regenerate the JSON:
+
+```bash
+node examples/data/helpers/csv-to-json.js
+```
+
+### Development Workflow
+
+```bash
+# Watch mode: rebuilds on file changes
+npm run watch
+
+# In another terminal, run the local server
+npm run local
+
+# Open http://localhost:8080/examples/ in your browser
+# Edit source files in src/ and refresh browser to see changes
 ```
 
 ## Documentation
@@ -131,9 +179,15 @@ We welcome contributions! Please see our contributing guide for:
 gsm.simaerep.viz/
 ├── src/                    # Source modules
 │   ├── SiteList.js        # Site list chart
+│   ├── Simaerep.js        # Simaerep time series chart
 │   └── index.js           # Main entry point
 ├── tests/                 # Jest tests
+│   ├── SiteList.test.js
+│   └── Simaerep.test.js
 ├── examples/              # Working examples
+│   ├── siteList.html
+│   ├── simaerep-chart-example.html
+│   └── data/              # Example data (CSV and JSON)
 ├── docs/                  # Documentation
 ├── index.js              # Built bundle (generated)
 └── package.json
