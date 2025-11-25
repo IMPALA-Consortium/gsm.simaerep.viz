@@ -17,6 +17,10 @@ class Simaerep {
   constructor(container, data, config = {}) {
     this.container = container;
     this.rawData = data || {};
+    
+    // Extract metric fields from metric object if provided
+    const metric = config.metric || {};
+    
     this.config = {
       selectedGroupIDs: config.selectedGroupIDs || 'None',
       width: config.width || '100%',
@@ -24,9 +28,19 @@ class Simaerep {
       aspectRatio: config.aspectRatio || 2,
       showGroupSelector: config.showGroupSelector !== false,
       groupLabelKey: config.groupLabelKey || 'GroupID',
-      GroupLevel: config.GroupLevel || 'Site',
+      GroupLevel: config.GroupLevel || metric.GroupLevel || 'Site',
+      // KRI metadata fields extracted from metric object with fallbacks
+      Metric: metric.Metric || config.Metric || 'Adverse Event Rate',
+      Numerator: metric.Numerator || config.Numerator || 'Adverse Events',
+      Denominator: metric.Denominator || config.Denominator || 'Visits',
+      Score: metric.Score || config.Score || 'Over/Under-Reporting Probability',
+      ExpectedNumerator: metric.ExpectedNumerator || config.ExpectedNumerator || 'Delta Expected AEs',
+      Abbreviation: metric.Abbreviation || config.Abbreviation || 'AE',
       ...config,
     };
+    
+    // Store original metric object for reference
+    this.metric = metric;
 
     // Structure group metadata if provided
     this.groupMetadata = structureGroupMetadata(config.groupMetadata, this.config);
@@ -93,6 +107,9 @@ class Simaerep {
     siteLabels.forEach(site => {
       siteMetadata[site.GroupID] = site;
     });
+    
+    // Store as instance property for tooltip access
+    this.siteMetadata = siteMetadata;
 
     // Helper to group data by GroupID
     const groupByGroupID = (data) => {
@@ -232,7 +249,7 @@ class Simaerep {
             type: 'linear',
             title: {
               display: true,
-              text: 'Denominator'
+              text: this.config.Denominator
             },
             grid: {
               display: true,
@@ -242,7 +259,7 @@ class Simaerep {
           y: {
             title: {
               display: true,
-              text: 'Cumulative Mean Deviation'
+              text: `Average Cumulative ${this.config.Numerator} Count`
             },
             grid: {
               display: true,
@@ -279,14 +296,38 @@ class Simaerep {
                 const value = context.parsed.y.toFixed(2);
                 const xValue = context.parsed.x.toFixed(0);
                 const groupID = context.dataset.groupID;
+                const siteInfo = this.siteMetadata[groupID];
                 const metadata = this.groupMetadata?.get(groupID);
                 
+                // Debug logging
+                console.log('Tooltip debug:', {
+                  groupID,
+                  hasSiteMetadata: !!this.siteMetadata,
+                  siteMetadataKeys: this.siteMetadata ? Object.keys(this.siteMetadata).length : 0,
+                  hasSiteInfo: !!siteInfo,
+                  siteInfo: siteInfo,
+                  siteType: context.dataset.siteType
+                });
+                
                 const labels = [
-                  `Cumulative Mean Deviation: ${value}`,
-                  `Denominator: ${xValue}`
+                  `Average Cumulative ${this.config.Numerator}: ${value}`,
+                  `${this.config.Denominator}: ${xValue}`
                 ];
                 
-                // Add metadata fields if available
+                // Add KRI metrics from df_label_sites
+                if (siteInfo && context.dataset.siteType !== 'study') {
+                  if (siteInfo.Score !== undefined) {
+                    labels.push(`${this.config.Score}: ${Number(siteInfo.Score).toFixed(2)}`);
+                  }
+                  if (siteInfo.ExpectedNumerator !== undefined) {
+                    labels.push(`${this.config.ExpectedNumerator}: ${Number(siteInfo.ExpectedNumerator).toFixed(2)}`);
+                  }
+                  if (siteInfo.Flag !== undefined) {
+                    labels.push(`Flag: ${siteInfo.Flag}`);
+                  }
+                }
+                
+                // Add extended metadata from df_groups
                 if (metadata && context.dataset.siteType !== 'study') {
                   const metadataLabels = formatGroupTooltipLabel(metadata, this.config);
                   labels.push(...metadataLabels);

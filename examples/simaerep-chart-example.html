@@ -86,12 +86,13 @@
     // Load data from JSON files
     async function loadData() {
       try {
-        const [studyData, flaggedData, unflaggedData, labelData, groupsData] = await Promise.all([
+        const [studyData, flaggedData, unflaggedData, labelData, groupsData, metricData] = await Promise.all([
           fetch('data/csv/df_mean_study.json').then(r => r.json()),
           fetch('data/csv/df_mean_group_flagged.json').then(r => r.json()),
           fetch('data/csv/df_mean_group_not_flagged.json').then(r => r.json()),
           fetch('data/csv/df_label_sites.json').then(r => r.json()),
-          fetch('data/csv/df_groups.json').then(r => r.json())
+          fetch('data/csv/df_groups.json').then(r => r.json()),
+          fetch('data/csv/df_metric.json').then(r => r.json())
         ]);
 
         return {
@@ -99,7 +100,8 @@
           df_mean_group_flagged: flaggedData,
           df_mean_group_not_flagged: unflaggedData,
           df_label_sites: labelData,
-          df_groups: groupsData
+          df_groups: groupsData,
+          df_metric: metricData
         };
       } catch (error) {
         console.error('Error loading data:', error);
@@ -123,7 +125,8 @@
           width: '100%',
           height: '500px',
           groupMetadata: data.df_groups,
-          GroupLevel: 'Site'
+          // Pass entire metric object - much cleaner!
+          metric: data.df_metric && data.df_metric.length > 0 ? data.df_metric[0] : undefined
         };
 
         // Create chart using the global gsmSimaerepViz library

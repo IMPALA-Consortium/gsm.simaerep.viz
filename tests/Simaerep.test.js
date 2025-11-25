@@ -4,6 +4,22 @@
 
 import Simaerep from '../src/Simaerep';
 
+// Mock d3 to avoid ES module issues
+jest.mock('d3', () => ({
+  rollup: jest.fn((data, reducer, ...keys) => {
+    // Simple mock implementation
+    const map = new Map();
+    data.forEach(item => {
+      const key = keys.map(k => k(item)).join('-');
+      if (!map.has(key)) {
+        map.set(key, []);
+      }
+      map.get(key).push(item);
+    });
+    return map;
+  })
+}));
+
 // Mock Chart.js
 jest.mock('chart.js/auto', () => {
   return jest.fn().mockImplementation(function(canvas, config) {
@@ -102,7 +118,7 @@ describe('Simaerep', () => {
     test('uses default config values', () => {
       const chart = new Simaerep(container, sampleData);
       expect(chart.data.config.selectedGroupIDs).toBe('None');
-      expect(chart.data.config.aspectRatio).toBe(1);
+      expect(chart.data.config.aspectRatio).toBe(2);  // Default is 2
       expect(chart.data.config.showGroupSelector).toBe(true);
     });
   });
