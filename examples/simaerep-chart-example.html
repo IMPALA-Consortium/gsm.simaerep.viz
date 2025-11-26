@@ -32,9 +32,13 @@
       margin-bottom: 20px;
     }
     .gsm-widget-control-container {
-      margin-top: 15px;
-      padding-top: 15px;
-      border-top: 1px solid #e0e0e0;
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #e0e0e0;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      flex-wrap: wrap;
     }
     .status {
       padding: 10px;
@@ -70,7 +74,8 @@
       <li><strong>Unflagged Sites</strong> - Normal sites (lighter colored lines)</li>
     </ul>
     <p>
-      Use the site selector below the chart to highlight individual sites.
+      Use the site selector above the chart to highlight individual sites.
+      Use the country selector to highlight all sites from a specific country.
       This chart is compatible with the gsm.viz group selector system.
     </p>
   </div>
@@ -122,6 +127,7 @@
           selectedGroupIDs: 'None',
           aspectRatio: 1.5,
           showGroupSelector: true,
+          showCountrySelector: true,
           width: '100%',
           height: '500px',
           groupMetadata: data.df_groups,
@@ -158,6 +164,14 @@
           statusEl.textContent = e.detail.groupID === 'None' 
             ? '✓ No site selected' 
             : `✓ Site selected: ${e.detail.groupID}`;
+        });
+
+        // Add event listener for country selection
+        container.addEventListener('country-selected', (e) => {
+          console.log('Country selected:', e.detail.country, 'Sites:', e.detail.groupIDs);
+          statusEl.textContent = e.detail.country === 'None' 
+            ? '✓ No country selected' 
+            : `✓ Country selected: ${e.detail.country} (${e.detail.groupIDs.length} sites)`;
         });
       })
       .catch(error => {

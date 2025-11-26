@@ -27,6 +27,7 @@ class Simaerep {
       height: config.height || 'auto',
       aspectRatio: config.aspectRatio || 2,
       showGroupSelector: config.showGroupSelector !== false,
+      showCountrySelector: config.showCountrySelector !== false,
       groupLabelKey: config.groupLabelKey || 'GroupID',
       GroupLevel: config.GroupLevel || metric.GroupLevel || 'Site',
       // KRI metadata fields extracted from metric object with fallbacks
@@ -44,6 +45,9 @@ class Simaerep {
 
     // Structure group metadata if provided
     this.groupMetadata = structureGroupMetadata(config.groupMetadata, this.config);
+
+    // Track selected country for maintaining selector state
+    this.selectedCountry = 'None';
 
     // Initialize canvas for Chart.js
     this.canvas = document.createElement('canvas');
@@ -94,7 +98,9 @@ class Simaerep {
     const selectedGroupID = this.data.config.selectedGroupIDs;
     
     // Check if a site is actually selected (not 'None')
-    const hasSelection = selectedGroupID && selectedGroupID !== 'None';
+    // Handle both single selection (string) and multiple selection (array)
+    const hasSelection = selectedGroupID && selectedGroupID !== 'None' && 
+      (Array.isArray(selectedGroupID) ? selectedGroupID.length > 0 : true);
 
     // Extract data from rawData structure
     const studyData = this.rawData.df_mean_study || [];
@@ -129,7 +135,9 @@ class Simaerep {
     // 1. Add unflagged sites (first layer)
     const unflaggedGroups = groupByGroupID(unflaggedSites);
     Object.entries(unflaggedGroups).forEach(([groupID, points]) => {
-      const isSelected = groupID === selectedGroupID;
+      const isSelected = Array.isArray(selectedGroupID) 
+        ? selectedGroupID.includes(groupID) 
+        : groupID === selectedGroupID;
       const baseColor = siteMetadata[groupID]?.Color || '#CCCCCC';
       
       // Apply opacity reduction for unselected items when there's a selection
@@ -147,14 +155,16 @@ class Simaerep {
         fill: false,
         groupID: groupID,
         siteType: 'unflagged',
-        order: isSelected ? 1 : 3 // Selected sites on top
+        order: isSelected ? 3 : 5 // Selected unflagged sites above unselected, but below flagged
       });
     });
 
     // 2. Add flagged sites (second layer)
     const flaggedGroups = groupByGroupID(flaggedSites);
     Object.entries(flaggedGroups).forEach(([groupID, points]) => {
-      const isSelected = groupID === selectedGroupID;
+      const isSelected = Array.isArray(selectedGroupID) 
+        ? selectedGroupID.includes(groupID) 
+        : groupID === selectedGroupID;
       const baseColor = siteMetadata[groupID]?.Color || '#3182BD';
       
       // Apply opacity reduction for unselected items when there's a selection
@@ -172,7 +182,7 @@ class Simaerep {
         fill: false,
         groupID: groupID,
         siteType: 'flagged',
-        order: isSelected ? 1 : 2 // Selected sites on top, flagged above unflagged
+        order: isSelected ? 1 : 2 // Selected flagged sites on top, unselected flagged above all unflagged
       });
     });
 
@@ -210,6 +220,11 @@ class Simaerep {
     this.container.innerHTML = '';
     this.container.classList.add('gsm-widget', 'simaerep-chart');
 
+    // Add selectors first if enabled (at top of chart)
+    if (this.config.showGroupSelector || this.config.showCountrySelector) {
+      this.addSelectors();
+    }
+
     // Create chart wrapper
     const chartWrapper = document.createElement('div');
     chartWrapper.className = 'simaerep-chart-wrapper';
@@ -217,7 +232,7 @@ class Simaerep {
     chartWrapper.style.width = '100%';
     
     // Calculate height accounting for selector dropdown
-    const selectorHeight = this.config.showGroupSelector ? 40 : 0;
+    const selectorHeight = (this.config.showGroupSelector || this.config.showCountrySelector) ? 40 : 0;
     const availableHeight = this.config.height === 'auto' ? '100%' : 
       (typeof this.config.height === 'number' ? `${this.config.height - selectorHeight}px` : 
        `calc(${this.config.height} - ${selectorHeight}px)`);
@@ -346,71 +361,191 @@ class Simaerep {
       }
     });
 
-    // Add group selector if enabled
-    if (this.config.showGroupSelector) {
-      this.addGroupSelector();
-    }
+    // Remove the old selector call since it's now at the top
   }
 
   /**
-   * Add group selector dropdown
+   * Add site and country selector dropdowns
    */
-  addGroupSelector() {
+  addSelectors() {
     const selectorContainer = document.createElement('div');
     selectorContainer.className = 'gsm-widget-control-container';
-    selectorContainer.style.marginTop = '10px';
+    selectorContainer.style.marginBottom = '10px';
+    selectorContainer.style.display = 'flex';
+    selectorContainer.style.gap = '20px';
+    selectorContainer.style.alignItems = 'center';
+    selectorContainer.style.flexWrap = 'wrap';
 
-    const label = document.createElement('label');
-    label.textContent = 'Site: ';
-    label.style.marginRight = '8px';
-    label.style.fontSize = '14px';
+    // Add site selector if enabled
+    if (this.config.showGroupSelector) {
+      const siteGroup = document.createElement('div');
+      siteGroup.style.display = 'flex';
+      siteGroup.style.alignItems = 'center';
+      siteGroup.style.gap = '8px';
 
-    const select = document.createElement('select');
-    select.className = 'gsm-widget-control--group';
-    select.style.padding = '4px 8px';
-    select.style.borderRadius = '4px';
-    select.style.border = '1px solid #ccc';
+      const siteLabel = document.createElement('label');
+      siteLabel.textContent = 'Site: ';
+      siteLabel.style.fontSize = '14px';
+      siteLabel.style.fontWeight = '500';
 
-    // Add "None" option
-    const noneOption = document.createElement('option');
-    noneOption.value = 'None';
-    noneOption.textContent = 'None';
-    select.appendChild(noneOption);
+      const siteSelect = document.createElement('select');
+      siteSelect.className = 'gsm-widget-control--group';
+      siteSelect.style.padding = '4px 8px';
+      siteSelect.style.borderRadius = '4px';
+      siteSelect.style.border = '1px solid #ccc';
+      siteSelect.style.minWidth = '150px';
 
-    // Get unique site IDs from data
-    const siteLabels = this.rawData.df_label_sites || [];
-    siteLabels.forEach((site) => {
-      const option = document.createElement('option');
-      const groupID = site[this.config.groupLabelKey] || site.GroupID;
-      option.value = groupID;
-      option.textContent = groupID;
-      select.appendChild(option);
-    });
+      // Add "None" option
+      const noneOption = document.createElement('option');
+      noneOption.value = 'None';
+      noneOption.textContent = 'None';
+      siteSelect.appendChild(noneOption);
 
-    // Set current value
-    select.value = this.data.config.selectedGroupIDs;
+      // Get unique site IDs from data
+      const siteLabels = this.rawData.df_label_sites || [];
+      siteLabels.forEach((site) => {
+        const option = document.createElement('option');
+        const groupID = site[this.config.groupLabelKey] || site.GroupID;
+        option.value = groupID;
+        option.textContent = groupID;
+        siteSelect.appendChild(option);
+      });
 
-    // Add change handler
-    select.addEventListener('change', (e) => {
-      this.selectSite(e.target.value);
-    });
+      // Set current value
+      const currentSelection = this.data.config.selectedGroupIDs;
+      siteSelect.value = (Array.isArray(currentSelection) || currentSelection === 'None') 
+        ? 'None' 
+        : currentSelection;
 
-    selectorContainer.appendChild(label);
-    selectorContainer.appendChild(select);
+      // Add change handler (will be updated with mutual reset logic)
+      siteSelect.addEventListener('change', (e) => {
+        this.selectSite(e.target.value);
+      });
+
+      siteGroup.appendChild(siteLabel);
+      siteGroup.appendChild(siteSelect);
+      selectorContainer.appendChild(siteGroup);
+      
+      this.siteSelector = siteSelect;
+    }
+
+    // Add country selector if enabled
+    if (this.config.showCountrySelector) {
+      const countryGroup = document.createElement('div');
+      countryGroup.style.display = 'flex';
+      countryGroup.style.alignItems = 'center';
+      countryGroup.style.gap = '8px';
+
+      const countryLabel = document.createElement('label');
+      countryLabel.textContent = 'Country: ';
+      countryLabel.style.fontSize = '14px';
+      countryLabel.style.fontWeight = '500';
+
+      const countrySelect = document.createElement('select');
+      countrySelect.className = 'gsm-widget-control--country';
+      countrySelect.style.padding = '4px 8px';
+      countrySelect.style.borderRadius = '4px';
+      countrySelect.style.border = '1px solid #ccc';
+      countrySelect.style.minWidth = '150px';
+
+      // Add "None" option
+      const noneOption = document.createElement('option');
+      noneOption.value = 'None';
+      noneOption.textContent = 'None';
+      countrySelect.appendChild(noneOption);
+
+      // Extract unique countries from groupMetadata
+      const countries = new Set();
+      const countryToSites = {};
+      
+      if (this.groupMetadata && this.groupMetadata.size > 0) {
+        this.groupMetadata.forEach((metadata, groupID) => {
+          if (metadata.Country) {
+            countries.add(metadata.Country);
+            if (!countryToSites[metadata.Country]) {
+              countryToSites[metadata.Country] = [];
+            }
+            countryToSites[metadata.Country].push(groupID);
+          }
+        });
+      }
+
+      // Store the mapping for later use
+      this.countryToSites = countryToSites;
+
+      // Sort and add country options
+      const sortedCountries = Array.from(countries).sort();
+      sortedCountries.forEach((country) => {
+        const option = document.createElement('option');
+        option.value = country;
+        option.textContent = country;
+        countrySelect.appendChild(option);
+      });
+
+      // Set current value
+      countrySelect.value = 'None';
+
+      // Add change handler (will be updated with mutual reset logic)
+      countrySelect.addEventListener('change', (e) => {
+        this.selectCountry(e.target.value);
+      });
+
+      countryGroup.appendChild(countryLabel);
+      countryGroup.appendChild(countrySelect);
+      selectorContainer.appendChild(countryGroup);
+      
+      this.countrySelector = countrySelect;
+      
+      // Set the value to the selected country if one is active
+      if (this.selectedCountry && this.selectedCountry !== 'None') {
+        countrySelect.value = this.selectedCountry;
+      }
+    }
+
     this.container.appendChild(selectorContainer);
-    
-    this.selector = select;
   }
 
   /**
    * Handle site selection
    */
   selectSite(groupID) {
+    // Reset country selector if present
+    if (this.countrySelector) {
+      this.countrySelector.value = 'None';
+    }
+    
+    // Clear the selected country
+    this.selectedCountry = 'None';
+    
     this.updateSelectedGroupIDs(groupID);
 
     // Trigger change event for integration with other widgets
     const event = new CustomEvent('site-selected', {
       detail: { groupID },
+    });
+    this.container.dispatchEvent(event);
+  }
+
+  /**
+   * Handle country selection
+   */
+  selectCountry(country) {
+    // Reset site selector if present
+    if (this.siteSelector) {
+      this.siteSelector.value = 'None';
+    }
+
+    // Store the selected country
+    this.selectedCountry = country;
+
+    // Get all sites for this country
+    const sitesInCountry = country === 'None' ? 'None' : (this.countryToSites[country] || []);
+    
+    this.updateSelectedGroupIDs(sitesInCountry);
+
+    // Trigger change event for integration with other widgets
+    const event = new CustomEvent('country-selected', {
+      detail: { country, groupIDs: sitesInCountry },
     });
     this.container.dispatchEvent(event);
   }
