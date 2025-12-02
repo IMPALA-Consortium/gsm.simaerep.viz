@@ -22,7 +22,7 @@ export default function formatGroupTooltipLabel(group, config) {
         ? config.groupTooltipKeys
         : Object.keys(group)
             // remove internal fields from the tooltip
-            .filter((key) => ['groupLabel', 'GroupLabel', 'nRedFlags', 'nAmberFlags', 'nGreenFlags', 'ParticipantCount', 'ActiveParticipantCount', 'SiteCount', 'PercentParticipantsActive', 'ActiveParticipants'].includes(key) === false)
+            .filter((key) => ['groupLabel', 'GroupLabel', 'nRedFlags', 'nAmberFlags', 'nGreenFlags', 'ParticipantCount'].includes(key) === false)
             .reduce((acc, key) => {
                 // title-case key:
                 // - replace underscores with spaces

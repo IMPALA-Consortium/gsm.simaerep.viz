@@ -417,8 +417,14 @@ class Simaerep {
             }
             const groupID = dataset.groupID;
             const metadata = this.groupMetadata?.get(groupID);
-            if (metadata && metadata.InvestigatorLastName) {
-              return `Site ${groupID} - ${metadata.InvestigatorLastName}`;
+            
+            if (metadata) {
+              const name = metadata.InvestigatorLastName || groupID;
+              const enrolled = metadata.ParticipantCount;
+              if (enrolled !== undefined) {
+                return `Site ${groupID} - ${name} (${enrolled} enrolled)`;
+              }
+              return `Site ${groupID} - ${name}`;
             }
             return `Site ${groupID}`;
           }
