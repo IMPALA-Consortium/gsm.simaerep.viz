@@ -18,6 +18,9 @@ class Simaerep {
     this.container = container;
     this.rawData = data || {};
     
+    // Add df_visit extraction for right panel patient trajectories
+    this.visitData = this.rawData.df_visit || [];
+    
     // Extract metric fields from metric object if provided
     const metric = config.metric || {};
     
@@ -30,6 +33,11 @@ class Simaerep {
       showCountrySelector: config.showCountrySelector !== false,
       groupLabelKey: config.groupLabelKey || 'GroupID',
       GroupLevel: config.GroupLevel || metric.GroupLevel || 'Site',
+      // Right panel configuration
+      showRightPanel: config.showRightPanel !== false,
+      rightPanelWidth: config.rightPanelWidth || '50%',
+      maxVisibleSitePlots: config.maxVisibleSitePlots || 4,
+      sitePlotAspectRatio: config.sitePlotAspectRatio || 1,
       // KRI metadata fields extracted from metric object with fallbacks
       Metric: metric.Metric || config.Metric || 'Adverse Event Rate',
       Numerator: metric.Numerator || config.Numerator || 'Adverse Events',
@@ -69,6 +77,9 @@ class Simaerep {
 
     // Chart.js instance (will be created in render)
     this.chartInstance = null;
+    
+    // Site plot Chart.js instances for right panel
+    this.sitePlotCharts = [];
 
     this.render();
   }
@@ -80,14 +91,46 @@ class Simaerep {
     this.data.config = { ...this.data.config, ...config };
     this.data._thresholds_ = thresholds || this.data._thresholds_;
     this.render();
+    
+    // Trigger interactions for selected site (if any)
+    const groupID = this.data.config.selectedGroupIDs;
+    if (groupID && groupID !== 'None') {
+      requestAnimationFrame(() => {
+        const targetSite = Array.isArray(groupID) 
+          ? this.findFirstFlaggedSite(groupID) 
+          : groupID;
+        
+        if (targetSite) {
+          this.highlightSitePlot(targetSite);
+          this.scrollToSitePlot(groupID);
+          this.showTooltipForSite(targetSite);
+        }
+      });
+    }
   }
 
   /**
    * Update selected group IDs - required by gsm.kri
    */
-  updateSelectedGroupIDs(groupID) {
+  updateSelectedGroupIDs(groupID, skipInteraction = false) {
     this.data.config.selectedGroupIDs = groupID;
     this.render();
+    
+    // If called externally (via gsm.kri group selector), also show highlight, scroll, and tooltip
+    // skipInteraction is true when called from selectSite/selectCountry to avoid duplicate calls
+    if (!skipInteraction && groupID && groupID !== 'None') {
+      requestAnimationFrame(() => {
+        const targetSite = Array.isArray(groupID) 
+          ? this.findFirstFlaggedSite(groupID) 
+          : groupID;
+        
+        if (targetSite) {
+          this.highlightSitePlot(targetSite);
+          this.scrollToSitePlot(groupID);
+          this.showTooltipForSite(targetSite);
+        }
+      });
+    }
   }
 
   /**
@@ -225,30 +268,83 @@ class Simaerep {
       this.addSelectors();
     }
 
-    // Create chart wrapper
-    const chartWrapper = document.createElement('div');
-    chartWrapper.className = 'simaerep-chart-wrapper';
-    chartWrapper.style.position = 'relative';
-    chartWrapper.style.width = '100%';
-    
     // Calculate height accounting for selector dropdown
     const selectorHeight = (this.config.showGroupSelector || this.config.showCountrySelector) ? 40 : 0;
     const availableHeight = this.config.height === 'auto' ? '100%' : 
       (typeof this.config.height === 'number' ? `${this.config.height - selectorHeight}px` : 
        `calc(${this.config.height} - ${selectorHeight}px)`);
-    
-    chartWrapper.style.height = availableHeight;
-    chartWrapper.style.maxHeight = availableHeight;
-    
-    // Add canvas
-    chartWrapper.appendChild(this.canvas);
-    this.container.appendChild(chartWrapper);
 
-    // Destroy existing chart if present
+    // Check if right panel should be displayed
+    const showRightPanel = this.config.showRightPanel && this.visitData.length > 0;
+
+    // Create main panels container (flex layout)
+    const panelsContainer = document.createElement('div');
+    panelsContainer.className = 'simaerep-panels-container';
+    panelsContainer.style.display = 'flex';
+    panelsContainer.style.gap = '10px';
+    panelsContainer.style.width = '100%';
+    panelsContainer.style.height = availableHeight;
+    panelsContainer.style.maxHeight = availableHeight;
+
+    // Create left panel wrapper
+    const leftPanel = document.createElement('div');
+    leftPanel.className = 'simaerep-left-panel';
+    leftPanel.style.flex = showRightPanel ? '1 1 50%' : '1 1 100%';
+    leftPanel.style.position = 'relative';
+    leftPanel.style.minWidth = '0'; // Prevent flex overflow
+    
+    // Add canvas to left panel
+    leftPanel.appendChild(this.canvas);
+    panelsContainer.appendChild(leftPanel);
+
+    // Create right panel if enabled and data is available
+    if (showRightPanel) {
+      const rightPanel = document.createElement('div');
+      rightPanel.className = 'simaerep-right-panel';
+      rightPanel.style.flex = '1 1 50%';
+      rightPanel.style.overflowY = 'auto';
+      rightPanel.style.overflowX = 'hidden';
+      rightPanel.style.padding = '0 10px';
+      rightPanel.style.minWidth = '0'; // Prevent flex overflow
+      rightPanel.style.display = 'grid';
+      rightPanel.style.gridTemplateColumns = 'repeat(2, 1fr)';
+      rightPanel.style.gap = '15px';
+      rightPanel.style.alignContent = 'start'; // Align grid items to the top
+      
+      // Store reference to right panel for later use
+      this.rightPanel = rightPanel;
+      
+      panelsContainer.appendChild(rightPanel);
+    }
+
+    this.container.appendChild(panelsContainer);
+
+    // Destroy existing chart instances
     if (this.chartInstance) {
       this.chartInstance.destroy();
     }
+    if (this.sitePlotCharts) {
+      this.sitePlotCharts.forEach(item => {
+        if (item.chart) {
+          item.chart.destroy();
+        }
+      });
+      this.sitePlotCharts = [];
+    }
 
+    // Render left panel chart
+    this.renderLeftPanel();
+
+    // Render right panel site plots if enabled
+    if (showRightPanel) {
+      this.renderSitePlots();
+    }
+  }
+
+  /**
+   * Render the left panel (main overview chart)
+   */
+  renderLeftPanel() {
     // Create Chart.js instance
     const datasets = this.processData();
     
@@ -286,82 +382,412 @@ class Simaerep {
           legend: {
             display: false
           },
-          tooltip: {
-            enabled: true,
-            mode: 'nearest',
-            intersect: false,
-            ...getTooltipAesthetics(),
-            callbacks: {
-              title: (context) => {
-                if (context.length > 0) {
-                  const dataset = context[0].dataset;
-                  if (dataset.siteType === 'study') {
-                    return 'Study Mean';
-                  }
-                  const groupID = dataset.groupID;
-                  const metadata = this.groupMetadata?.get(groupID);
-                  if (metadata && metadata.InvestigatorLastName) {
-                    return `Site ${groupID} - ${metadata.InvestigatorLastName}`;
-                  }
-                  return `Site ${groupID}`;
-                }
-                return '';
-              },
-              label: (context) => {
-                const value = context.parsed.y.toFixed(2);
-                const xValue = context.parsed.x.toFixed(0);
-                const groupID = context.dataset.groupID;
-                const siteInfo = this.siteMetadata[groupID];
-                const metadata = this.groupMetadata?.get(groupID);
-                
-                // Debug logging
-                console.log('Tooltip debug:', {
-                  groupID,
-                  hasSiteMetadata: !!this.siteMetadata,
-                  siteMetadataKeys: this.siteMetadata ? Object.keys(this.siteMetadata).length : 0,
-                  hasSiteInfo: !!siteInfo,
-                  siteInfo: siteInfo,
-                  siteType: context.dataset.siteType
-                });
-                
-                const labels = [
-                  `Average Cumulative ${this.config.Numerator}: ${value}`,
-                  `${this.config.Denominator}: ${xValue}`
-                ];
-                
-                // Add KRI metrics from df_label_sites
-                if (siteInfo && context.dataset.siteType !== 'study') {
-                  if (siteInfo.Score !== undefined) {
-                    labels.push(`${this.config.Score}: ${Number(siteInfo.Score).toFixed(2)}`);
-                  }
-                  if (siteInfo.ExpectedNumerator !== undefined) {
-                    labels.push(`${this.config.ExpectedNumerator}: ${Number(siteInfo.ExpectedNumerator).toFixed(2)}`);
-                  }
-                  if (siteInfo.Flag !== undefined) {
-                    labels.push(`Flag: ${siteInfo.Flag}`);
-                  }
-                }
-                
-                // Add extended metadata from df_groups
-                if (metadata && context.dataset.siteType !== 'study') {
-                  const metadataLabels = formatGroupTooltipLabel(metadata, this.config);
-                  labels.push(...metadataLabels);
-                }
-                
-                return labels;
-              },
-              labelPointStyle: () => ({ pointStyle: 'circle' })
-            }
-          }
+          tooltip: this.getTooltipConfig('left')
         },
         interaction: {
           mode: 'nearest',
           intersect: false
         }
+        // Note: No onHover handler - right panel highlighting only happens via selectors
       }
     });
+  }
 
-    // Remove the old selector call since it's now at the top
+  /**
+   * Get tooltip configuration (shared between left and right panels)
+   */
+  getTooltipConfig(panelType = 'left') {
+    return {
+      enabled: true,
+      mode: 'nearest',
+      intersect: false,
+      ...getTooltipAesthetics(),
+      callbacks: {
+        title: (context) => {
+          if (context.length > 0) {
+            const dataset = context[0].dataset;
+            
+            // Handle patient lines in right panel
+            if (dataset.dataType === 'patient') {
+              return `Patient ${dataset.subjectID}`;
+            }
+            
+            if (dataset.siteType === 'study') {
+              return 'Study Mean';
+            }
+            const groupID = dataset.groupID;
+            const metadata = this.groupMetadata?.get(groupID);
+            if (metadata && metadata.InvestigatorLastName) {
+              return `Site ${groupID} - ${metadata.InvestigatorLastName}`;
+            }
+            return `Site ${groupID}`;
+          }
+          return '';
+        },
+        label: (context) => {
+          const value = context.parsed.y.toFixed(2);
+          const xValue = context.parsed.x.toFixed(0);
+          const dataset = context.dataset;
+          
+          // Handle patient lines
+          if (dataset.dataType === 'patient') {
+            return [
+              `${this.config.Numerator}: ${value}`,
+              `${this.config.Denominator}: ${xValue}`
+            ];
+          }
+          
+          const groupID = dataset.groupID;
+          const siteInfo = this.siteMetadata[groupID];
+          const metadata = this.groupMetadata?.get(groupID);
+          
+          const labels = [
+            `Average Cumulative ${this.config.Numerator}: ${value}`,
+            `${this.config.Denominator}: ${xValue}`
+          ];
+          
+          // Add KRI metrics from df_label_sites
+          if (siteInfo && dataset.siteType !== 'study') {
+            if (siteInfo.Score !== undefined) {
+              labels.push(`${this.config.Score}: ${Number(siteInfo.Score).toFixed(2)}`);
+            }
+            if (siteInfo.ExpectedNumerator !== undefined) {
+              labels.push(`${this.config.ExpectedNumerator}: ${Number(siteInfo.ExpectedNumerator).toFixed(2)}`);
+            }
+            if (siteInfo.Flag !== undefined) {
+              labels.push(`Flag: ${siteInfo.Flag}`);
+            }
+          }
+          
+          // Add extended metadata from df_groups
+          if (metadata && dataset.siteType !== 'study') {
+            const metadataLabels = formatGroupTooltipLabel(metadata, this.config);
+            labels.push(...metadataLabels);
+          }
+          
+          return labels;
+        },
+        labelPointStyle: () => ({ pointStyle: 'circle' })
+      }
+    };
+  }
+
+  /**
+   * Process patient data for a specific site
+   */
+  processPatientData(groupID) {
+    // Filter visit data for this GroupID
+    const siteVisits = this.visitData.filter(visit => visit.GroupID === groupID);
+    
+    // Group by SubjectID
+    const patientGroups = {};
+    siteVisits.forEach(visit => {
+      const subjectID = visit.SubjectID.toString();
+      if (!patientGroups[subjectID]) {
+        patientGroups[subjectID] = [];
+      }
+      patientGroups[subjectID].push({
+        x: parseFloat(visit.Denominator),
+        y: parseFloat(visit.Numerator)
+      });
+    });
+
+    // Convert to Chart.js datasets
+    const datasets = Object.entries(patientGroups).map(([subjectID, points]) => ({
+      label: `Patient ${subjectID}`,
+      data: points,
+      borderColor: 'rgba(200, 200, 200, 1.0)',
+      backgroundColor: 'rgba(200, 200, 200, 1.0)',
+      borderWidth: 0.5,
+      pointRadius: 0,
+      tension: 0,
+      fill: false,
+      subjectID: subjectID,
+      dataType: 'patient',
+      order: 3 // Bottom layer
+    }));
+
+    return datasets;
+  }
+
+  /**
+   * Render site plots in the right panel
+   */
+  renderSitePlots() {
+    if (!this.rightPanel) return;
+
+    // Clear right panel
+    this.rightPanel.innerHTML = '';
+
+    // Get flagged sites from df_label_sites, sorted by Score (ascending - most under-reporting first)
+    const siteLabels = this.rawData.df_label_sites || [];
+    const flaggedSites = siteLabels
+      .filter(site => site.Flag !== 0 && site.Flag !== undefined)
+      .sort((a, b) => {
+        // Sort by Score (ascending order: lowest scores first)
+        const scoreA = parseFloat(a.Score) || 0;
+        const scoreB = parseFloat(b.Score) || 0;
+        return scoreA - scoreB;
+      });
+
+    // Get study data for reference line
+    const studyData = this.rawData.df_mean_study || [];
+    const studyPoints = studyData.map(row => ({
+      x: parseFloat(row.Denominator),
+      y: parseFloat(row.cum_mean_dev_event)
+    }));
+
+    // Get flagged site data
+    const flaggedSiteData = this.rawData.df_mean_group_flagged || [];
+
+    // Render each flagged site
+    flaggedSites.forEach((site, index) => {
+      const groupID = site.GroupID;
+      
+      // Create container for this site plot
+      const sitePlotContainer = document.createElement('div');
+      sitePlotContainer.className = 'simaerep-site-plot';
+      sitePlotContainer.setAttribute('data-group-id', groupID);
+      sitePlotContainer.style.border = '1px solid #e0e0e0';
+      sitePlotContainer.style.borderRadius = '4px';
+      sitePlotContainer.style.padding = '10px';
+      sitePlotContainer.style.backgroundColor = '#ffffff';
+
+      // Add site title
+      const title = document.createElement('div');
+      title.className = 'site-plot-title';
+      title.style.fontWeight = 'bold';
+      title.style.marginBottom = '10px';
+      title.style.fontSize = '14px';
+      
+      const metadata = this.groupMetadata?.get(groupID);
+      if (metadata && metadata.InvestigatorLastName) {
+        title.textContent = `Site ${groupID} - ${metadata.InvestigatorLastName}`;
+      } else {
+        title.textContent = `Site ${groupID}`;
+      }
+      sitePlotContainer.appendChild(title);
+
+      // Create canvas for this site
+      const canvas = document.createElement('canvas');
+      canvas.style.width = '100%';
+      sitePlotContainer.appendChild(canvas);
+
+      // Get patient data for this site
+      const patientDatasets = this.processPatientData(groupID);
+
+      // Get site line data
+      const siteLineData = flaggedSiteData
+        .filter(row => row.GroupID === groupID)
+        .map(row => ({
+          x: parseFloat(row.Denominator),
+          y: parseFloat(row.cum_mean_dev_event)
+        }));
+
+      // Build datasets: patient lines, site line, study line
+      const datasets = [
+        ...patientDatasets,
+        // Site line (middle layer)
+        {
+          label: `Site ${groupID}`,
+          data: siteLineData,
+          borderColor: site.Color || '#3182BD',
+          backgroundColor: site.Color || '#3182BD',
+          borderWidth: 2,
+          pointRadius: 0,
+          tension: 0,
+          fill: false,
+          groupID: groupID,
+          siteType: 'flagged',
+          order: 2
+        },
+        // Study reference line (top layer)
+        {
+          label: 'Study',
+          data: studyPoints,
+          borderColor: '#000000',
+          backgroundColor: '#000000',
+          borderWidth: 2,
+          pointRadius: 0,
+          tension: 0,
+          fill: false,
+          groupID: 'study',
+          siteType: 'study',
+          order: 1
+        }
+      ];
+
+      // Create Chart.js instance
+      const chart = new Chart(canvas, {
+        type: 'line',
+        data: { datasets },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          aspectRatio: this.config.sitePlotAspectRatio,
+          scales: {
+            x: {
+              type: 'linear',
+              title: {
+                display: false  // Removed for more space
+              },
+              grid: {
+                display: true,
+                color: '#e0e0e0'
+              },
+              ticks: {
+                font: { size: 10 }
+              }
+            },
+            y: {
+              title: {
+                display: false  // Removed for more space
+              },
+              grid: {
+                display: true,
+                color: '#e0e0e0'
+              },
+              ticks: {
+                font: { size: 10 }
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              display: false
+            },
+            tooltip: this.getTooltipConfig('right')
+          },
+          interaction: {
+            mode: 'nearest',
+            intersect: false
+          }
+        }
+      });
+
+      // Store chart instance
+      this.sitePlotCharts.push({ groupID, chart, container: sitePlotContainer });
+
+      // Add to right panel
+      this.rightPanel.appendChild(sitePlotContainer);
+    });
+  }
+
+  /**
+   * Highlight a site plot in the right panel (no scrolling - only visual highlight)
+   */
+  highlightSitePlot(groupID) {
+    if (!this.rightPanel) return;
+
+    // Remove highlight from all site plots (use outline to avoid layout shifts)
+    const allPlots = this.rightPanel.querySelectorAll('.simaerep-site-plot');
+    allPlots.forEach(plot => {
+      plot.style.outline = 'none';
+      plot.style.outlineOffset = '0';
+    });
+
+    // Highlight the specified site plot (use outline to avoid layout shifts)
+    const targetPlot = this.rightPanel.querySelector(`[data-group-id="${groupID}"]`);
+    if (targetPlot) {
+      targetPlot.style.outline = '2px solid #3182BD';
+      targetPlot.style.outlineOffset = '-2px';
+    }
+  }
+
+  /**
+   * Scroll to a specific site plot in the right panel (only if it's a flagged site)
+   */
+  scrollToSitePlot(groupID) {
+    if (!this.rightPanel || !groupID || groupID === 'None') return;
+
+    // Handle array of groupIDs (from country selection) - find first flagged site
+    let targetGroupID = null;
+    
+    if (Array.isArray(groupID)) {
+      // Find first site in the array that exists in the right panel
+      for (const id of groupID) {
+        const plot = this.rightPanel.querySelector(`[data-group-id="${id}"]`);
+        if (plot) {
+          targetGroupID = id;
+          break;
+        }
+      }
+    } else {
+      targetGroupID = groupID;
+    }
+    
+    if (!targetGroupID) return;
+    
+    const targetPlot = this.rightPanel.querySelector(`[data-group-id="${targetGroupID}"]`);
+    if (targetPlot) {
+      targetPlot.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'nearest' 
+      });
+    }
+  }
+
+  /**
+   * Find the first site from an array that exists in the right panel (is flagged)
+   */
+  findFirstFlaggedSite(groupIDs) {
+    if (!this.rightPanel || !Array.isArray(groupIDs)) return null;
+    
+    for (const id of groupIDs) {
+      const plot = this.rightPanel.querySelector(`[data-group-id="${id}"]`);
+      if (plot) {
+        return id;
+      }
+    }
+    return null;
+  }
+
+  /**
+   * Show tooltip for a site at its highest x value in the left panel chart
+   */
+  showTooltipForSite(groupID) {
+    if (!this.chartInstance || !groupID || groupID === 'None') return;
+
+    // Find the dataset for this site
+    const datasets = this.chartInstance.data.datasets;
+    let targetDatasetIndex = -1;
+    let maxXIndex = -1;
+    let maxX = -Infinity;
+
+    for (let i = 0; i < datasets.length; i++) {
+      if (datasets[i].groupID === groupID) {
+        targetDatasetIndex = i;
+        // Find the point with highest x value
+        const data = datasets[i].data;
+        for (let j = 0; j < data.length; j++) {
+          if (data[j].x > maxX) {
+            maxX = data[j].x;
+            maxXIndex = j;
+          }
+        }
+        break;
+      }
+    }
+
+    if (targetDatasetIndex >= 0 && maxXIndex >= 0) {
+      // Programmatically show tooltip at the highest x value point
+      // Check if Chart.js methods exist (they won't in test mocks)
+      if (typeof this.chartInstance.setActiveElements === 'function') {
+        this.chartInstance.setActiveElements([{
+          datasetIndex: targetDatasetIndex,
+          index: maxXIndex
+        }]);
+      }
+      if (this.chartInstance.tooltip && typeof this.chartInstance.tooltip.setActiveElements === 'function') {
+        this.chartInstance.tooltip.setActiveElements([{
+          datasetIndex: targetDatasetIndex,
+          index: maxXIndex
+        }], { x: 0, y: 0 });
+      }
+      if (typeof this.chartInstance.update === 'function') {
+        this.chartInstance.update('none');
+      }
+    }
   }
 
   /**
@@ -401,11 +827,28 @@ class Simaerep {
       noneOption.textContent = 'None';
       siteSelect.appendChild(noneOption);
 
-      // Get unique site IDs from data
-      const siteLabels = this.rawData.df_label_sites || [];
-      siteLabels.forEach((site) => {
+      // Get ALL unique site IDs from all data sources (flagged + unflagged + labels)
+      const allSiteIDs = new Set();
+      
+      // Add sites from df_label_sites
+      (this.rawData.df_label_sites || []).forEach(site => {
+        allSiteIDs.add(site.GroupID);
+      });
+      
+      // Add sites from df_mean_group_flagged
+      (this.rawData.df_mean_group_flagged || []).forEach(site => {
+        allSiteIDs.add(site.GroupID);
+      });
+      
+      // Add sites from df_mean_group_not_flagged
+      (this.rawData.df_mean_group_not_flagged || []).forEach(site => {
+        allSiteIDs.add(site.GroupID);
+      });
+      
+      // Sort and add all sites to the dropdown
+      const sortedSiteIDs = Array.from(allSiteIDs).sort();
+      sortedSiteIDs.forEach((groupID) => {
         const option = document.createElement('option');
-        const groupID = site[this.config.groupLabelKey] || site.GroupID;
         option.value = groupID;
         option.textContent = groupID;
         siteSelect.appendChild(option);
@@ -517,7 +960,17 @@ class Simaerep {
     // Clear the selected country
     this.selectedCountry = 'None';
     
-    this.updateSelectedGroupIDs(groupID);
+    // Use skipInteraction=true since we handle interaction below
+    this.updateSelectedGroupIDs(groupID, true);
+
+    // After render, highlight the site in right panel, scroll to it, and show tooltip
+    requestAnimationFrame(() => {
+      if (groupID && groupID !== 'None') {
+        this.highlightSitePlot(groupID);
+        this.scrollToSitePlot(groupID);
+        this.showTooltipForSite(groupID);
+      }
+    });
 
     // Trigger change event for integration with other widgets
     const event = new CustomEvent('site-selected', {
@@ -541,7 +994,8 @@ class Simaerep {
     // Get all sites for this country
     const sitesInCountry = country === 'None' ? 'None' : (this.countryToSites[country] || []);
     
-    this.updateSelectedGroupIDs(sitesInCountry);
+    // Update selection - country only highlights on left panel, no right panel interactions
+    this.updateSelectedGroupIDs(sitesInCountry, true);
 
     // Trigger change event for integration with other widgets
     const event = new CustomEvent('country-selected', {
@@ -556,6 +1010,15 @@ class Simaerep {
   destroy() {
     if (this.chartInstance) {
       this.chartInstance.destroy();
+    }
+    // Destroy all site plot chart instances
+    if (this.sitePlotCharts) {
+      this.sitePlotCharts.forEach(item => {
+        if (item.chart) {
+          item.chart.destroy();
+        }
+      });
+      this.sitePlotCharts = [];
     }
     this.container.innerHTML = '';
   }

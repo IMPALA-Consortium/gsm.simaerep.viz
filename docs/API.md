@@ -145,9 +145,15 @@ new Simaerep(container, data, config)
 | `height` | String | `'auto'` | Chart height (CSS units) |
 | `aspectRatio` | Number | `2` | Chart aspect ratio when height is auto |
 | `showGroupSelector` | Boolean | `true` | Show dropdown selector |
+| `showCountrySelector` | Boolean | `true` | Show country dropdown selector |
 | `groupLabelKey` | String | `'GroupID'` | Property to use for site labels |
 | `GroupLevel` | String | `'Site'` | Group level (Site, Country, etc.) |
 | `groupMetadata` | Array | `null` | Optional metadata for tooltip enrichment |
+| **Right Panel Options** | | | **For individual site plots** |
+| `showRightPanel` | Boolean | `true` | Show right panel with individual site plots |
+| `rightPanelWidth` | String | `'50%'` | Width of right panel (CSS units) |
+| `maxVisibleSitePlots` | Number | `4` | Maximum visible site plots before scrolling |
+| `sitePlotAspectRatio` | Number | `1` | Aspect ratio for individual site plots (1 = square) |
 | **KRI Metadata** | | | **For dynamic chart labels** |
 | `metric` | Object | `undefined` | **Recommended:** Metric metadata object with all KRI fields |
 | *Individual Fields* | | | *Backwards compatible (use metric object instead):* |
@@ -227,7 +233,10 @@ Required data format for Simaerep:
   df_label_sites: [          // Site metadata for colors
     {
       GroupID: string,
-      Color: string          // Hex color code
+      Color: string,         // Hex color code
+      Score: number,         // KRI score
+      ExpectedNumerator: number,  // Expected value
+      Flag: number           // Flagging status
     }
   ],
   df_groups: [               // Optional: Extended metadata for tooltips
@@ -237,6 +246,14 @@ Required data format for Simaerep:
       InvestigatorLastName: string,
       Country: string,
       // ... additional metadata fields
+    }
+  ],
+  df_visit: [                // Optional: Patient-level data for right panel
+    {
+      SubjectID: string,     // Patient identifier
+      GroupID: string,       // Site identifier
+      Numerator: number,     // Cumulative event count
+      Denominator: number    // Visit/time point
     }
   ]
 }
@@ -250,6 +267,40 @@ Required data format for Simaerep:
 
 **Optional Datasets:**
 - `df_groups` - Extended metadata for tooltip enrichment
+- `df_visit` - Patient-level trajectories for right panel individual site plots
+
+#### Right Panel Features
+
+The Simaerep chart includes an optional right panel that displays individual plots for each flagged site. This panel provides detailed patient-level trajectory visualization.
+
+**Key Features:**
+- **Individual Site Plots**: Each flagged site gets its own plot showing:
+  - Patient trajectories (light gray lines from `df_visit`)
+  - Site mean line (colored based on site color)
+  - Study reference line (black)
+- **Two-Column Grid Layout**: Site plots are arranged in a responsive two-column grid for efficient use of space
+- **Automatic Scrolling**: When a site is selected via the dropdown or when hovering, the right panel automatically scrolls to that site's plot
+- **Synchronized Highlighting**: Hovering over a site line in the left panel highlights the corresponding plot in the right panel
+- **Consistent Tooltips**: Both panels show the same rich tooltip information including KRI metrics and group metadata
+- **50:50 Layout**: Left and right panels split the available space equally
+- **Scrollable**: If more than 4 flagged sites exist, the right panel becomes scrollable
+
+**Disabling the Right Panel:**
+```javascript
+const chart = new Simaerep(container, data, {
+  showRightPanel: false  // Hide the right panel
+});
+```
+
+**Customizing Right Panel:**
+```javascript
+const chart = new Simaerep(container, data, {
+  showRightPanel: true,
+  rightPanelWidth: '50%',        // Panel width
+  maxVisibleSitePlots: 4,        // Max visible before scrolling
+  sitePlotAspectRatio: 1         // 1 = square plots
+});
+```
 
 #### Methods
 

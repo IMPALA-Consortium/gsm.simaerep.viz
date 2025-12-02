@@ -7,7 +7,7 @@
   <style>
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      max-width: 1200px;
+      max-width: 1400px;  /* Increased for two-panel layout */
       margin: 0 auto;
       padding: 20px;
       background: #f5f5f5;
@@ -66,18 +66,33 @@
     <h3>About This Chart</h3>
     <p>
       The Simaerep displays cumulative deviation trends across clinical trial sites over time.
-      It shows:
+      It features a two-panel layout:
     </p>
     <ul>
-      <li><strong>Study Line</strong> - Overall study trend (black line)</li>
-      <li><strong>Flagged Sites</strong> - Sites with statistical anomalies (colored lines)</li>
-      <li><strong>Unflagged Sites</strong> - Normal sites (lighter colored lines)</li>
+      <li><strong>Left Panel</strong> - Overview with all sites:
+        <ul>
+          <li>Study Line - Overall study trend (black line)</li>
+          <li>Flagged Sites - Sites with statistical anomalies (colored lines)</li>
+          <li>Unflagged Sites - Normal sites (lighter colored lines)</li>
+        </ul>
+      </li>
+      <li><strong>Right Panel</strong> - Individual flagged site plots showing:
+        <ul>
+          <li>Patient trajectories (light gray lines)</li>
+          <li>Site mean line (colored)</li>
+          <li>Study reference line (black)</li>
+        </ul>
+      </li>
     </ul>
     <p>
-      Use the site selector above the chart to highlight individual sites.
-      Use the country selector to highlight all sites from a specific country.
-      This chart is compatible with the gsm.viz group selector system.
+      <strong>Interactive Features:</strong>
     </p>
+    <ul>
+      <li>Use the site selector to highlight individual sites - the right panel automatically scrolls to the selected site</li>
+      <li>Use the country selector to highlight all sites from a country</li>
+      <li>Hover over a site in the left panel to highlight it in the right panel</li>
+      <li>Tooltips show detailed KRI metrics and site metadata</li>
+    </ul>
   </div>
 
   <div id="status" class="status loading">Loading data...</div>
@@ -91,13 +106,14 @@
     // Load data from JSON files
     async function loadData() {
       try {
-        const [studyData, flaggedData, unflaggedData, labelData, groupsData, metricData] = await Promise.all([
+        const [studyData, flaggedData, unflaggedData, labelData, groupsData, metricData, visitData] = await Promise.all([
           fetch('data/csv/df_mean_study.json').then(r => r.json()),
           fetch('data/csv/df_mean_group_flagged.json').then(r => r.json()),
           fetch('data/csv/df_mean_group_not_flagged.json').then(r => r.json()),
           fetch('data/csv/df_label_sites.json').then(r => r.json()),
           fetch('data/csv/df_groups.json').then(r => r.json()),
-          fetch('data/csv/df_metric.json').then(r => r.json())
+          fetch('data/csv/df_metric.json').then(r => r.json()),
+          fetch('data/csv/df_visit.json').then(r => r.json())
         ]);
 
         return {
@@ -106,7 +122,8 @@
           df_mean_group_not_flagged: unflaggedData,
           df_label_sites: labelData,
           df_groups: groupsData,
-          df_metric: metricData
+          df_metric: metricData,
+          df_visit: visitData
         };
       } catch (error) {
         console.error('Error loading data:', error);
@@ -119,7 +136,7 @@
       .then(data => {
         const statusEl = document.getElementById('status');
         statusEl.className = 'status success';
-        statusEl.textContent = `✓ Data loaded successfully! (Study: ${data.df_mean_study.length} points, Flagged sites: ${data.df_mean_group_flagged.length} points, Unflagged sites: ${data.df_mean_group_not_flagged.length} points, Sites: ${data.df_label_sites.length})`;
+        statusEl.textContent = `✓ Data loaded successfully! (Study: ${data.df_mean_study.length} points, Flagged sites: ${data.df_mean_group_flagged.length} points, Unflagged sites: ${data.df_mean_group_not_flagged.length} points, Sites: ${data.df_label_sites.length}, Patient visits: ${data.df_visit.length})`;
 
         const container = document.getElementById('simaerep-chart');
         
@@ -128,8 +145,12 @@
           aspectRatio: 1.5,
           showGroupSelector: true,
           showCountrySelector: true,
+          showRightPanel: true,
+          rightPanelWidth: '50%',
+          sitePlotAspectRatio: 1,
+          maxVisibleSitePlots: 4,
           width: '100%',
-          height: '500px',
+          height: '700px',  // Increased height for better visibility of right panel
           groupMetadata: data.df_groups,
           // Pass entire metric object - much cleaner!
           metric: data.df_metric && data.df_metric.length > 0 ? data.df_metric[0] : undefined

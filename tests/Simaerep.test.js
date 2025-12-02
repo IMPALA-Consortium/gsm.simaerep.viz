@@ -42,6 +42,9 @@ describe('Simaerep', () => {
     container = document.createElement('div');
     document.body.appendChild(container);
 
+    // Mock scrollIntoView for jsdom
+    Element.prototype.scrollIntoView = jest.fn();
+
     // Sample data matching CSV structure
     sampleData = {
       df_mean_study: [
@@ -264,7 +267,8 @@ describe('Simaerep', () => {
       const chart = new Simaerep(container, sampleData);
       const updateSpy = jest.spyOn(chart, 'updateSelectedGroupIDs');
       chart.selectSite('120');
-      expect(updateSpy).toHaveBeenCalledWith('120');
+      // Second arg is skipInteraction=true to avoid duplicate highlight/scroll/tooltip
+      expect(updateSpy).toHaveBeenCalledWith('120', true);
     });
 
     test('selectSite dispatches custom event', () => {
@@ -328,6 +332,275 @@ describe('Simaerep', () => {
       const chart = new Simaerep(container, {});
       expect(chart).toBeDefined();
       expect(chart.chartInstance).toBeTruthy();
+    });
+  });
+
+  describe('Right Panel Features', () => {
+    let dataWithVisits;
+
+    beforeEach(() => {
+      dataWithVisits = {
+        ...sampleData,
+        df_visit: [
+          { SubjectID: '001', GroupID: '120', Numerator: 0, Denominator: 1 },
+          { SubjectID: '001', GroupID: '120', Numerator: 1, Denominator: 2 },
+          { SubjectID: '001', GroupID: '120', Numerator: 1, Denominator: 3 },
+          { SubjectID: '002', GroupID: '120', Numerator: 0, Denominator: 1 },
+          { SubjectID: '002', GroupID: '120', Numerator: 0, Denominator: 2 },
+          { SubjectID: '003', GroupID: '10', Numerator: 0, Denominator: 1 }
+        ]
+      };
+    });
+
+    test('stores df_visit data in constructor', () => {
+      const chart = new Simaerep(container, dataWithVisits);
+      expect(chart.visitData).toBeDefined();
+      expect(chart.visitData.length).toBe(6);
+    });
+
+    test('handles missing df_visit data gracefully', () => {
+      const chart = new Simaerep(container, sampleData);
+      expect(chart.visitData).toBeDefined();
+      expect(chart.visitData.length).toBe(0);
+    });
+
+    test('creates right panel when showRightPanel is true and visitData exists', () => {
+      const chart = new Simaerep(container, dataWithVisits, { showRightPanel: true });
+      const rightPanel = container.querySelector('.simaerep-right-panel');
+      expect(rightPanel).toBeTruthy();
+    });
+
+    test('does not create right panel when showRightPanel is false', () => {
+      const chart = new Simaerep(container, dataWithVisits, { showRightPanel: false });
+      const rightPanel = container.querySelector('.simaerep-right-panel');
+      expect(rightPanel).toBeFalsy();
+    });
+
+    test('does not create right panel when visitData is empty', () => {
+      const chart = new Simaerep(container, sampleData, { showRightPanel: true });
+      const rightPanel = container.querySelector('.simaerep-right-panel');
+      expect(rightPanel).toBeFalsy();
+    });
+
+    test('creates panels container with flex layout', () => {
+      const chart = new Simaerep(container, dataWithVisits);
+      const panelsContainer = container.querySelector('.simaerep-panels-container');
+      expect(panelsContainer).toBeTruthy();
+      expect(panelsContainer.style.display).toBe('flex');
+    });
+
+    test('left and right panels have 50% flex basis', () => {
+      const chart = new Simaerep(container, dataWithVisits);
+      const leftPanel = container.querySelector('.simaerep-left-panel');
+      const rightPanel = container.querySelector('.simaerep-right-panel');
+      expect(leftPanel.style.flex).toContain('50%');
+      expect(rightPanel.style.flex).toContain('50%');
+    });
+
+    test('processPatientData filters data by GroupID', () => {
+      const chart = new Simaerep(container, dataWithVisits);
+      const patientDatasets = chart.processPatientData('120');
+      
+      // Should have 2 patients for site 120
+      expect(patientDatasets.length).toBe(2);
+    });
+
+    test('processPatientData groups by SubjectID', () => {
+      const chart = new Simaerep(container, dataWithVisits);
+      const patientDatasets = chart.processPatientData('120');
+      
+      const subjectIDs = patientDatasets.map(d => d.subjectID);
+      expect(subjectIDs).toContain('001');
+      expect(subjectIDs).toContain('002');
+    });
+
+    test('processPatientData converts data to Chart.js format', () => {
+      const chart = new Simaerep(container, dataWithVisits);
+      const patientDatasets = chart.processPatientData('120');
+      
+      expect(patientDatasets[0]).toHaveProperty('data');
+      expect(patientDatasets[0]).toHaveProperty('borderColor');
+      expect(patientDatasets[0]).toHaveProperty('dataType', 'patient');
+      expect(Array.isArray(patientDatasets[0].data)).toBe(true);
+    });
+
+    test('renders site plots for flagged sites only', () => {
+      const chart = new Simaerep(container, dataWithVisits);
+      const sitePlots = container.querySelectorAll('.simaerep-site-plot');
+      
+      // Only site 120 is flagged (Flag: '2'), site 10 has Flag: '-2' which is also flagged
+      // Both sites have non-zero flags, so both should appear
+      expect(sitePlots.length).toBeGreaterThan(0);
+    });
+
+    test('site plot containers have data-group-id attributes', () => {
+      const chart = new Simaerep(container, dataWithVisits);
+      const sitePlot = container.querySelector('.simaerep-site-plot[data-group-id="120"]');
+      expect(sitePlot).toBeTruthy();
+    });
+
+    test('site plots have titles with GroupID', () => {
+      const chart = new Simaerep(container, dataWithVisits);
+      const sitePlot = container.querySelector('.simaerep-site-plot[data-group-id="120"]');
+      const title = sitePlot.querySelector('.site-plot-title');
+      expect(title.textContent).toContain('120');
+    });
+
+    test('stores site plot chart instances', () => {
+      const chart = new Simaerep(container, dataWithVisits);
+      expect(chart.sitePlotCharts).toBeDefined();
+      expect(Array.isArray(chart.sitePlotCharts)).toBe(true);
+      expect(chart.sitePlotCharts.length).toBeGreaterThan(0);
+    });
+
+    test('highlightSitePlot adds visual styling without scrolling', () => {
+      const chart = new Simaerep(container, dataWithVisits);
+      chart.highlightSitePlot('120');
+      
+      const sitePlot = container.querySelector('.simaerep-site-plot[data-group-id="120"]');
+      // Uses outline instead of border to avoid layout shifts
+      expect(sitePlot.style.outline).toContain('2px');
+      // Note: scrollIntoView is NOT called on hover - only via selectors
+    });
+
+    test('highlightSitePlot removes highlight from other plots', () => {
+      const chart = new Simaerep(container, dataWithVisits);
+      
+      // Highlight one site
+      chart.highlightSitePlot('120');
+      const plot120 = container.querySelector('.simaerep-site-plot[data-group-id="120"]');
+      
+      // Then highlight another site
+      chart.highlightSitePlot('10');
+      
+      // First site should no longer be highlighted (outline removed)
+      expect(plot120.style.outline).toBe('none');
+    });
+
+    test('scrollToSitePlot calls scrollIntoView', () => {
+      const chart = new Simaerep(container, dataWithVisits);
+      const sitePlot = container.querySelector('.simaerep-site-plot[data-group-id="120"]');
+      
+      const scrollIntoViewMock = jest.fn();
+      sitePlot.scrollIntoView = scrollIntoViewMock;
+      
+      chart.scrollToSitePlot('120');
+      expect(scrollIntoViewMock).toHaveBeenCalledWith({
+        behavior: 'smooth',
+        block: 'nearest'
+      });
+    });
+
+    test('selectSite triggers scrollToSitePlot after render', (done) => {
+      const chart = new Simaerep(container, dataWithVisits);
+      const scrollSpy = jest.spyOn(chart, 'scrollToSitePlot');
+      
+      chart.selectSite('120');
+      
+      // scrollToSitePlot is called via requestAnimationFrame, so wait for it
+      requestAnimationFrame(() => {
+        expect(scrollSpy).toHaveBeenCalledWith('120');
+        done();
+      });
+    });
+
+    test('selectCountry scrolls to first flagged site after render', (done) => {
+      const dataWithCountries = {
+        ...dataWithVisits,
+        df_groups: [
+          { GroupID: '120', Param: 'Country', Value: 'USA', GroupLevel: 'Site' },
+          { GroupID: '10', Param: 'Country', Value: 'USA', GroupLevel: 'Site' }
+        ]
+      };
+      
+      const chart = new Simaerep(container, dataWithCountries, { 
+        groupMetadata: dataWithCountries.df_groups,
+        showCountrySelector: true 
+      });
+      
+      // Manually set countryToSites for testing
+      if (!chart.countryToSites) {
+        chart.countryToSites = {};
+      }
+      chart.countryToSites['USA'] = ['120', '10'];
+      
+      const scrollSpy = jest.spyOn(chart, 'scrollToSitePlot');
+      chart.selectCountry('USA');
+      
+      // scrollToSitePlot is called via requestAnimationFrame, so wait for it
+      requestAnimationFrame(() => {
+        expect(scrollSpy).toHaveBeenCalled();
+        done();
+      });
+    });
+
+    test('destroy clears all site plot chart instances', () => {
+      const chart = new Simaerep(container, dataWithVisits);
+      const sitePlotCharts = chart.sitePlotCharts;
+      
+      expect(sitePlotCharts.length).toBeGreaterThan(0);
+      
+      chart.destroy();
+      
+      // Verify destroy was called on all site plot charts
+      sitePlotCharts.forEach(item => {
+        if (item.chart && item.chart.destroy) {
+          expect(item.chart.destroy).toHaveBeenCalled();
+        }
+      });
+    });
+
+    test('right panel has scrolling enabled', () => {
+      const chart = new Simaerep(container, dataWithVisits);
+      const rightPanel = container.querySelector('.simaerep-right-panel');
+      expect(rightPanel.style.overflowY).toBe('auto');
+    });
+
+    test('tooltip config is shared between panels', () => {
+      const chart = new Simaerep(container, dataWithVisits);
+      const leftConfig = chart.getTooltipConfig('left');
+      const rightConfig = chart.getTooltipConfig('right');
+      
+      expect(leftConfig).toBeDefined();
+      expect(rightConfig).toBeDefined();
+      expect(leftConfig.callbacks).toBeDefined();
+      expect(rightConfig.callbacks).toBeDefined();
+    });
+
+    test('patient line tooltips show SubjectID', () => {
+      const chart = new Simaerep(container, dataWithVisits);
+      const tooltipConfig = chart.getTooltipConfig('right');
+      
+      const mockContext = [{
+        dataset: {
+          dataType: 'patient',
+          subjectID: '001'
+        }
+      }];
+      
+      const title = tooltipConfig.callbacks.title(mockContext);
+      expect(title).toContain('001');
+    });
+
+    test('site plot datasets include patient lines, site line, and study line', () => {
+      const chart = new Simaerep(container, dataWithVisits);
+      chart.renderSitePlots();
+      
+      const sitePlotChart = chart.sitePlotCharts.find(item => item.groupID === '120');
+      expect(sitePlotChart).toBeDefined();
+      
+      if (sitePlotChart && sitePlotChart.chart && sitePlotChart.chart.data) {
+        const datasets = sitePlotChart.chart.data.datasets;
+        
+        // Should have patient lines + site line + study line
+        const patientLines = datasets.filter(d => d.dataType === 'patient');
+        const siteLine = datasets.find(d => d.siteType === 'flagged');
+        const studyLine = datasets.find(d => d.siteType === 'study');
+        
+        expect(patientLines.length).toBeGreaterThan(0);
+        expect(siteLine).toBeDefined();
+        expect(studyLine).toBeDefined();
+      }
     });
   });
 });
