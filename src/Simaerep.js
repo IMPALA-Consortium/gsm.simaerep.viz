@@ -671,9 +671,9 @@ class Simaerep {
     const datasets = Object.entries(patientGroups).map(([subjectID, points]) => ({
       label: `Patient ${subjectID}`,
       data: points,
-      borderColor: 'rgba(200, 200, 200, 1.0)',
-      backgroundColor: 'rgba(200, 200, 200, 1.0)',
-      borderWidth: 0.5,
+      borderColor: 'rgba(140, 140, 140, 1.0)',
+      backgroundColor: 'rgba(140, 140, 140, 1.0)',
+      borderWidth: 1,
       pointRadius: 0,
       tension: 0,
       fill: false,
