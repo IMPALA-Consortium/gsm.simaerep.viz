@@ -8,10 +8,8 @@
  */
 
 import Chart from 'chart.js/auto';
-import getTooltipAesthetics from './util/getTooltipAesthetics.js';
 import hexToRgba from './util/hexToRgba.js';
 import structureGroupMetadata from './util/structureGroupMetadata.js';
-import formatGroupTooltipLabel from './util/formatGroupTooltipLabel.js';
 
 class Simaerep {
   constructor(container, data, config = {}) {
@@ -394,87 +392,249 @@ class Simaerep {
   }
 
   /**
+   * Get or create the external tooltip container
+   */
+  getOrCreateTooltip() {
+    let tooltipEl = document.getElementById('simaerep-tooltip');
+    if (!tooltipEl) {
+      tooltipEl = document.createElement('div');
+      tooltipEl.id = 'simaerep-tooltip';
+      tooltipEl.style.cssText = `
+        position: absolute;
+        background: rgba(255, 255, 255, 0.95);
+        border: 1px solid black;
+        border-radius: 4px;
+        padding: 10px;
+        pointer-events: none;
+        font-family: roboto, sans-serif;
+        font-size: 12px;
+        z-index: 10000;
+        max-width: 400px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        transition: opacity 0.1s ease;
+      `;
+      document.body.appendChild(tooltipEl);
+    }
+    return tooltipEl;
+  }
+
+  /**
+   * Build title HTML with colored box indicator
+   */
+  buildTitleHtml(dataset, groupID) {
+    const color = dataset.borderColor || '#333';
+    const metadata = this.groupMetadata?.get(groupID);
+    
+    // Handle patient lines
+    if (dataset.dataType === 'patient') {
+      return `<span style="display:inline-block;width:10px;height:10px;background:${color};margin-right:6px;vertical-align:middle;"></span>Patient ${dataset.subjectID}`;
+    }
+    
+    // Handle study line
+    if (dataset.siteType === 'study') {
+      return `<span style="display:inline-block;width:10px;height:10px;background:${color};margin-right:6px;vertical-align:middle;"></span>Study Mean`;
+    }
+    
+    // Site title
+    let title = `Site ${groupID}`;
+    if (metadata) {
+      const name = metadata.InvestigatorLastName || '';
+      const enrolled = metadata.ParticipantCount;
+      if (name) title += ` - ${name}`;
+      if (enrolled !== undefined) title += ` (${enrolled} enrolled)`;
+    }
+    return `<span style="display:inline-block;width:10px;height:10px;background:${color};margin-right:6px;vertical-align:middle;"></span>${title}`;
+  }
+
+  /**
+   * Build basic metrics HTML (Numerator, Denominator, Score, Delta, Flag)
+   */
+  buildBasicMetricsHtml(context) {
+    const dataset = context.dataset;
+    const groupID = dataset.groupID;
+    const siteInfo = this.siteMetadata[groupID];
+    const value = context.parsed.y.toFixed(2);
+    const xValue = context.parsed.x.toFixed(0);
+    
+    const lines = [];
+    
+    // Handle patient lines
+    if (dataset.dataType === 'patient') {
+      lines.push(`${this.config.Numerator}: ${value}`);
+      lines.push(`${this.config.Denominator}: ${xValue}`);
+      return lines.join('<br>');
+    }
+    
+    lines.push(`${this.config.Numerator}: ${value}`);
+    lines.push(`${this.config.Denominator}: ${xValue}`);
+    
+    // Add KRI metrics from df_label_sites
+    if (siteInfo && dataset.siteType !== 'study') {
+      if (siteInfo.Score !== undefined) {
+        lines.push(`Score: ${Number(siteInfo.Score).toFixed(2)}`);
+      }
+      if (siteInfo.ExpectedNumerator !== undefined) {
+        lines.push(`Delta: ${Number(siteInfo.ExpectedNumerator).toFixed(2)}`);
+      }
+      if (siteInfo.Flag !== undefined) {
+        lines.push(`Flag: ${siteInfo.Flag}`);
+      }
+    }
+    
+    return lines.join('<br>');
+  }
+
+  /**
+   * Build extra information HTML from df_groups metadata
+   */
+  buildExtraInfoHtml(groupID) {
+    const metadata = this.groupMetadata?.get(groupID);
+    if (!metadata) return '';
+    
+    const lines = [];
+    
+    // Specific fields requested in requirements
+    if (metadata.studyid) lines.push(`Study ID: ${metadata.studyid}`);
+    if (metadata.invid) lines.push(`Investigator ID: ${metadata.invid}`);
+    if (metadata.InvestigatorFirstName || metadata.InvestigatorLastName) {
+      const name = [metadata.InvestigatorFirstName, metadata.InvestigatorLastName].filter(Boolean).join(' ');
+      lines.push(`Investigator Name: ${name}`);
+    }
+    if (metadata.Status) lines.push(`Site Status: ${metadata.Status}`);
+    if (metadata.City) lines.push(`City: ${metadata.City}`);
+    if (metadata.State) lines.push(`State: ${metadata.State}`);
+    if (metadata.Country) lines.push(`Country: ${metadata.Country}`);
+    if (metadata.ActiveParticipantCount !== undefined) lines.push(`Active Participant Count: ${metadata.ActiveParticipantCount}`);
+    if (metadata.SiteCount !== undefined) lines.push(`Site Count: ${metadata.SiteCount}`);
+    if (metadata.PercentParticipantsActive !== undefined) lines.push(`Percent Active Participants: ${metadata.PercentParticipantsActive}%`);
+    if (metadata.ActiveParticipants) lines.push(`Active Participants: ${metadata.ActiveParticipants}`);
+    
+    if (lines.length === 0) return '';
+    return `<div style="margin-top:8px;padding-top:8px;border-top:1px solid #ddd;color:#666;font-size:11px;">${lines.join('<br>')}</div>`;
+  }
+
+  /**
+   * Check if points are overlapping (same x/y coordinates)
+   */
+  detectOverlappingPoints(tooltipItems) {
+    if (tooltipItems.length <= 1) return false;
+    
+    // Group by x/y position - consider overlapping if within small threshold
+    const threshold = 0.5;
+    const firstX = tooltipItems[0].parsed.x;
+    const firstY = tooltipItems[0].parsed.y;
+    
+    for (let i = 1; i < tooltipItems.length; i++) {
+      const dx = Math.abs(tooltipItems[i].parsed.x - firstX);
+      const dy = Math.abs(tooltipItems[i].parsed.y - firstY);
+      if (dx > threshold || dy > threshold) {
+        return false; // Points are not overlapping
+      }
+    }
+    return true; // All points are at same position
+  }
+
+  /**
+   * External tooltip handler
+   */
+  externalTooltipHandler(context) {
+    const { chart, tooltip } = context;
+    const tooltipEl = this.getOrCreateTooltip();
+    
+    // Hide if no tooltip
+    if (tooltip.opacity === 0) {
+      tooltipEl.style.opacity = '0';
+      return;
+    }
+    
+    // Get tooltip items
+    const tooltipItems = tooltip.dataPoints || [];
+    if (tooltipItems.length === 0) {
+      tooltipEl.style.opacity = '0';
+      return;
+    }
+    
+    // Detect if points are overlapping
+    const isOverlapping = this.detectOverlappingPoints(tooltipItems);
+    
+    // Build tooltip content
+    let html = '';
+    
+    if (isOverlapping && tooltipItems.length > 1) {
+      // Overlapping: show all titles + basic metrics for each (no extra info)
+      tooltipItems.forEach((item, index) => {
+        const dataset = item.dataset;
+        const groupID = dataset.groupID;
+        
+        // Title with colored box
+        html += `<div style="font-weight:bold;font-size:14px;margin-bottom:4px;">`;
+        html += this.buildTitleHtml(dataset, groupID);
+        html += `</div>`;
+        
+        // Basic metrics
+        html += `<div style="margin-bottom:${index < tooltipItems.length - 1 ? '12px' : '0'};">`;
+        html += this.buildBasicMetricsHtml(item);
+        html += `</div>`;
+      });
+    } else {
+      // Single point or non-overlapping: show full tooltip with extra info
+      const item = tooltipItems[0];
+      const dataset = item.dataset;
+      const groupID = dataset.groupID;
+      
+      // Title with colored box
+      html += `<div style="font-weight:bold;font-size:14px;margin-bottom:8px;">`;
+      html += this.buildTitleHtml(dataset, groupID);
+      html += `</div>`;
+      
+      // Basic metrics
+      html += `<div>`;
+      html += this.buildBasicMetricsHtml(item);
+      html += `</div>`;
+      
+      // Extra information (only for non-overlapping)
+      if (dataset.siteType !== 'study' && dataset.dataType !== 'patient') {
+        html += this.buildExtraInfoHtml(groupID);
+      }
+    }
+    
+    tooltipEl.innerHTML = html;
+    tooltipEl.style.opacity = '1';
+    
+    // Position the tooltip
+    const position = chart.canvas.getBoundingClientRect();
+    const tooltipWidth = tooltipEl.offsetWidth;
+    const tooltipHeight = tooltipEl.offsetHeight;
+    
+    let left = position.left + window.scrollX + tooltip.caretX + 10;
+    let top = position.top + window.scrollY + tooltip.caretY - tooltipHeight / 2;
+    
+    // Prevent tooltip from going off-screen right
+    if (left + tooltipWidth > window.innerWidth + window.scrollX - 10) {
+      left = position.left + window.scrollX + tooltip.caretX - tooltipWidth - 10;
+    }
+    
+    // Prevent tooltip from going off-screen top/bottom
+    if (top < window.scrollY + 10) {
+      top = window.scrollY + 10;
+    }
+    if (top + tooltipHeight > window.innerHeight + window.scrollY - 10) {
+      top = window.innerHeight + window.scrollY - tooltipHeight - 10;
+    }
+    
+    tooltipEl.style.left = `${left}px`;
+    tooltipEl.style.top = `${top}px`;
+  }
+
+  /**
    * Get tooltip configuration (shared between left and right panels)
    */
   getTooltipConfig(panelType = 'left') {
     return {
-      enabled: true,
+      enabled: false, // Disable built-in tooltip
       mode: 'nearest',
       intersect: false,
-      ...getTooltipAesthetics(),
-      callbacks: {
-        title: (context) => {
-          if (context.length > 0) {
-            const dataset = context[0].dataset;
-            
-            // Handle patient lines in right panel
-            if (dataset.dataType === 'patient') {
-              return `Patient ${dataset.subjectID}`;
-            }
-            
-            if (dataset.siteType === 'study') {
-              return 'Study Mean';
-            }
-            const groupID = dataset.groupID;
-            const metadata = this.groupMetadata?.get(groupID);
-            
-            if (metadata) {
-              const name = metadata.InvestigatorLastName || groupID;
-              const enrolled = metadata.ParticipantCount;
-              if (enrolled !== undefined) {
-                return `Site ${groupID} - ${name} (${enrolled} enrolled)`;
-              }
-              return `Site ${groupID} - ${name}`;
-            }
-            return `Site ${groupID}`;
-          }
-          return '';
-        },
-        label: (context) => {
-          const value = context.parsed.y.toFixed(2);
-          const xValue = context.parsed.x.toFixed(0);
-          const dataset = context.dataset;
-          
-          // Handle patient lines
-          if (dataset.dataType === 'patient') {
-            return [
-              `${this.config.Numerator}: ${value}`,
-              `${this.config.Denominator}: ${xValue}`
-            ];
-          }
-          
-          const groupID = dataset.groupID;
-          const siteInfo = this.siteMetadata[groupID];
-          const metadata = this.groupMetadata?.get(groupID);
-          
-          const labels = [
-            `Average Cumulative ${this.config.Numerator}: ${value}`,
-            `${this.config.Denominator}: ${xValue}`
-          ];
-          
-          // Add KRI metrics from df_label_sites
-          if (siteInfo && dataset.siteType !== 'study') {
-            if (siteInfo.Score !== undefined) {
-              labels.push(`${this.config.Score}: ${Number(siteInfo.Score).toFixed(2)}`);
-            }
-            if (siteInfo.ExpectedNumerator !== undefined) {
-              labels.push(`${this.config.ExpectedNumerator}: ${Number(siteInfo.ExpectedNumerator).toFixed(2)}`);
-            }
-            if (siteInfo.Flag !== undefined) {
-              labels.push(`Flag: ${siteInfo.Flag}`);
-            }
-          }
-          
-          // Add extended metadata from df_groups
-          if (metadata && dataset.siteType !== 'study') {
-            const metadataLabels = formatGroupTooltipLabel(metadata, this.config);
-            labels.push(...metadataLabels);
-          }
-          
-          return labels;
-        },
-        labelPointStyle: () => ({ pointStyle: 'circle' })
-      }
+      external: (context) => this.externalTooltipHandler(context)
     };
   }
 
@@ -1025,6 +1185,11 @@ class Simaerep {
         }
       });
       this.sitePlotCharts = [];
+    }
+    // Remove external tooltip element
+    const tooltipEl = document.getElementById('simaerep-tooltip');
+    if (tooltipEl) {
+      tooltipEl.remove();
     }
     this.container.innerHTML = '';
   }

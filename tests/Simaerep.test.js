@@ -504,7 +504,7 @@ describe('Simaerep', () => {
       });
     });
 
-    test('selectCountry scrolls to first flagged site after render', (done) => {
+    test('selectCountry highlights sites without scrolling (left panel only)', () => {
       const dataWithCountries = {
         ...dataWithVisits,
         df_groups: [
@@ -527,11 +527,12 @@ describe('Simaerep', () => {
       const scrollSpy = jest.spyOn(chart, 'scrollToSitePlot');
       chart.selectCountry('USA');
       
-      // scrollToSitePlot is called via requestAnimationFrame, so wait for it
-      requestAnimationFrame(() => {
-        expect(scrollSpy).toHaveBeenCalled();
-        done();
-      });
+      // Country selection uses skipInteraction=true, so scrollToSitePlot should NOT be called
+      // This is by design: "country only highlights on left panel, no right panel interactions"
+      expect(scrollSpy).not.toHaveBeenCalled();
+      
+      // Verify the country was stored
+      expect(chart.selectedCountry).toBe('USA');
     });
 
     test('destroy clears all site plot chart instances', () => {
@@ -556,30 +557,32 @@ describe('Simaerep', () => {
       expect(rightPanel.style.overflowY).toBe('auto');
     });
 
-    test('tooltip config is shared between panels', () => {
+    test('tooltip config uses external tooltip', () => {
       const chart = new Simaerep(container, dataWithVisits);
       const leftConfig = chart.getTooltipConfig('left');
       const rightConfig = chart.getTooltipConfig('right');
       
       expect(leftConfig).toBeDefined();
       expect(rightConfig).toBeDefined();
-      expect(leftConfig.callbacks).toBeDefined();
-      expect(rightConfig.callbacks).toBeDefined();
+      // External tooltip is now used instead of built-in callbacks
+      expect(leftConfig.enabled).toBe(false);
+      expect(rightConfig.enabled).toBe(false);
+      expect(leftConfig.external).toBeDefined();
+      expect(rightConfig.external).toBeDefined();
     });
 
-    test('patient line tooltips show SubjectID', () => {
+    test('patient line tooltips show SubjectID via buildTitleHtml', () => {
       const chart = new Simaerep(container, dataWithVisits);
-      const tooltipConfig = chart.getTooltipConfig('right');
       
-      const mockContext = [{
-        dataset: {
-          dataType: 'patient',
-          subjectID: '001'
-        }
-      }];
+      const mockDataset = {
+        dataType: 'patient',
+        subjectID: '001',
+        borderColor: '#ccc'
+      };
       
-      const title = tooltipConfig.callbacks.title(mockContext);
-      expect(title).toContain('001');
+      const titleHtml = chart.buildTitleHtml(mockDataset, null);
+      expect(titleHtml).toContain('001');
+      expect(titleHtml).toContain('Patient');
     });
 
     test('site plot datasets include patient lines, site line, and study line', () => {

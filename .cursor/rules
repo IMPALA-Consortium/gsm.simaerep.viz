@@ -66,7 +66,30 @@
   - it needs to be compatible with the gsm.viz group selector
   - it must take up the same space as the scatterplot widget in the html report
 
-
+  tooltip:
+    - tooltip needs to be the same between left and right panel
+    - tooltip needs to be external so that it is not limited by the canvas making sure full tooltip is visible
+    - full tooltip required for non-overlapping data points:
+      - title with site name and PI Name and enrolled patients and colored box with same color as assigned to element
+      - Numerator
+      - Denominator
+      - Score
+      - Delta
+      - Flag
+      - extra information:
+        - studyid
+        - investigator id
+        - inverstigator name
+        - site status
+        - site active
+        - city
+        - state
+        - country
+        - active participant count
+        - site count
+        - percent active participants
+        - Active Participants
+    - when x/y points are overlapping show title for all elements and Numerator, Denominator, Score, Delta, Flag
 # documentation:
 
 - project documentation is organized in docs/ folder
