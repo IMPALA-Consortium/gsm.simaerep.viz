@@ -79,6 +79,9 @@ class Simaerep {
     // Site plot Chart.js instances for right panel
     this.sitePlotCharts = [];
 
+    // Unique tooltip ID for this instance (supports multiple charts on same page)
+    this.tooltipId = 'simaerep-tooltip-' + Math.random().toString(36).substr(2, 9);
+
     this.render();
   }
 
@@ -290,6 +293,10 @@ class Simaerep {
     leftPanel.style.flex = showRightPanel ? '1 1 50%' : '1 1 100%';
     leftPanel.style.position = 'relative';
     leftPanel.style.minWidth = '0'; // Prevent flex overflow
+    leftPanel.style.overflow = 'visible'; // Allow tooltip to extend beyond panel
+    
+    // Store reference to left panel for tooltip positioning
+    this.leftPanel = leftPanel;
     
     // Add canvas to left panel
     leftPanel.appendChild(this.canvas);
@@ -395,10 +402,11 @@ class Simaerep {
    * Get or create the external tooltip container
    */
   getOrCreateTooltip() {
-    let tooltipEl = document.getElementById('simaerep-tooltip');
+    // Look for tooltip within this chart's left panel
+    let tooltipEl = this.leftPanel ? this.leftPanel.querySelector(`#${this.tooltipId}`) : null;
     if (!tooltipEl) {
       tooltipEl = document.createElement('div');
-      tooltipEl.id = 'simaerep-tooltip';
+      tooltipEl.id = this.tooltipId;
       tooltipEl.style.cssText = `
         position: absolute;
         background: rgba(255, 255, 255, 0.95);
@@ -413,7 +421,10 @@ class Simaerep {
         box-shadow: 0 2px 8px rgba(0,0,0,0.15);
         transition: opacity 0.1s ease;
       `;
-      document.body.appendChild(tooltipEl);
+      // Append to left panel (which has position: relative) for proper scoping
+      if (this.leftPanel) {
+        this.leftPanel.appendChild(tooltipEl);
+      }
     }
     return tooltipEl;
   }
@@ -601,25 +612,23 @@ class Simaerep {
     tooltipEl.innerHTML = html;
     tooltipEl.style.opacity = '1';
     
-    // Position the tooltip
-    const position = chart.canvas.getBoundingClientRect();
+    // Position tooltip relative to left panel container (which has position: relative)
+    // caretX/caretY are already pixel positions within the canvas
     const tooltipWidth = tooltipEl.offsetWidth;
     const tooltipHeight = tooltipEl.offsetHeight;
+    const canvasWidth = this.canvas.offsetWidth;
     
-    let left = position.left + window.scrollX + tooltip.caretX + 10;
-    let top = position.top + window.scrollY + tooltip.caretY - tooltipHeight / 2;
+    let left = tooltip.caretX + 10;
+    let top = tooltip.caretY - tooltipHeight / 2;
     
-    // Prevent tooltip from going off-screen right
-    if (left + tooltipWidth > window.innerWidth + window.scrollX - 10) {
-      left = position.left + window.scrollX + tooltip.caretX - tooltipWidth - 10;
+    // Prevent tooltip from going off the right edge of canvas - flip to left side
+    if (left + tooltipWidth > canvasWidth) {
+      left = tooltip.caretX - tooltipWidth - 10;
     }
     
-    // Prevent tooltip from going off-screen top/bottom
-    if (top < window.scrollY + 10) {
-      top = window.scrollY + 10;
-    }
-    if (top + tooltipHeight > window.innerHeight + window.scrollY - 10) {
-      top = window.innerHeight + window.scrollY - tooltipHeight - 10;
+    // Keep tooltip within reasonable vertical bounds
+    if (top < 0) {
+      top = 0;
     }
     
     tooltipEl.style.left = `${left}px`;
@@ -919,10 +928,12 @@ class Simaerep {
     let targetDatasetIndex = -1;
     let maxXIndex = -1;
     let maxX = -Infinity;
+    let targetDataset = null;
 
     for (let i = 0; i < datasets.length; i++) {
       if (datasets[i].groupID === groupID) {
         targetDatasetIndex = i;
+        targetDataset = datasets[i];
         // Find the point with highest x value
         const data = datasets[i].data;
         for (let j = 0; j < data.length; j++) {
@@ -935,20 +946,50 @@ class Simaerep {
       }
     }
 
-    if (targetDatasetIndex >= 0 && maxXIndex >= 0) {
-      // Programmatically show tooltip at the highest x value point
-      // Check if Chart.js methods exist (they won't in test mocks)
+    if (targetDatasetIndex >= 0 && maxXIndex >= 0 && targetDataset) {
+      const dataPoint = targetDataset.data[maxXIndex];
+      
+      // Check if scales exist (they won't in test mocks)
+      if (!this.chartInstance.scales) return;
+      
+      // Calculate pixel position using Chart.js scales
+      const xScale = this.chartInstance.scales.x;
+      const yScale = this.chartInstance.scales.y;
+      
+      if (!xScale || !yScale) return;
+      
+      const pixelX = xScale.getPixelForValue(dataPoint.x);
+      const pixelY = yScale.getPixelForValue(dataPoint.y);
+      
+      // Build mock tooltip context to manually invoke external handler
+      const mockContext = {
+        chart: this.chartInstance,
+        tooltip: {
+          opacity: 1,
+          caretX: pixelX,
+          caretY: pixelY,
+          dataPoints: [{
+            dataset: targetDataset,
+            datasetIndex: targetDatasetIndex,
+            dataIndex: maxXIndex,
+            parsed: {
+              x: dataPoint.x,
+              y: dataPoint.y
+            },
+            raw: dataPoint
+          }]
+        }
+      };
+      
+      // Directly invoke the external tooltip handler
+      this.externalTooltipHandler(mockContext);
+      
+      // Also set active elements for visual highlight on the chart
       if (typeof this.chartInstance.setActiveElements === 'function') {
         this.chartInstance.setActiveElements([{
           datasetIndex: targetDatasetIndex,
           index: maxXIndex
         }]);
-      }
-      if (this.chartInstance.tooltip && typeof this.chartInstance.tooltip.setActiveElements === 'function') {
-        this.chartInstance.tooltip.setActiveElements([{
-          datasetIndex: targetDatasetIndex,
-          index: maxXIndex
-        }], { x: 0, y: 0 });
       }
       if (typeof this.chartInstance.update === 'function') {
         this.chartInstance.update('none');
@@ -1186,8 +1227,8 @@ class Simaerep {
       });
       this.sitePlotCharts = [];
     }
-    // Remove external tooltip element
-    const tooltipEl = document.getElementById('simaerep-tooltip');
+    // Remove external tooltip element for this instance
+    const tooltipEl = this.leftPanel ? this.leftPanel.querySelector(`#${this.tooltipId}`) : null;
     if (tooltipEl) {
       tooltipEl.remove();
     }

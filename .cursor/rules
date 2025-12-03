@@ -90,6 +90,7 @@
         - percent active participants
         - Active Participants
     - when x/y points are overlapping show title for all elements and Numerator, Denominator, Score, Delta, Flag
+    - show tooltip when site is selected via gsm.viz group selector or simaerep chart site selector in left panel at highest x value
 # documentation:
 
 - project documentation is organized in docs/ folder
