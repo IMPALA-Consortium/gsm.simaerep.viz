@@ -747,13 +747,17 @@ class Simaerep {
       sitePlotContainer.style.borderRadius = '4px';
       sitePlotContainer.style.padding = '10px';
       sitePlotContainer.style.backgroundColor = '#ffffff';
+      sitePlotContainer.style.aspectRatio = '1'; // Make entire container square (including title)
+      sitePlotContainer.style.display = 'flex';
+      sitePlotContainer.style.flexDirection = 'column';
 
       // Add site title
       const title = document.createElement('div');
       title.className = 'site-plot-title';
       title.style.fontWeight = 'bold';
-      title.style.marginBottom = '10px';
-      title.style.fontSize = '14px';
+      title.style.marginBottom = '5px';
+      title.style.fontSize = '12px';
+      title.style.flexShrink = '0'; // Title doesn't shrink
       
       const metadata = this.groupMetadata?.get(groupID);
       if (metadata && metadata.InvestigatorLastName) {
@@ -763,10 +767,18 @@ class Simaerep {
       }
       sitePlotContainer.appendChild(title);
 
+      // Create canvas wrapper to fill remaining space
+      const canvasWrapper = document.createElement('div');
+      canvasWrapper.style.flex = '1';
+      canvasWrapper.style.minHeight = '0'; // Allow flex shrinking
+      canvasWrapper.style.position = 'relative';
+      
       // Create canvas for this site
       const canvas = document.createElement('canvas');
       canvas.style.width = '100%';
-      sitePlotContainer.appendChild(canvas);
+      canvas.style.height = '100%';
+      canvasWrapper.appendChild(canvas);
+      sitePlotContainer.appendChild(canvasWrapper);
 
       // Get patient data for this site
       const patientDatasets = this.processPatientData(groupID);
@@ -819,8 +831,7 @@ class Simaerep {
         data: { datasets },
         options: {
           responsive: true,
-          maintainAspectRatio: true,
-          aspectRatio: this.config.sitePlotAspectRatio,
+          maintainAspectRatio: false, // Fill available space in wrapper
           scales: {
             x: {
               type: 'linear',
