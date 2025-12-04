@@ -1,2 +1,2 @@
-Type,ID,GroupLevel,Abbreviation,Metric,Numerator,Denominator,Model,Score,ExpectedNumerator,AnalysisType,Threshold,nAccrualThreshold,Priority,MetricID
+Type,ID,GroupLevel,Abbreviation,Metric,Numerator,Denominator,Model,Score,{},AnalysisType,Threshold,nAccrualThreshold,Priority,MetricID
 Analysis,kri0001,Site,AE,Adverse Event Rate,Adverse Events,Visits,bootstrap-simaerep,Over/Under-Reporting Probability,Delta Expected AEs,identity,"-0.99, -0.95, 0.95, 0.99",1,0,Analysis_kri0001
