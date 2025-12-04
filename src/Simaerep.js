@@ -482,10 +482,10 @@ class Simaerep {
     // Add KRI metrics from df_label_sites
     if (siteInfo && dataset.siteType !== 'study') {
       if (siteInfo.Score !== undefined) {
-        lines.push(`Score: ${Number(siteInfo.Score).toFixed(2)}`);
+        lines.push(`${this.config.Score}: ${Number(siteInfo.Score).toFixed(2)}`);
       }
       if (siteInfo.ExpectedNumerator !== undefined) {
-        lines.push(`Delta: ${Number(siteInfo.ExpectedNumerator).toFixed(2)}`);
+        lines.push(`${this.config.ExpectedNumerator}: ${Number(siteInfo.ExpectedNumerator).toFixed(2)}`);
       }
       if (siteInfo.Flag !== undefined) {
         lines.push(`Flag: ${siteInfo.Flag}`);
