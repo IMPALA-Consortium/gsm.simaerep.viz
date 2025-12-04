@@ -767,6 +767,12 @@ class Simaerep {
       }
       sitePlotContainer.appendChild(title);
 
+      // Prepare metrics data for chart plugin
+      const siteColor = site.Color || '#3182BD';
+      const score = site.Score !== undefined ? Number(site.Score).toFixed(2) : 'N/A';
+      const delta = site.ExpectedNumerator !== undefined ? Number(site.ExpectedNumerator).toFixed(2) : 'N/A';
+      const nPatients = site.nSubjects !== undefined && site.nSubjects !== 'NA' ? site.nSubjects : 'N/A';
+
       // Create canvas wrapper to fill remaining space
       const canvasWrapper = document.createElement('div');
       canvasWrapper.style.flex = '1';
@@ -824,11 +830,50 @@ class Simaerep {
         }
       ];
 
+      // Custom plugin to draw metrics label inside chart area
+      const metricsLabelPlugin = {
+        id: 'metricsLabel',
+        afterDraw: (chart) => {
+          const ctx = chart.ctx;
+          const chartArea = chart.chartArea;
+          
+          if (!chartArea) return;
+          
+          const padding = 8;
+          const lineHeight = 16;
+          const fontSize = 13; // Slightly bigger than 12px title
+          
+          ctx.save();
+          ctx.font = `500 ${fontSize}px sans-serif`;
+          ctx.textAlign = 'left';
+          ctx.textBaseline = 'top';
+          
+          const x = chartArea.left + padding;
+          let y = chartArea.top + padding;
+          
+          // Draw Score in site color
+          ctx.fillStyle = siteColor;
+          ctx.fillText(score, x, y);
+          y += lineHeight;
+          
+          // Draw Delta with triangle in site color
+          ctx.fillText(`▲ ${delta}`, x, y);
+          y += lineHeight;
+          
+          // Draw N in black
+          ctx.fillStyle = '#000000';
+          ctx.fillText(`N: ${nPatients}`, x, y);
+          
+          ctx.restore();
+        }
+      };
+
       // Create Chart.js instance
       // Pass site plot container to tooltip config so tooltip appears within this container
       const chart = new Chart(canvas, {
         type: 'line',
         data: { datasets },
+        plugins: [metricsLabelPlugin],
         options: {
           responsive: true,
           maintainAspectRatio: false, // Fill available space in wrapper
