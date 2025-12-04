@@ -263,6 +263,9 @@ class Simaerep {
     // Clear container
     this.container.innerHTML = '';
     this.container.classList.add('gsm-widget', 'simaerep-chart');
+    // Set container positioning for tooltip placement
+    this.container.style.position = 'relative';
+    this.container.style.overflow = 'visible';
 
     // Add selectors first if enabled (at top of chart)
     if (this.config.showGroupSelector || this.config.showCountrySelector) {
@@ -400,13 +403,15 @@ class Simaerep {
 
   /**
    * Get or create the external tooltip container
+   * @param {string} tooltipIdSuffix - Optional suffix to create unique tooltip IDs
    */
-  getOrCreateTooltip() {
-    // Look for tooltip within this chart's left panel
-    let tooltipEl = this.leftPanel ? this.leftPanel.querySelector(`#${this.tooltipId}`) : null;
+  getOrCreateTooltip(tooltipIdSuffix = '') {
+    const tooltipId = this.tooltipId + tooltipIdSuffix;
+    // Look for tooltip in this widget's container
+    let tooltipEl = this.container.querySelector(`#${tooltipId}`);
     if (!tooltipEl) {
       tooltipEl = document.createElement('div');
-      tooltipEl.id = this.tooltipId;
+      tooltipEl.id = tooltipId;
       tooltipEl.style.cssText = `
         position: absolute;
         background: rgba(255, 255, 255, 0.95);
@@ -421,10 +426,8 @@ class Simaerep {
         box-shadow: 0 2px 8px rgba(0,0,0,0.15);
         transition: opacity 0.1s ease;
       `;
-      // Append to left panel (which has position: relative) for proper scoping
-      if (this.leftPanel) {
-        this.leftPanel.appendChild(tooltipEl);
-      }
+      // Append to widget container (which has position: relative and overflow: visible)
+      this.container.appendChild(tooltipEl);
     }
     return tooltipEl;
   }
@@ -547,10 +550,12 @@ class Simaerep {
 
   /**
    * External tooltip handler
+   * @param {Object} context - Chart.js tooltip context
+   * @param {string} tooltipIdSuffix - Optional suffix for unique tooltip IDs
    */
-  externalTooltipHandler(context) {
+  externalTooltipHandler(context, tooltipIdSuffix = '') {
     const { chart, tooltip } = context;
-    const tooltipEl = this.getOrCreateTooltip();
+    const tooltipEl = this.getOrCreateTooltip(tooltipIdSuffix);
     
     // Hide if no tooltip
     if (tooltip.opacity === 0) {
@@ -612,21 +617,34 @@ class Simaerep {
     tooltipEl.innerHTML = html;
     tooltipEl.style.opacity = '1';
     
-    // Position tooltip relative to left panel container (which has position: relative)
-    // caretX/caretY are already pixel positions within the canvas
+    // Position tooltip using absolute positioning relative to this.container
+    // Get positions relative to document
+    const canvasRect = chart.canvas.getBoundingClientRect();
+    const containerRect = this.container.getBoundingClientRect();
+    
+    // Calculate offset from container to canvas
+    const offsetX = canvasRect.left - containerRect.left;
+    const offsetY = canvasRect.top - containerRect.top;
+    
+    // caretX/caretY are pixel positions within the canvas
+    // Convert to container-relative coordinates
+    let left = offsetX + tooltip.caretX + 10;
+    let top = offsetY + tooltip.caretY;
+    
+    // Get tooltip dimensions after content is set
     const tooltipWidth = tooltipEl.offsetWidth;
     const tooltipHeight = tooltipEl.offsetHeight;
-    const canvasWidth = this.canvas.offsetWidth;
     
-    let left = tooltip.caretX + 10;
-    let top = tooltip.caretY - tooltipHeight / 2;
+    // Center tooltip vertically on caret
+    top = top - tooltipHeight / 2;
     
-    // Prevent tooltip from going off the right edge of canvas - flip to left side
-    if (left + tooltipWidth > canvasWidth) {
-      left = tooltip.caretX - tooltipWidth - 10;
+    // Prevent tooltip from going off the right edge of container - flip to left side
+    const containerWidth = this.container.offsetWidth;
+    if (left + tooltipWidth > containerWidth) {
+      left = offsetX + tooltip.caretX - tooltipWidth - 10;
     }
     
-    // Keep tooltip within reasonable vertical bounds
+    // Keep tooltip within reasonable vertical bounds (relative to container)
     if (top < 0) {
       top = 0;
     }
@@ -636,14 +654,16 @@ class Simaerep {
   }
 
   /**
-   * Get tooltip configuration (shared between left and right panels)
+   * Get tooltip configuration for a panel
+   * @param {string} panelType - 'left' or 'right'
+   * @param {string} tooltipIdSuffix - Optional suffix to create unique tooltip IDs
    */
-  getTooltipConfig(panelType = 'left') {
+  getTooltipConfig(panelType = 'left', tooltipIdSuffix = '') {
     return {
       enabled: false, // Disable built-in tooltip
       mode: 'nearest',
       intersect: false,
-      external: (context) => this.externalTooltipHandler(context)
+      external: (context) => this.externalTooltipHandler(context, tooltipIdSuffix)
     };
   }
 
@@ -793,6 +813,7 @@ class Simaerep {
       ];
 
       // Create Chart.js instance
+      // Pass site plot container to tooltip config so tooltip appears within this container
       const chart = new Chart(canvas, {
         type: 'line',
         data: { datasets },
@@ -831,7 +852,7 @@ class Simaerep {
             legend: {
               display: false
             },
-            tooltip: this.getTooltipConfig('right')
+            tooltip: this.getTooltipConfig('right', `-site-${groupID}`)
           },
           interaction: {
             mode: 'nearest',
@@ -982,7 +1003,7 @@ class Simaerep {
       };
       
       // Directly invoke the external tooltip handler
-      this.externalTooltipHandler(mockContext);
+      this.externalTooltipHandler(mockContext, '');
       
       // Also set active elements for visual highlight on the chart
       if (typeof this.chartInstance.setActiveElements === 'function') {
@@ -1227,11 +1248,10 @@ class Simaerep {
       });
       this.sitePlotCharts = [];
     }
-    // Remove external tooltip element for this instance
-    const tooltipEl = this.leftPanel ? this.leftPanel.querySelector(`#${this.tooltipId}`) : null;
-    if (tooltipEl) {
-      tooltipEl.remove();
-    }
+    // Remove all tooltips for this instance from the container
+    const allTooltips = this.container.querySelectorAll(`[id^="${this.tooltipId}"]`);
+    allTooltips.forEach(tooltip => tooltip.remove());
+    
     this.container.innerHTML = '';
   }
 }
