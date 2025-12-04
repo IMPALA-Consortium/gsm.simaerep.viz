@@ -1,0 +1,19 @@
+[
+  {
+    "Type": "Analysis",
+    "ID": "kri0001",
+    "GroupLevel": "Site",
+    "Abbreviation": "AE",
+    "Metric": "Adverse Event Rate",
+    "Numerator": "Adverse Events",
+    "Denominator": "Visits",
+    "Model": "bootstrap-simaerep",
+    "Score": "Over/Under-Reporting Probability",
+    "ExpectedNumerator": "Delta Expected AEs",
+    "AnalysisType": "identity",
+    "Threshold": "\"-0.99",
+    "nAccrualThreshold": -0.95,
+    "Priority": 0.95,
+    "MetricID": "0.99\""
+  }
+]

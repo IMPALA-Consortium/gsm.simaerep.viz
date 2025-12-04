@@ -18,6 +18,7 @@ Data format specifications, example data management, and CSV to JSON conversion 
 Templates for implementing each chart as an htmlwidget in gsm.simaerep:
 
 - [SiteList Integration](charts/SiteList-Integration.md) - Interactive site list with selection support
+- [SimaerepChart Integration](charts/SimaerepChart-Integration.md) - Time series visualization for cumulative deviation trends
 
 ## Quick Links
 

@@ -1,6 +1,6 @@
 {
   "name": "gsm.simaerep.viz",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Visualization library for simaerep data with site selection functionality",
   "main": "index.js",
   "scripts": {
@@ -23,7 +23,8 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "gsm.viz": "github:Gilead-BioStats/gsm.viz#v2.2.0"
+    "chart.js": "^4.4.0",
+    "d3": "^7.9.0"
   },
   "devDependencies": {
     "@babel/core": "^7.23.0",
@@ -37,4 +38,3 @@
     "webpack-cli": "^5.1.4"
   }
 }
-

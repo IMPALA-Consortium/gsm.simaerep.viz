@@ -7,10 +7,11 @@
  */
 
 import SiteList from './SiteList.js';
+import Simaerep from './Simaerep.js';
 
 export default {
   SiteList,
+  Simaerep,
 };
 
-export { SiteList };
-
+export { SiteList, Simaerep };

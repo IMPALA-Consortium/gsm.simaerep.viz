@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simaerep Example</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      max-width: 1400px;  /* Increased for two-panel layout */
+      margin: 0 auto;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    h1 {
+      color: #333;
+      border-bottom: 2px solid #3182BD;
+      padding-bottom: 10px;
+    }
+    .chart-container {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      margin-top: 20px;
+    }
+    .description {
+      background: #e3f2fd;
+      padding: 15px;
+      border-radius: 4px;
+      border-left: 4px solid #2196f3;
+      margin-bottom: 20px;
+    }
+    .gsm-widget-control-container {
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #e0e0e0;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .status {
+      padding: 10px;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+    .status.loading {
+      background: #fff3cd;
+      border-left: 4px solid #ffc107;
+    }
+    .status.success {
+      background: #d4edda;
+      border-left: 4px solid #28a745;
+    }
+    .status.error {
+      background: #f8d7da;
+      border-left: 4px solid #dc3545;
+    }
+  </style>
+</head>
+<body>
+  <h1>Simaerep Visualization Example</h1>
+  
+  <div class="description">
+    <h3>About This Chart</h3>
+    <p>
+      The Simaerep displays cumulative deviation trends across clinical trial sites over time.
+      It features a two-panel layout:
+    </p>
+    <ul>
+      <li><strong>Left Panel</strong> - Overview with all sites:
+        <ul>
+          <li>Study Line - Overall study trend (black line)</li>
+          <li>Flagged Sites - Sites with statistical anomalies (colored lines)</li>
+          <li>Unflagged Sites - Normal sites (lighter colored lines)</li>
+        </ul>
+      </li>
+      <li><strong>Right Panel</strong> - Individual flagged site plots showing:
+        <ul>
+          <li>Patient trajectories (light gray lines)</li>
+          <li>Site mean line (colored)</li>
+          <li>Study reference line (black)</li>
+        </ul>
+      </li>
+    </ul>
+    <p>
+      <strong>Interactive Features:</strong>
+    </p>
+    <ul>
+      <li>Use the site selector to highlight individual sites - the right panel automatically scrolls to the selected site</li>
+      <li>Use the country selector to highlight all sites from a country</li>
+      <li>Hover over a site in the left panel to highlight it in the right panel</li>
+      <li>Tooltips show detailed KRI metrics and site metadata</li>
+    </ul>
+  </div>
+
+  <div id="status" class="status loading">Loading data...</div>
+
+  <div class="chart-container">
+    <div id="simaerep-chart"></div>
+  </div>
+
+  <script src="../index.js"></script>
+  <script>
+    // Load data from JSON files
+    async function loadData() {
+      try {
+        const [studyData, flaggedData, unflaggedData, labelData, groupsData, metricData, visitData] = await Promise.all([
+          fetch('data/csv/df_mean_study.json').then(r => r.json()),
+          fetch('data/csv/df_mean_group_flagged.json').then(r => r.json()),
+          fetch('data/csv/df_mean_group_not_flagged.json').then(r => r.json()),
+          fetch('data/csv/df_label_sites.json').then(r => r.json()),
+          fetch('data/csv/df_groups.json').then(r => r.json()),
+          fetch('data/csv/df_metric.json').then(r => r.json()),
+          fetch('data/csv/df_visit.json').then(r => r.json())
+        ]);
+
+        return {
+          df_mean_study: studyData,
+          df_mean_group_flagged: flaggedData,
+          df_mean_group_not_flagged: unflaggedData,
+          df_label_sites: labelData,
+          df_groups: groupsData,
+          df_metric: metricData,
+          df_visit: visitData
+        };
+      } catch (error) {
+        console.error('Error loading data:', error);
+        throw error;
+      }
+    }
+
+    // Initialize chart
+    loadData()
+      .then(data => {
+        const statusEl = document.getElementById('status');
+        statusEl.className = 'status success';
+        statusEl.textContent = `✓ Data loaded successfully! (Study: ${data.df_mean_study.length} points, Flagged sites: ${data.df_mean_group_flagged.length} points, Unflagged sites: ${data.df_mean_group_not_flagged.length} points, Sites: ${data.df_label_sites.length}, Patient visits: ${data.df_visit.length})`;
+
+        const container = document.getElementById('simaerep-chart');
+        
+        const config = {
+          selectedGroupIDs: 'None',
+          aspectRatio: 1.5,
+          showGroupSelector: true,
+          showCountrySelector: true,
+          showRightPanel: true,
+          rightPanelWidth: '50%',
+          sitePlotAspectRatio: 1,
+          maxVisibleSitePlots: 4,
+          width: '100%',
+          height: '700px',  // Increased height for better visibility of right panel
+          groupMetadata: data.df_groups,
+          // Pass entire metric object - much cleaner!
+          metric: data.df_metric && data.df_metric.length > 0 ? data.df_metric[0] : undefined
+        };
+
+        // Create chart using the global gsmSimaerepViz library
+        console.log("=== DEBUG START ===");
+        console.log("data object keys:", Object.keys(data));
+        console.log("df_groups exists?", !!data.df_groups);
+        console.log("df_groups length:", data.df_groups?.length);
+        console.log("df_groups first item:", data.df_groups?.[0]);
+        console.log("config.GroupLevel:", config.GroupLevel);
+        console.log("config.groupMetadata length:", config.groupMetadata?.length);
+        const chart = new gsmSimaerepViz.Simaerep(container, data, config);
+        window.lastChart = chart;  // For debugging
+        console.log("Chart created successfully");
+        console.log("chart.groupMetadata type:", typeof chart.groupMetadata);
+        console.log("chart.groupMetadata instanceof Map:", chart.groupMetadata instanceof Map);
+        console.log("chart.groupMetadata size:", chart.groupMetadata?.size);
+        if (chart.groupMetadata && chart.groupMetadata.size > 0) {
+          console.log("First 3 metadata entries:", Array.from(chart.groupMetadata.entries()).slice(0, 3));
+        } else {
+          console.log("WARNING: groupMetadata is empty or null!");
+        }
+
+        console.log('Simaerep initialized:', chart);
+        console.log('Available sites:', data.df_label_sites.map(s => s.GroupID));
+        
+        // Add event listener for site selection
+        container.addEventListener('site-selected', (e) => {
+          console.log('Site selected:', e.detail.groupID);
+          statusEl.textContent = e.detail.groupID === 'None' 
+            ? '✓ No site selected' 
+            : `✓ Site selected: ${e.detail.groupID}`;
+        });
+
+        // Add event listener for country selection
+        container.addEventListener('country-selected', (e) => {
+          console.log('Country selected:', e.detail.country, 'Sites:', e.detail.groupIDs);
+          statusEl.textContent = e.detail.country === 'None' 
+            ? '✓ No country selected' 
+            : `✓ Country selected: ${e.detail.country} (${e.detail.groupIDs.length} sites)`;
+        });
+      })
+      .catch(error => {
+        const statusEl = document.getElementById('status');
+        statusEl.className = 'status error';
+        statusEl.textContent = `✗ Error loading data: ${error.message}. Make sure to run this from a web server (e.g., npm run local)`;
+        console.error('Failed to initialize chart:', error);
+      });
+  </script>
+</body>
+</html>

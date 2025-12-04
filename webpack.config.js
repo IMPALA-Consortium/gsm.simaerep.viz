@@ -24,13 +24,5 @@ module.exports = {
     ],
   },
   devtool: 'source-map',
-  externals: {
-    'chart.js': {
-      commonjs: 'chart.js',
-      commonjs2: 'chart.js',
-      amd: 'chart.js',
-      root: 'Chart',
-    },
-  },
 };
 

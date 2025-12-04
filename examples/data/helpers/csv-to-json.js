@@ -26,8 +26,8 @@ function csvToJson(csvFilePath) {
     headers.forEach((header, index) => {
       let value = values[index];
       
-      // Convert numbers
-      if (!isNaN(value) && value !== '') {
+      // Convert numbers, but preserve GroupID as string
+      if (header !== 'GroupID' && !isNaN(value) && value !== '') {
         value = Number(value);
       }
       
@@ -66,6 +66,31 @@ files.forEach(file => {
     convertFile(file, jsonFileName);
   }
 });
+
+// Also convert CSV files in csv subdirectory
+const csvDir = path.join(dataDir, 'csv');
+if (fs.existsSync(csvDir)) {
+  const csvFiles = fs.readdirSync(csvDir);
+  csvFiles.forEach(file => {
+    if (file.endsWith('.csv')) {
+      const csvPath = path.join('csv', file);
+      const jsonFileName = file.replace('.csv', '.json');
+      const jsonPath = path.join('csv', jsonFileName);
+      
+      console.log(`Converting csv/${file} to csv/${jsonFileName}...`);
+      
+      try {
+        const fullCsvPath = path.join(csvDir, file);
+        const fullJsonPath = path.join(csvDir, jsonFileName);
+        const jsonData = csvToJson(fullCsvPath);
+        fs.writeFileSync(fullJsonPath, JSON.stringify(jsonData, null, 2));
+        console.log(`✓ Created csv/${jsonFileName} with ${jsonData.length} records`);
+      } catch (error) {
+        console.error(`✗ Error converting csv/${file}:`, error.message);
+      }
+    }
+  });
+}
 
 console.log('\nDone!');
 
